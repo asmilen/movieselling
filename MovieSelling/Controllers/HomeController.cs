@@ -24,5 +24,11 @@ namespace MovieSelling
                 return View();
             }
         }
+
+        public ActionResult ViewDetail()
+        {
+            return View(mylist.myListFilm.ElementAt(0));
+        }
+
     }
 }

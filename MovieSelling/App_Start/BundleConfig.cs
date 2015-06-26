@@ -42,6 +42,9 @@ namespace MovieSelling
             bundles.Add(new ScriptBundle("~/bundles/myquery").Include(
                             "~/Scripts/jquery-1.4.2.min.js",
                             "~/Scripts/jquery-func.js"));
+
+            
+
         }
 
 
