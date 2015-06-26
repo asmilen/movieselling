@@ -10,11 +10,12 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Manage.Filters;
 using Manage.Models;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Manage.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -35,58 +36,25 @@ namespace Manage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
+            if (!WebSecurity.Initialized)
+                WebSecurity.InitializeDatabaseConnection("myConnectionString", "Users", "UserID", "username", true);
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }
-
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Home");
-        }
-
-        //
-        // GET: /Account/Register
-
-                //
-        // POST: /Account/Disassociate
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Disassociate(string provider, string providerUserId)
-        {
-            string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
-            ManageMessageId? message = null;
-
-            // Only disassociate the account if the currently logged in user is the owner
-            if (ownerAccount == User.Identity.Name)
-            {
-                // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
-                {
-                    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-                    if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
-                    {
-                        OAuthWebSecurity.DeleteAccount(provider, providerUserId);
-                        scope.Complete();
-                        message = ManageMessageId.RemoveLoginSuccess;
-                    }
-                }
-            }
-
-            return RedirectToAction("Manage", new { Message = message });
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -97,9 +65,7 @@ namespace Manage.Controllers
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : "";
-            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
         }

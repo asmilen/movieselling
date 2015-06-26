@@ -204,6 +204,29 @@ ul#menu {
             text-decoration: none;
         }
 
+ul#submenu {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin: 0 0 5px;
+    padding: 0;
+    text-align: left;
+}
+ul#submenu li {
+        display: inline;
+        list-style: none;
+        padding-left: 15px;
+    }
+
+        ul#submenu li a {
+            background: none;
+            color: #999;
+            text-decoration: none;
+        }
+
+        ul#submenu li a:hover {
+            color: #333;
+            text-decoration: none;
+        }
 
 /* page elements
 ----------------------------------------------------------*/
@@ -356,7 +379,7 @@ aside {
     }
 
     #loginForm input[type="checkbox"],
-    #loginForm input[type="submit"],
+    #loginForm input[type="submenumit"],
     #loginForm input[type="button"],
     #loginForm button {
         width: auto;
@@ -449,7 +472,7 @@ textarea {
         width: auto;
     }
 
-    input[type="submit"],
+    input[type="submenumit"],
     input[type="button"],
     button {
         background-color: #d3dce0;
@@ -462,7 +485,7 @@ textarea {
         width: auto;
     }
 
-    td input[type="submit"],
+    td input[type="submenumit"],
     td input[type="button"],
     td button {
         font-size: 1em;
@@ -652,7 +675,16 @@ tr.pager td {
             padding: 0;
         }
 
+        ul#submenu {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
 
+        ul#submenu li {
+            margin: 0;
+            padding: 0;
+        }
     /* main layout
     ----------------------------------------------------------*/
     .main-content,
@@ -754,3 +786,17 @@ tr.pager td {
             margin: 0;
         }
 }
+
+.box { width:980px; border-bottom:1px dashed #413e3e; padding-bottom:21px; }
+
+.box .head { width:980px; padding-top:14px; padding-bottom:11px; }
+.box .head h2 { float:left; display:inline; }
+
+.box .movie { width:152px; float:left; padding-right:12px; }
+.movie-image { float:left; width:152px; height:214px; position:relative; }
+.movie-image img { width:152px; height:214px; }
+.movie-image a { float: left; display: inline; width:152px; height:214px; position: relative; z-index: 2; }
+.play { position: absolute; top: 0; left: 0; width:152px; height:214px; background: url('themes/base/images/image-hover.png'); display:block; z-index: 5; cursor:pointer; display:none; }
+.movie span.name { font-weight:bold; color:#fff; font-size:14px; text-align:center; padding-top:160px; display:block; }
+
+.box .last { padding:0; }
