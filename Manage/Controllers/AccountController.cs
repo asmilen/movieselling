@@ -26,6 +26,7 @@ namespace Manage.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
+            //Test
         }
 
         //
