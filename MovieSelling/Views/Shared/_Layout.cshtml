@@ -6,8 +6,10 @@
     <title>@ViewBag.Title</title>
 
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/myquery")
+    @Styles.Render("~/bundles/myquery")
 </head>
+
+
 <body>
     <!-- Shell -->
     <div id="shell">
@@ -39,10 +41,7 @@
             <!-- Sub-menu -->
             <div id="sub-navigation">
                 <ul>
-                    <li><a href="#">SHOW ALL</a></li>
-                    <li><a href="#">LATEST TRAILERS</a></li>
-                    <li><a href="#">TOP RATED</a></li>
-                    <li><a href="#">MOST COMMENTED</a></li>
+                    <li><a href="#">@ViewBag.SubMenu</a></li>
                 </ul>
                 <div id="search">
                     <form action="home_submit" method="get" accept-charset="utf-8">
@@ -52,10 +51,9 @@
                     </form>
                 </div>
             </div>
-            <!-- end Sub-Menu -->
-
         </div>
         <!-- end Header -->
+        @RenderSection("featured", required: false)
         @RenderBody()
         <!-- NEWS -->
         <div id="news">
@@ -126,5 +124,7 @@
         <!-- end Footer -->
     </div>
     <!-- end Shell -->
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

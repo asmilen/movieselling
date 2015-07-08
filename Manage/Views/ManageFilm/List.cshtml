@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Manage.Models.FilmModel>
+@{
+    ViewBag.Title = "List";
+}
+
+<ul id="menu">
+    <li>@Html.ActionLink("Add Film ", "Add")</li>
+    <li>@Html.ActionLink("List Film ", "List")</li>
+</ul>
+
+<table>
+    <tr>
+        <th>
+            FilmID
+        </th>
+        <th>
+            UserID
+        </th>
+        <th>
+            Film Name
+        </th>
+        <th>
+            CategoryID
+        </th>
+        <th>
+            TechID
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            End Date
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilmID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TechID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { item.FilmID }) |
+                @Html.ActionLink("Details", "ViewDetail", new { item.FilmID }) |
+                @Html.ActionLink("Delete", "Delete", new { item.FilmID }, new { onclick = "return confirm('Are you sure you wish to delete this User?');" })
+            </td>
+        </tr>
+    }
+
+</table>
+

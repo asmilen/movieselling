@@ -27,6 +27,5 @@ E:\B's Workshop\MovieSelling\MovieSelling\bin\System.Web.Razor.xml
 E:\B's Workshop\MovieSelling\MovieSelling\bin\System.Web.WebPages.xml
 E:\B's Workshop\MovieSelling\MovieSelling\bin\System.Web.WebPages.Deployment.xml
 E:\B's Workshop\MovieSelling\MovieSelling\bin\System.Web.WebPages.Razor.xml
-E:\B's Workshop\MovieSelling\MovieSelling\obj\Debug\MovieSelling.csprojResolveAssemblyReference.cache
 E:\B's Workshop\MovieSelling\MovieSelling\obj\Debug\MovieSelling.dll
 E:\B's Workshop\MovieSelling\MovieSelling\obj\Debug\MovieSelling.pdb

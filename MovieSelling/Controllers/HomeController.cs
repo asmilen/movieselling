@@ -12,23 +12,10 @@ namespace MovieSelling
     {
         //
         // GET: /Home/
-        private ListFilmDB mylist = new ListFilmDB();
+        
         public ActionResult Index()
         {
-            if (String.IsNullOrEmpty(mylist.errorMessage))
-            {
-                return View(mylist);
-            }
-            else
-            {
-                return View();
-            }
+           return View();
         }
-
-        public ActionResult ViewDetail()
-        {
-            return View(mylist.myListFilm.ElementAt(0));
-        }
-
     }
 }

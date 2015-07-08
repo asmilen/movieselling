@@ -17,5 +17,13 @@ namespace MovieSelling
         public static String Picture        = "Picture";
         public static String StartDate      = "StartDate";
         public static String EndDate        = "EndDate";
+
+        // Bang Schedule
+        public static String ScheduleID     = "ScheduleID";
+        public static String StartTime      = "StartTime";
+
+        // Bang Category
+        public static String TechID     = "TechID";
+        public static String Feature    = "Feature";
     }
 }

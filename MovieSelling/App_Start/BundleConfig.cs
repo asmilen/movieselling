@@ -40,11 +40,7 @@ namespace MovieSelling
                         "~/Content/themes/base/jquery.ui.theme.css"));
             // My modified
             bundles.Add(new ScriptBundle("~/bundles/myquery").Include(
-                            "~/Scripts/jquery-1.4.2.min.js",
                             "~/Scripts/jquery-func.js"));
-
-            
-
         }
 
 

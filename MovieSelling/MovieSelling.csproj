@@ -126,12 +126,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DatabaseColumnName.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Film.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Models\BookingModel.cs" />
+    <Compile Include="Models\FilmModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +199,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\site.css" />
+    <Content Include="Scripts\jquery-1.4.2.js" />
     <Content Include="Scripts\jquery-1.4.2.min.js" />
     <Content Include="Scripts\jquery-func.js" />
     <Content Include="Global.asax" />
@@ -229,7 +233,10 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\ViewDetail.cshtml" />
+    <Content Include="Views\Booking\Step1.cshtml" />
+    <Content Include="Views\Film\OnTheater.cshtml" />
+    <Content Include="Views\Film\ViewDetail.cshtml" />
+    <Content Include="Views\Booking\Step2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

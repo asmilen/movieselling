@@ -1,0 +1,43 @@
+﻿@model Manage.Models.ViewUser
+@{
+    ViewBag.Title = @Model.Name;
+}
+
+<ul id="menu">
+    <li>@Html.ActionLink("Add User ", "Add")</li>
+    <li>@Html.ActionLink("List User ", "List")</li>
+</ul>
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<article>
+
+    <p>
+        <img src="data:image;base64,@System.Convert.ToBase64String(Model.picture)" width="202" height="254" />
+    </p>
+    <br>
+
+
+    <p>
+         <strong>Full Name: </strong> @Model.Name
+    </p>
+
+    <p>
+        <strong>Username: </strong> @Model.username
+    </p>
+
+    <p>
+        <strong>Role: </strong> @Model.RoleName
+    </p>
+
+    <p>
+        <strong>Date of Birth: </strong> @Model.DateOfBirth
+    </p>
+
+    <p>
+        <strong>Address: </strong> @Model.address
+    </p>
+</article>

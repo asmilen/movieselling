@@ -1,0 +1,51 @@
+﻿@model Manage.Models.Schedule
+
+@{
+    ViewBag.Title = "ViewSche";
+}
+
+@Html.ValidationSummary()
+<section class="Schedule">
+@using (Html.BeginForm("ViewSche", "ManageSchedule", FormMethod.Post, new { enctype = "multipart/form-data"}))
+                {
+    <table>
+        <tr>
+            <td> @Html.EditorFor(m => m.DateSche) </td>
+
+            <td width="10px">
+               
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="View" width="10px" />
+
+            </td>
+        </tr>
+    </table>
+}
+    <ol class="round">
+        @foreach (var item in Model.listScheduleByFilm)
+{
+
+    // Select ten film theo film ID
+    System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString);
+    string sqlSelect = @"select Name from Film where FilmID = " + item.Key;
+    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sqlSelect, conn);
+    conn.Open();
+    System.Data.SqlClient.SqlDataReader reader = cmd.ExecuteReader();
+    if (reader.Read())
+    {
+        <li>
+            <h2> @reader["Name"] </h2>
+            @foreach (var sche in item.Value)
+	{
+		    @Html.ActionLink(sche.startTime, "Edit", new {sche.ScheduleID})  
+	}
+        </li>
+    }
+    conn.Close();
+    conn.Dispose();
+}
+    </ol>
+</section>
+
+
+

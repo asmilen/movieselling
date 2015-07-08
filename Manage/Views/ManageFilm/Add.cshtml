@@ -1,0 +1,72 @@
+﻿@model Manage.Models.FilmModel
+
+@{
+    ViewBag.Title = "Add Film";
+}
+
+<ul id="menu">
+    <li>@Html.ActionLink("Add Film ", "Add")</li>
+    <li>@Html.ActionLink("List Film ", "List")</li>
+</ul>
+
+<section id="loginForm">
+    <h2>Add Film</h2>
+    @using (Html.BeginForm("Add", "ManageFilm", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Add new User</legend>
+            <ol>
+                <li>
+                    @Html.LabelFor(m => m.Picture)
+                    <input type="file" name="file" id="file" />
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Actor)
+                    @Html.TextBoxFor(m => m.Actor)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Director)
+                    @Html.TextBoxFor(m => m.Director)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Description)
+                    @Html.TextBoxFor(m => m.Description)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.CategoryID)
+                    @Html.DropDownListFor(m => m.CategoryID, Model.listCate)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.listTech)
+                    @for (int i = 0; i < Model.listTech.Count; i++)
+			            {
+			                @Html.CheckBoxFor(m => m.listTech[i].Selected);  @Model.listTech[i].Text;
+			            }
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.StartDate)
+                    @Html.EditorFor(m => m.StartDate)
+                    @Html.ValidationMessageFor(m => m.StartDate)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.EndDate)
+                    @Html.EditorFor(m => m.EndDate)
+                    @Html.ValidationMessageFor(m => m.EndDate)
+                </li>
+            </ol>
+            <input type="submit" value="Add" />
+        </fieldset>
+    }
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -7,6 +7,10 @@ namespace Manage
 {
     public class DatabaseColumnName
     {
+        //String Format
+        public static String DateFormat = "dd-MM-yyyy";
+
+        //Film
         public static String FilmID = "FilmID";
         public static String UserID = "UserID";
         public static String CategoryID = "CategoryID";
@@ -28,5 +32,15 @@ namespace Manage
         public static String DateOfBirth = "DateOfBirth";
         public static String username = "username";
         public static String Address = "Address";
+
+        //Tech
+        public static String TechID = "TechID";
+        public static String Feature = "Feature";
+
+        //Schedule
+        public static String ScheduleID = "ScheduleID";
+        public static String RoomID = "RoomID";
+        public static String StartTime = "StartTime";
+        public static String DateSche = "DateSche";
     }
 }

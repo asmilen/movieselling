@@ -81,6 +81,6 @@ E:\B's Workshop\MovieSelling\Manage\bin\ko\System.Spatial.resources.dll
 E:\B's Workshop\MovieSelling\Manage\bin\ru\System.Spatial.resources.dll
 E:\B's Workshop\MovieSelling\Manage\bin\zh-Hans\System.Spatial.resources.dll
 E:\B's Workshop\MovieSelling\Manage\bin\zh-Hant\System.Spatial.resources.dll
-E:\B's Workshop\MovieSelling\Manage\obj\Debug\Manage.csprojResolveAssemblyReference.cache
 E:\B's Workshop\MovieSelling\Manage\obj\Debug\Manage.dll
 E:\B's Workshop\MovieSelling\Manage\obj\Debug\Manage.pdb
+E:\B's Workshop\MovieSelling\Manage\obj\Debug\Manage.csprojResolveAssemblyReference.cache

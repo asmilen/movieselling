@@ -37,8 +37,11 @@ namespace Manage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
+            
+            // Neu chua ket noi den database thi ket noi
             if (!WebSecurity.Initialized)
                 WebSecurity.InitializeDatabaseConnection("myConnectionString", "Users", "UserID", "username", true);
+
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);

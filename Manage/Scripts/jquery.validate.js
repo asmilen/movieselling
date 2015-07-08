@@ -1260,3 +1260,18 @@ $.format = $.validator.format;
 		}
 	});
 }(jQuery));
+
+function ValidateFile() {
+    var fileName = document.getElementById("file").value
+    if (fileName == "") {
+        alert("upload a valid File with .jpeg extension");
+        return false;
+    }
+    else if (fileName.split(".")[1].toUpperCase() == "JPEG")
+        return true;
+    else {
+        alert("Invalid File");
+        return false;
+    }
+    return true;
+}

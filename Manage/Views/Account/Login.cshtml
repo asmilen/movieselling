@@ -13,7 +13,6 @@
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
     <fieldset>
         <legend>Log in Form</legend>
         <ol>

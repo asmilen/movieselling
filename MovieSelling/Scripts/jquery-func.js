@@ -19,5 +19,5 @@ $(document).ready(function(){
             if(this.value=='') {
                 this.value = this.title;                    
 			}
-		});
+        });
 });

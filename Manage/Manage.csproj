@@ -183,6 +183,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageFilmController.cs" />
+    <Compile Include="Controllers\ManageScheduleController.cs" />
     <Compile Include="Controllers\ManageUserController.cs" />
     <Compile Include="DatabaseColumnName.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -190,7 +192,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\FilmModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
+    <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -301,6 +305,11 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\ManageUser\Add.cshtml" />
     <Content Include="Views\ManageUser\List.cshtml" />
+    <Content Include="Views\ManageUser\ViewDetail.cshtml" />
+    <Content Include="Views\ManageFilm\List.cshtml" />
+    <Content Include="Views\ManageFilm\Add.cshtml" />
+    <Content Include="Views\ManageSchedule\ViewSche.cshtml" />
+    <Content Include="Views\ManageSchedule\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

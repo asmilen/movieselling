@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Manage.Models.User>
+﻿@model IEnumerable<Manage.Models.ViewUser>
 
 
-        <p>
-            @Html.ActionLink("Add User ", "Add")
-            @Html.ActionLink("List User ", "List")
-        </p>
+        <ul id="menu">
+            <li>@Html.ActionLink("Add User ", "Add")</li>
+            <li>@Html.ActionLink("List User ", "List")</li>
+        </ul>
         <table>
             <tr>
                 <th>
@@ -47,9 +47,12 @@
                         @Html.DisplayFor(modelItem => item.address)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                        @Html.DisplayFor(modelItem => item.username)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { item.UserID }) |
+                        @Html.ActionLink("Details", "ViewDetail", new { item.UserID }) |
+                        @Html.ActionLink("Delete", "Delete", new { item.UserID }, new { onclick = "return confirm('Are you sure you wish to delete this User?');" })
                     </td>
                 </tr>
             }
