@@ -138,6 +138,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\GetResource_005.css" />
     <Content Include="Content\themes\base\images\body-bg.gif" />
     <Content Include="Content\themes\base\images\comments.gif" />
     <Content Include="Content\themes\base\images\favicon.ico" />
@@ -199,8 +200,11 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\site.css" />
+    <Content Include="Scripts\ca-pub-0617840233982627.js" />
+    <Content Include="Scripts\ga.js" />
     <Content Include="Scripts\jquery-1.4.2.js" />
     <Content Include="Scripts\jquery-1.4.2.min.js" />
+    <Content Include="Scripts\jquery-1.js" />
     <Content Include="Scripts\jquery-func.js" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -237,6 +241,7 @@
     <Content Include="Views\Film\OnTheater.cshtml" />
     <Content Include="Views\Film\ViewDetail.cshtml" />
     <Content Include="Views\Booking\Step2.cshtml" />
+    <Content Include="Views\Booking\Step3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

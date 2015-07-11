@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services;
 
 namespace MovieSelling.Controllers
 {
@@ -20,7 +21,7 @@ namespace MovieSelling.Controllers
             BookingModel model = new BookingModel();
 
             // Lay ra List Film dang chieu
-            model.listFilm = getListFilm(0);
+            model.listFilm = getListFilm(1);
 
             return View(model);
         }
@@ -121,9 +122,19 @@ namespace MovieSelling.Controllers
 
         //Step 2
         //Chon Ghe
-        public ActionResult Step2(string scheID, string numSeats)
+        public ActionResult Step2(BookingModel model)
         {
             ViewBag.SubMenu = "STEP 2: SELECT SEAT";
+            Session["time"] = DateTime.Now;
+            Session["scheID"] = model.timeSelected; 
+            return View();
+        }
+
+        //Step 3
+        //Thanh toan
+        public ActionResult Step3()
+        {
+            ViewBag.Message = Session["scheID"] + Session["time"].ToString();
             return View();
         }
     }

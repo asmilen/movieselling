@@ -12,7 +12,7 @@ using System.Data;
 
 namespace Manage.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class ManageUserController : Controller
     {
         //
@@ -80,6 +80,12 @@ namespace Manage.Controllers
 
         public ActionResult ViewDetail(int UserID)
         {
+            ViewUser model = getUserByID(UserID);
+            return View(model);
+        }
+
+        private ViewUser getUserByID(int UserID)
+        {
             ViewUser model = new ViewUser();
             using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
             {
@@ -105,7 +111,7 @@ namespace Manage.Controllers
 
                             // Retrieve image
                             if (test[DatabaseColumnName.Picture] != null)
-                            model.picture = (Byte[])(test[DatabaseColumnName.Picture]);
+                                model.picture = (Byte[])(test[DatabaseColumnName.Picture]);
 
                             model.RoleName = Roles.GetRolesForUser(model.username)[0];
                         }
@@ -119,7 +125,7 @@ namespace Manage.Controllers
                     conn.Dispose();
                 }
             }
-            return View(model);
+            return model;
         }
         private List<ViewUser> getListUser()
         {
@@ -213,6 +219,12 @@ namespace Manage.Controllers
                 ModelState.AddModelError("", ModelState.Values.All(modelState => modelState.Errors.Count == 0).ToString());
             }
             return RedirectToAction("List");
+        }
+
+        public ActionResult Edit(int UserID)
+        {
+            ViewUser model = getUserByID(UserID);
+            return View(model);
         }
     }
 }

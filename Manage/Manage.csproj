@@ -310,6 +310,7 @@
     <Content Include="Views\ManageFilm\Add.cshtml" />
     <Content Include="Views\ManageSchedule\ViewSche.cshtml" />
     <Content Include="Views\ManageSchedule\Add.cshtml" />
+    <Content Include="Views\ManageUser\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
