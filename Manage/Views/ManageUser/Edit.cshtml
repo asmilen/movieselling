@@ -27,7 +27,7 @@
                 </li>
                 <li>
                     @Html.LabelFor(m => m.username)
-                    @Html.DisplayFor(m => m.username)
+                    @Html.TextBoxFor(m => m.username, new Dictionary<string, object>() { { "readonly", "true" } })
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Name)

@@ -231,7 +231,7 @@ namespace Manage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ViewUser model)
+        public ActionResult Edit(ViewUser model,SelectListItem item)
         {
             // Edit exist User to Database
             ModelState.Clear();
@@ -269,7 +269,7 @@ namespace Manage.Controllers
                     using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                     {
                         conn.Open();
-                        string sqlSelect = @"update user set Name = @name, DateOfBirth = @date, Address = @add where username = @username ";
+                        string sqlSelect = @"update users set Name = @name, DateOfBirth = @date, Address = @add where username = @username ";
                         using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                         {
                             cmd.Parameters.AddWithValue("@name", model.Name);
