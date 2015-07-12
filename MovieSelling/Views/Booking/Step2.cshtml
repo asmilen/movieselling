@@ -7,9 +7,9 @@
 
 <script type="text/javascript">
     var seat = Request.QueryString("seat");
-    if (seatParent == "")
-        seatParent = 0;
-    var seatTotal = parseFloat(seatParent);
+    if (seat == "")
+        seat = 0;
+    var seatTotal = parseFloat(seat);
 
     function selectSeat(seatID) {
         // xử lý check chọn ghế
@@ -88,7 +88,7 @@
         }
         var _strList = GetListSeat();
         if (_strList != "") {
-            var query = "/Booking/Step3";
+            var query = "/Booking/Step3?ListSeat=" + _strList;
             window.location = query;
         }
         else {

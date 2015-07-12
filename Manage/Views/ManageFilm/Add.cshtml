@@ -53,12 +53,12 @@
                 </li>
                 <li>
                     @Html.LabelFor(m => m.StartDate)
-                    @Html.EditorFor(m => m.StartDate)
+                    @Html.EditorFor(m => m.StartDate,Model.StartDate)
                     @Html.ValidationMessageFor(m => m.StartDate)
                 </li>
                 <li>
                     @Html.LabelFor(m => m.EndDate)
-                    @Html.EditorFor(m => m.EndDate)
+                    @Html.EditorFor(m => m.EndDate,Model.EndDate)
                     @Html.ValidationMessageFor(m => m.EndDate)
                 </li>
             </ol>

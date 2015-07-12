@@ -200,13 +200,8 @@ namespace Manage.Controllers
                                     {
                                         img = new byte[file.ContentLength];
                                         file.InputStream.Read(img, 0, file.ContentLength);
-                                        cmd.Parameters.Add("@Pic", SqlDbType.VarBinary).Value = img;
                                     }
-                                    else
-                                    {
-                                        cmd.Parameters.AddWithValue("@Pic", DBNull.Value);
-                                    }
-
+                                    cmd.Parameters.Add("@Pic", SqlDbType.VarBinary).Value = img;
                                     cmd.Parameters.Add("@StaDate", SqlDbType.DateTime).Value = model.StartDate;
                                     cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = model.EndDate;
 

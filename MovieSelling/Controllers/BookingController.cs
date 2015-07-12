@@ -16,7 +16,7 @@ namespace MovieSelling.Controllers
         public ActionResult Step1()
         {
             ViewBag.SubMenu = "STEP 1: SELECT MOVIE ";
-
+            
             // Tao model booking moi cho view
             BookingModel model = new BookingModel();
 
@@ -132,9 +132,10 @@ namespace MovieSelling.Controllers
 
         //Step 3
         //Thanh toan
-        public ActionResult Step3()
+        public ActionResult Step3(string ListSeat)
         {
-            ViewBag.Message = Session["scheID"] + Session["time"].ToString();
+            //ViewBag.Message = Session["scheID"] + Session["time"].ToString();
+            ViewBag.Message = ListSeat;
             return View();
         }
     }
