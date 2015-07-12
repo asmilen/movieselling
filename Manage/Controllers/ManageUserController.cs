@@ -278,6 +278,17 @@ namespace Manage.Controllers
                             cmd.Parameters.AddWithValue("@username", model.username);
                             cmd.ExecuteNonQuery();
                         }
+                        if (img != null) 
+                        {
+                            sqlSelect = @"update users set Picture = @img where username = @username";
+                            using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                            {
+                                cmd.Parameters.AddWithValue("@username", model.username);
+                                cmd.Parameters.Add("@img", SqlDbType.VarBinary).Value = img;
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                        
                     }
                 }
                 catch (Exception ex)
