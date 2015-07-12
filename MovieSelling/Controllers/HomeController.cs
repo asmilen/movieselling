@@ -15,6 +15,7 @@ namespace MovieSelling
         
         public ActionResult Index()
         {
+            // Xoa di
            return View();
         }
     }

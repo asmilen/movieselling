@@ -136,7 +136,7 @@ namespace MovieSelling.Controllers
         {
             //ViewBag.Message = Session["scheID"] + Session["time"].ToString();
             ViewBag.Message = ListSeat;
-            // 
+            // Hien thi thong tin khach hang
             return View();
         }
     }
