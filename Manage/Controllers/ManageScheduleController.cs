@@ -31,15 +31,15 @@ namespace Manage.Controllers
                 string sqlSelect = @"select * from Schedule where DateSche = @Date";
                 using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Date", model.DateSche.ToString(DatabaseColumnName.DateFormat));
+                    cmd.Parameters.AddWithValue("@Date", model.DateSche.ToString(DatabaseHelper.DateFormat));
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        int ScheID = (int)reader[DatabaseColumnName.ScheduleID];
-                        string StartTime = reader[DatabaseColumnName.StartTime].ToString();
-                        int RoomID = (int)reader[DatabaseColumnName.RoomID];
-                        int FilmID = (int)reader[DatabaseColumnName.FilmID];
+                        int ScheID = (int)reader[DatabaseHelper.ScheduleID];
+                        string StartTime = reader[DatabaseHelper.StartTime].ToString();
+                        int RoomID = (int)reader[DatabaseHelper.RoomID];
+                        int FilmID = (int)reader[DatabaseHelper.FilmID];
 
                         // Loc lich chieu theo phim
                         if (model.listScheduleByFilm.ContainsKey(FilmID))

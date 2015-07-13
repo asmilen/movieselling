@@ -99,19 +99,19 @@ namespace Manage.Controllers
                     {
                         try
                         {
-                            model.Name = test[DatabaseColumnName.FullName].ToString();
-                            model.username = test[DatabaseColumnName.username].ToString();
+                            model.Name = test[DatabaseHelper.FullName].ToString();
+                            model.username = test[DatabaseHelper.username].ToString();
 
                             // Vi Address co the null nen phai kiem tra
-                            if (test[DatabaseColumnName.Address] != null)
-                                model.address = test[DatabaseColumnName.Address].ToString();
+                            if (test[DatabaseHelper.Address] != null)
+                                model.address = test[DatabaseHelper.Address].ToString();
 
-                            if (test[DatabaseColumnName.DateOfBirth] != null)
-                                model.DateOfBirth = test[DatabaseColumnName.DateOfBirth].ToString();
+                            if (test[DatabaseHelper.DateOfBirth] != null)
+                                model.DateOfBirth = test[DatabaseHelper.DateOfBirth].ToString();
 
                             // Retrieve image
-                            if (test[DatabaseColumnName.Picture] != null)
-                                model.picture = (Byte[])(test[DatabaseColumnName.Picture]);
+                            if (test[DatabaseHelper.Picture] != null)
+                                model.picture = (Byte[])(test[DatabaseHelper.Picture]);
 
                             model.RoleName = Roles.GetRolesForUser(model.username)[0];
                         }
@@ -142,16 +142,16 @@ namespace Manage.Controllers
                     {
                         try
                         {
-                            int UserID = (int)test[DatabaseColumnName.UserID];
-                            string Name = test[DatabaseColumnName.FullName].ToString();
-                            string username = test[DatabaseColumnName.username].ToString();
+                            int UserID = (int)test[DatabaseHelper.UserID];
+                            string Name = test[DatabaseHelper.FullName].ToString();
+                            string username = test[DatabaseHelper.username].ToString();
 
                             // Vi Address co the null nen phai kiem tra
                             string Address = "";
-                            if (test[DatabaseColumnName.Address] != null)
-                                Address = test[DatabaseColumnName.Address].ToString();
+                            if (test[DatabaseHelper.Address] != null)
+                                Address = test[DatabaseHelper.Address].ToString();
 
-                            string DateOfBirth = test[DatabaseColumnName.DateOfBirth].ToString();
+                            string DateOfBirth = test[DatabaseHelper.DateOfBirth].ToString();
 
                             templist.Add(new ViewUser(UserID,Name, DateOfBirth, null, Address, username));
                         }
@@ -190,23 +190,11 @@ namespace Manage.Controllers
 
                     String currentDateOfBirth = model.DateOfBirth.Day + "/" + model.DateOfBirth.Month + "/" + model.DateOfBirth.Year;
                     // Create new user
-                    WebSecurity.CreateUserAndAccount(model.username, model.password, new { Name = model.Name , Picture = img , DateOfBirth = currentDateOfBirth , Address = model.address});
+                    WebSecurity.CreateUserAndAccount(model.username, model.password, new { Name = model.Name, Picture = img, DateOfBirth = currentDateOfBirth, Address = model.address });
 
                     // Gan Role cho user moi
                     int roleID = Int32.Parse(model.RoleName);
-                    switch (roleID)
-                    {
-                        case 1:
-                            Roles.AddUserToRole(model.username, "Administrator");
-                            break;
-                        case 2:
-                            Roles.AddUserToRole(model.username, "Manager");
-                            break;
-                        case 3:
-                            Roles.AddUserToRole(model.username, "Staff");
-                            break;
-                    }
-
+                    Roles.AddUserToRole(model.username, DatabaseHelper.listRoles.ElementAt(roleID - 1).Text);
                 }
                 catch (Exception ex)
                 {
@@ -221,11 +209,13 @@ namespace Manage.Controllers
             return RedirectToAction("List");
         }
 
-
-        
         public ActionResult Edit(int UserID)
         {
             ViewUser model = getUserByID(UserID);
+
+            // Chon lai gia tri mac dinh cho list role
+            DatabaseHelper.setNewSelectedRole(model.RoleName);
+
             return View(model);
         }
 
@@ -250,20 +240,10 @@ namespace Manage.Controllers
 
                    // xoa role hien tai
                     Roles.RemoveUserFromRole(model.username, Roles.GetRolesForUser(model.username)[0]);
+
                     // Gan Role moi
                     int roleID = Int32.Parse(model.RoleName);
-                    switch (roleID)
-                    {
-                        case 1:
-                            Roles.AddUserToRole(model.username, "Administrator");
-                            break;
-                        case 2:
-                            Roles.AddUserToRole(model.username, "Manager");
-                            break;
-                        case 3:
-                            Roles.AddUserToRole(model.username, "Staff");
-                            break;
-                    }
+                    Roles.AddUserToRole(model.username, DatabaseHelper.listRoles.ElementAt(roleID - 1).Text);
 
                     //Update vao database
                     using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))

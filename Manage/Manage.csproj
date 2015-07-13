@@ -186,7 +186,7 @@
     <Compile Include="Controllers\ManageFilmController.cs" />
     <Compile Include="Controllers\ManageScheduleController.cs" />
     <Compile Include="Controllers\ManageUserController.cs" />
-    <Compile Include="DatabaseColumnName.cs" />
+    <Compile Include="DatabaseHelper.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

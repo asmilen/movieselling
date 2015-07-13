@@ -33,27 +33,27 @@ namespace Manage.Controllers
                     {
                         try
                         {
-                            int FilmID = (int)test[DatabaseColumnName.FilmID];
-                            int UserID = (int)test[DatabaseColumnName.UserID];
-                            string CateID = test[DatabaseColumnName.CategoryID].ToString();
-                            string Name = test[DatabaseColumnName.Name].ToString();
-                            string TechID = test[DatabaseColumnName.TechID].ToString();
+                            int FilmID = (int)test[DatabaseHelper.FilmID];
+                            int UserID = (int)test[DatabaseHelper.UserID];
+                            string CateID = test[DatabaseHelper.CategoryID].ToString();
+                            string Name = test[DatabaseHelper.Name].ToString();
+                            string TechID = test[DatabaseHelper.TechID].ToString();
 
                             // Vi Actor,director,Description co the null nen phai kiem tra
                             string Actor = "";
-                            if (test[DatabaseColumnName.Actor] != null)
-                                Actor = test[DatabaseColumnName.Actor].ToString();
+                            if (test[DatabaseHelper.Actor] != null)
+                                Actor = test[DatabaseHelper.Actor].ToString();
 
                             string Direc = "";
-                            if (test[DatabaseColumnName.Director] != null)
-                                Direc = test[DatabaseColumnName.Director].ToString();
+                            if (test[DatabaseHelper.Director] != null)
+                                Direc = test[DatabaseHelper.Director].ToString();
 
                             string Desc = "";
-                            if (test[DatabaseColumnName.Description] != null)
-                                Desc = test[DatabaseColumnName.Description].ToString();
+                            if (test[DatabaseHelper.Description] != null)
+                                Desc = test[DatabaseHelper.Description].ToString();
 
-                            DateTime StartDate = (DateTime)test[DatabaseColumnName.StartDate];
-                            DateTime EndDate = (DateTime)test[DatabaseColumnName.EndDate];
+                            DateTime StartDate = (DateTime)test[DatabaseHelper.StartDate];
+                            DateTime EndDate = (DateTime)test[DatabaseHelper.EndDate];
 
                             byte[] data = new byte[0];
                             templist.Add(new FilmModel(FilmID,UserID,CateID,Name,Actor, Direc,Desc,data,StartDate,EndDate,TechID));
@@ -90,8 +90,8 @@ namespace Manage.Controllers
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            int FilmID = (int)reader[DatabaseColumnName.CategoryID];
-                            string Name = reader[DatabaseColumnName.Name].ToString();
+                            int FilmID = (int)reader[DatabaseHelper.CategoryID];
+                            string Name = reader[DatabaseHelper.Name].ToString();
                             mylist.Add(new SelectListItem() { Value = FilmID.ToString(), Text = Name });
                         }
                     }
@@ -119,8 +119,8 @@ namespace Manage.Controllers
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            int TechID = (int)reader[DatabaseColumnName.TechID];
-                            string Name = reader[DatabaseColumnName.Feature].ToString();
+                            int TechID = (int)reader[DatabaseHelper.TechID];
+                            string Name = reader[DatabaseHelper.Feature].ToString();
                             mylist.Add(new SelectListItem() { Value = TechID.ToString(), Text = Name });
                         }
                     }
@@ -244,8 +244,8 @@ namespace Manage.Controllers
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            int TechID = (int)reader[DatabaseColumnName.TechID];
-                            string Name = reader[DatabaseColumnName.Feature].ToString();
+                            int TechID = (int)reader[DatabaseHelper.TechID];
+                            string Name = reader[DatabaseHelper.Feature].ToString();
                             mylist.Add(new SelectListItem() { Value = TechID.ToString(), Text = Name , Selected= list[TechID-1].Selected});
                         }
                     }

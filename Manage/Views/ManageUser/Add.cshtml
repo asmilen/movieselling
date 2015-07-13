@@ -47,27 +47,9 @@
                     @Html.TextBoxFor(m => m.address)
                 </li>
                 <li>
-                    @{
-                        List<SelectListItem> listItems = new List<SelectListItem>();
-                        listItems.Add(new SelectListItem
-                             {
-                                 Text = "Administrator",
-                                 Value = "1"
-                             });
-                        listItems.Add(new SelectListItem
-                             {
-                                 Text = "Manager",
-                                 Value = "2",
-                                 Selected = true
-                             });
-                        listItems.Add(new SelectListItem
-                             {
-                                 Text = "Staff",
-                                 Value = "3"
-                             });
-                    }
+                  
                     @Html.LabelFor(m => m.RoleName)
-                    @Html.DropDownListFor(m => m.RoleName, listItems)
+                    @Html.DropDownListFor(m => m.RoleName, Manage.DatabaseHelper.listRoles)
                 </li>
                     
             </ol>
