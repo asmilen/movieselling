@@ -1,0 +1,35 @@
+﻿@model Manage.Models.AddSchedule
+@{
+    ViewBag.Title = "AddStep2";
+}
+
+<ul id="menu">
+    <li>@Html.ActionLink("Add Schedule ", "Add")</li>
+    <li>@Html.ActionLink("View Schedule ", "ViewSche")</li>
+</ul>
+
+
+
+<p class="message-success">@ViewBag.StatusMessage</p>
+
+@Html.ValidationSummary()
+<section class="Schedule">
+    @using (Html.BeginForm("AddStep2", "ManageSchedule", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <h2>Add Schedule for </h2> @Html.TextBoxFor(m => m.DateSche)
+        <table>
+            <tr>
+                <td> @Html.DropDownListFor(m => m.FilmID,Manage.DatabaseHelper.listFilm) </td>
+            </tr>
+            @for (int i = 0; i < @Model.listSchedule.Count; i++)
+			{
+             <tr>
+                <td> @Html.CheckBoxFor(m => m.listSchedule[i].selected) @Model.listSchedule[i].startTime </td>
+                 <td> @Html.DropDownListFor(m => m.listSchedule[i].RoomID,Manage.DatabaseHelper.listRoom)</td>
+             </tr>
+			}
+        </table>
+        <input type="submit" value="Add" />
+    }
+</section>

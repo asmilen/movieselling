@@ -58,7 +58,71 @@ namespace Manage.Controllers
 
         public ActionResult Add()
         {
+            AddSchedule model = new AddSchedule();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(AddSchedule model)
+        {
+            ModelState.Clear();
+
+            // Validate data
+            // Ngay khong duoc nho hon nay hien tai
+            if (model.DateSche < DateTime.Now)
+            {
+                ModelState.AddModelError("","Ngày được chọn phải lớn hơn ngày hiện tại");
+            }
+
+            if (ModelState.IsValid)
+            {
+                // Chon ra nhung phim co start date < date selected < end date
+                DatabaseHelper.listFilm = getListFilmByDate(model.DateSche);
+
+                model.listSchedule = new List<ScheduleDetail>();
+                // Tao ra list lich chieu de select
+                foreach (var item in DatabaseHelper.listTimes)
+                {
+                    ScheduleDetail temp = new ScheduleDetail(1, 1, item.Text);
+                    model.listSchedule.Add(temp);
+                }
+
+                return View(model);
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddStep2(AddSchedule model)
+        {
             return View();
+        }
+
+        private List<SelectListItem> getListFilmByDate(DateTime DateSelected)
+        {
+            List<SelectListItem> mylist = new List<SelectListItem>();
+
+            // Lay list film ra tu database voi start Date < DateSelected va DateSelected < EndDate
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                conn.Open();
+                string sqlSelect = @"Select * from Film where StartDate < @date and @date < EndDate";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.Add("@date", System.Data.SqlDbType.DateTime).Value = DateSelected;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int RoleIDr = (int)reader[DatabaseHelper.FilmID];
+                        string RoleNamer = reader[DatabaseHelper.Name].ToString();
+                        mylist.Add(new SelectListItem() { Value = RoleIDr.ToString(), Text = RoleNamer });
+                    }
+                }
+            }
+
+            return mylist;
         }
     }
 }

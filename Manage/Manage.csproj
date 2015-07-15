@@ -311,6 +311,7 @@
     <Content Include="Views\ManageSchedule\ViewSche.cshtml" />
     <Content Include="Views\ManageSchedule\Add.cshtml" />
     <Content Include="Views\ManageUser\Edit.cshtml" />
+    <Content Include="Views\ManageSchedule\AddStep2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

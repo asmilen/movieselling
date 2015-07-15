@@ -4,6 +4,11 @@
     ViewBag.Title = "View Schedule ";
 }
 
+<ul id="menu">
+    <li>@Html.ActionLink("Add Schedule ", "Add")</li>
+    <li>@Html.ActionLink("View Schedule ", "ViewSche")</li>
+</ul>
+
 @Html.ValidationSummary()
 <section class="Schedule">
 @using (Html.BeginForm("ViewSche", "ManageSchedule", FormMethod.Post, new { enctype = "multipart/form-data"}))
