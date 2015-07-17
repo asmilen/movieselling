@@ -15,7 +15,7 @@
 @Html.ValidationSummary()
 
 <section class="Schedule">
-    @using (Html.BeginForm("Add", "ManageSchedule", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Add", "ManageSchedule", new {ID = 1}, FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
         <table>
             <tr>
@@ -30,10 +30,10 @@
             </tr>
         </table>
     }
-    @using (Html.BeginForm("Add", "ManageSchedule", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Add", "ManageSchedule", new { ID = 2 }, FormMethod.Post, new { enctype = "multipart/form-data"  }))
     {
         @Html.AntiForgeryToken()
-        <h2>Add Schedule for @Html.TextBoxFor(m => m.DateSche, new Dictionary<string, object>() { { "readonly", "true" } }) </h2> 
+        <h2>Add Schedule for @Session["date"] </h2> 
         <p class="message-success">@ViewBag.StatusMessage</p>
         <table>
             <tr>
@@ -44,9 +44,10 @@
                 <tr>
                     <td> @Html.CheckBoxFor(m => m.listSchedule[i].selected) @Model.listSchedule[i].startTime </td>
                     <td> @Html.DropDownListFor(m => m.listSchedule[i].RoomID, Manage.DatabaseHelper.listRoom)</td>
+                    @Html.HiddenFor(m => m.listSchedule[i].startTime)
                 </tr>
             }
         </table>
-        <input type="submit" value="Save" />
+    <input type="submit" @((DateTime)Session["date"] == DateTime.MaxValue) ? "disabled" : "") value="Save" />
     }
 </section>

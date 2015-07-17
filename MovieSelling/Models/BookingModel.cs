@@ -20,7 +20,8 @@ namespace MovieSelling.Models
         [Required]
         public string filmSelected { get; set; }
         public string dateSelected { get; set; }
-        public string timeSelected { get; set; }
+        public string ScheID { get; set; }
+
         public string seatSelected { get; set; }
 
         public BookingModel()
@@ -43,5 +44,20 @@ namespace MovieSelling.Models
             listFilm = new List<SelectListItem>();
         }
 
+    }
+
+    public class BookingStep2
+    {
+        public string FilmNameFull { get; set; }
+
+        public string dateSche { get; set; }
+
+        public string ScheID { get; set; }
+
+        public string timeSche { get; set; }
+
+        public bool[,] listSeat { get; set; }
+
+        public string numberSeat { get; set; }
     }
 }

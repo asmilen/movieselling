@@ -1,6 +1,7 @@
 ﻿using Manage.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -41,13 +42,13 @@ namespace Manage.Controllers
                         int RoomID = (int)reader[DatabaseHelper.RoomID];
                         int FilmID = (int)reader[DatabaseHelper.FilmID];
 
-                        // Loc lich chieu theo phim
-                        if (model.listScheduleByFilm.ContainsKey(FilmID))
-                            model.listScheduleByFilm[FilmID].Add(new ScheduleDetail(ScheID, RoomID, StartTime));
+                        // Loc lich chieu theo phong chieu
+                        if (model.listScheduleByFilm.ContainsKey(RoomID))
+                            model.listScheduleByFilm[RoomID].Add(new ScheduleDetail(ScheID, FilmID, StartTime));
                         else
                         {
                             List<ScheduleDetail> temp = new List<ScheduleDetail>();
-                            temp.Add(new ScheduleDetail(ScheID, RoomID, StartTime));
+                            temp.Add(new ScheduleDetail(ScheID, FilmID, StartTime));
                             model.listScheduleByFilm.Add(FilmID, temp);
                         }
                     }
@@ -58,13 +59,16 @@ namespace Manage.Controllers
 
         public ActionResult Add()
         {
+            ViewBag.StatusMessage = "";
+
             AddSchedule model = new AddSchedule();
+            Session["date"] = DateTime.MaxValue;
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(AddSchedule model)
+        public ActionResult Add(AddSchedule model, int ID)
         {
             ModelState.Clear();
 
@@ -75,8 +79,11 @@ namespace Manage.Controllers
                 ModelState.AddModelError("","Ngày được chọn phải lớn hơn ngày hiện tại");
             }
 
+            // case 1 button Add
+            if (ID == 1)
             if (ModelState.IsValid)
             {
+                Session["date"] = model.DateSche;
                 // Chon ra nhung phim co start date < date selected < end date
                 DatabaseHelper.listFilm = getListFilmByDate(model.DateSche);
 
@@ -87,10 +94,44 @@ namespace Manage.Controllers
                     ScheduleDetail temp = new ScheduleDetail(1, 1, item.Text);
                     model.listSchedule.Add(temp);
                 }
+            }
 
-                return View(model);
+            // case 2 button Save
+            if (ID == 2 && !String.IsNullOrEmpty(model.FilmID))
+            {
+                @ViewBag.StatusMessage = "Nếu room đã được xếp lịch trước đó, sẽ tự động bỏ qua và tiếp tục add những suất chiếu khác";
+                foreach (var item in model.listSchedule)
+                    if (item.selected)
+                    {
+                        AddScheduleToDatabase(item.startTime,item.FilmID,model.FilmID);  
+                    }
             }
             return View(model);
+        }
+
+        private void AddScheduleToDatabase(string time, string room, string filmID)
+        {
+            //Insert into database
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                conn.Open();
+                string sqlSelect = @" IF not EXISTS 
+                        (SELECT * FROM Schedule WHERE RoomID = @RoomID and StartTime = @StartTime and DateSche = @DateSche ) 
+                        Insert into Schedule values (@RoomID,@FilmID,@StartTime,@DateSche)";
+
+                        using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                        {
+                            // Add value
+                            cmd.Parameters.AddWithValue("@RoomID", room);
+                            cmd.Parameters.AddWithValue("@FilmID", Int32.Parse(filmID));
+                            cmd.Parameters.AddWithValue("@StartTime", time);
+                            cmd.Parameters.AddWithValue("@DateSche", ((DateTime)Session["date"]).ToString(DatabaseHelper.DateFormat));
+                            // Exec
+                            cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+                conn.Dispose();
+            }
         }
 
         [HttpPost]

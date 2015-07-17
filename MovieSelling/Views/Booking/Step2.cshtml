@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MovieSelling.Models.BookingStep2
+@{
     ViewBag.Title = "Step2";
 }
 @Scripts.Render("~/bundles/jquery")
@@ -6,10 +7,12 @@
 <link rel="stylesheet" type="text/css" href="~/Content/GetResource_005.css"> 
 
 <script type="text/javascript">
-    var seat = Request.QueryString("seat");
-    if (seat == "")
-        seat = 0;
-    var seatTotal = parseFloat(seat);
+    var seatTotal = parseFloat(@Model.numberSeat);
+
+    var start = new Date;
+    setInterval(function () {
+        $('.Timer').text((new Date - start) / 1000 + " Seconds");
+    }, 1000);
 
     function selectSeat(seatID) {
         // xử lý check chọn ghế
@@ -34,7 +37,7 @@
                 document.getElementById(seatID).className = "item-seat";
             }
 
-            alert('Bạn chỉ được chọn ' + parseFloat(seatTotal) + ' Ghế');
+            alert('Bạn chỉ được chọn tối đa ' + parseFloat(seatTotal) + ' Ghế');
             return false;
         }
 
@@ -77,15 +80,15 @@
         //alert(_strList);
         //return false;
 
-        //////////// Ghế chọn vượt quá giới hạng cho phép hoặc thiếu
-        if (seatCount > seatTotal) {
-            alert('Bạn chỉ được chọn' + parseFloat(seatTotal) + 'Ghế');
-            return false;
-        }
-        if (seatCount < seatTotal) {
-            alert('Bạn vui lòng chọn thêm ' + (seatTotal - seatCount) + ' ghế để đủ số lượng');
-            return false;
-        }
+        ////////////// Ghế chọn vượt quá giới hạng cho phép hoặc thiếu
+        //if (seatCount > seatTotal) {
+        //    alert('Bạn chỉ được chọn' + parseFloat(seatTotal) + 'Ghế');
+        //    return false;
+        //}
+        //if (seatCount < seatTotal) {
+        //    alert('Bạn vui lòng chọn thêm ' + (seatTotal - seatCount) + ' ghế để đủ số lượng');
+        //    return false;
+        //}
         var _strList = GetListSeat();
         if (_strList != "") {
             var query = "/Booking/Step3?ListSeat=" + _strList;
@@ -122,8 +125,7 @@
                     font-weight: bold; text-transform: uppercase">
                 <div id="ctl00_plcMain_UpdatePanel">
                     <span id="ctl00_plcMain_time" style="visibility:hidden;display:none;"></span>
-                    <h1 style="color: #B81515">
-                        0:14:11
+                    <h1 style="color: #B81515" class="Timer">
                     </h1>
                 </div>
             </div>
@@ -138,81 +140,53 @@
                     <div style="float: left; padding-right: 10px;">
                         <span style="color: #3B3B3B">
                             Rạp: <b style="text-transform: uppercase">
-                                CanTho
+                                Trung tâm chiếu phim quốc gia
                             </b>
                         </span>
                     </div>
                     <div style="float: left; padding-right: 10px;">
                         <span style="color: #3B3B3B">
                             Phim: <b style="text-transform: uppercase">
-                                (3D-PD) Minions
+                                @Model.FilmNameFull
                             </b>
                         </span>
                     </div>
                     <div style="float: left; padding-right: 10px;">
                         <span style="color: #3B3B3B">
                             Ngày chiếu: <b>
-                                10-07-2015
+                                @Model.dateSche
                             </b>
                         </span>
                     </div>
                     <div style="float: left; padding-right: 10px;">
                         <span style="color: #3B3B3B">
                             Lịch chiếu phim: <b>
-                                15:40
+                                @Model.timeSche
                             </b>
                         </span>
                     </div>
                     <div style="clear: both">
                     </div>
                 </div>
-                <div>
-                    <div style="float: left; padding-right: 10px;">
-                        <span style="color: #3B3B3B">
-                            Ghế người lớn: <b>
-                                4
-                            </b>
-                        </span>
-                    </div>
-                    <div style="float: left; padding-right: 10px;">
-                        <span style="color: #3B3B3B">
-                            Ghế trẻ em: <b>
-                            </b>
-                        </span>
-                    </div>
-                    <div style="float: left; padding-right: 10px;">
-                        <span style="color: #3B3B3B">
-                            Tổng ghế: <b>
-                                4
-                            </b>
-                        </span>
-                    </div>
-
-                    <div style="float: left; padding-right: 10px;">
-                        <span style="color: #3B3B3B">
-                            Tiền người lớn: <b>
-                                <span id="ctl00_plcMain_lblTienNguoiLon">400.000</span>
-                            </b>
-                        </span>
-                    </div>
-                    <div style="float: left; padding-right: 10px;">
-                        <span style="color: #3B3B3B">
-                            Tiền trẻ em: <b>
-                                <span id="ctl00_plcMain_lblTienTreEm">0</span>
-                            </b>
-                        </span>
-                    </div>
-                    <div style="float: left; padding-right: 10px;">
-                        <span style="color: #3B3B3B">
-                            Tổng cộng (VIP nếu có): <b>
-                                <span id="ctl00_plcMain_lblTongTien">400.000</span>
-                            </b>
-                        </span>
-                    </div>
+            </div>
+            <div>
+                <div style="float: left; padding-right: 10px;">
+                    <span style="color: #3B3B3B">
+                        Tổng ghế: <b>
+                            @Model.numberSeat
+                        </b>
+                    </span>
+                </div>
+                 <div style="float: left; padding-right: 10px;">
+                    <span style="color: #3B3B3B">
+                        Tổng tiền: <b>
+                            <span id="ctl00_plcMain_lblTongTien">400.000</span>
+                        </b>
+                    </span>
+                </div>
 
 
-                    <div style="clear: both">
-                    </div>
+                <div style="clear: both">
                 </div>
             </div>
             <div style="padding-left: 75px;">
@@ -267,42 +241,25 @@
             <div class="div-seat-booing" style="width:900px;position:relative;min-height:600px;height:auto;">
 
 
-
-                <div id="A1" class="item-seat line-seat" style="left:97px; top:137px;">A</div>
-                <div id="A-1" class="item-seat-booked" style="left:132px; top:138px;">1</div>
-                <div id="A-2" class="item-seat-booked" style="left:173px; top:138px;">2</div>
-                <div id="A-3" class="item-seat-booked" style="left:241px; top:138px;">3</div>
-                <div id="A-4" class="item-seat-booked" style="left:282px; top:138px;">4</div>
-                <div id="A-5" class="item-seat-booked" style="left:323px; top:138px;">5</div>
-                <div id="A-6" class="item-seat-booked" style="left:364px; top:138px;">6</div>
-                <div id="A-7" class="item-seat-booked" style="left:405px; top:138px;">7</div>
-                <div id="A-8" class="item-seat-booked" style="left:446px; top:138px;">8</div>
-                <div id="A-9" class="item-seat-booked" style="left:487px; top:138px;">9</div>
-                <div id="A-10" class="item-seat-booked" style="left:528px; top:138px;">10</div>
-                <div id="A-11" class="item-seat-booked" style="left:569px; top:138px;">11</div>
-                <div id="A-12" class="item-seat-booked" style="left:610px; top:138px;">12</div>
-                <div id="A-13" class="item-seat-booked" style="left:650px; top:138px;">13</div>
-                <div id="A-14" class="item-seat-booked" style="left:691px; top:138px;">14</div>
-                <div id="A-15" class="item-seat-booked" style="left:760px; top:138px;">15</div>
-                <div id="A-16" class="item-seat-booked" style="left:800px; top:138px;">16</div>
-                <div id="B1" class="item-seat line-seat" style="left:97px; top:181px;">B</div>
-                <div id="B-1" class="item-seat-booked" style="left:132px; top:182px;">1</div>
-                <div id="B-2" class="item-seat-booked" style="left:173px; top:182px;">2</div>
-                <div id="B-3" class="item-seat-booked" style="left:241px; top:182px;">3</div>
-                <div id="B-4" class="item-seat-booked" style="left:282px; top:182px;">4</div>
-                <div id="B-5" class="item-seat-booked" style="left:323px; top:182px;">5</div>
-                <div id="B-6" class="item-seat-booked" style="left:364px; top:182px;">6</div>
-                <div id="B-7" class="item-seat-booked" style="left:405px; top:182px;">7</div>
-                <div id="B-8" class="item-seat-booked" style="left:446px; top:182px;">8</div>
-                <div id="B-9" class="item-seat-booked" style="left:487px; top:182px;">9</div>
-                <div id="B-10" class="item-seat-booked" style="left:528px; top:182px;">10</div>
-                <div id="B-11" class="item-seat-booked" style="left:569px; top:182px;">11</div>
-                <div id="B-12" class="item-seat-booked" style="left:610px; top:182px;">12</div>
-                <div id="B-13" class="item-seat-booked" style="left:650px; top:182px;">13</div>
-                <div id="B-14" class="item-seat-booked" style="left:691px; top:182px;">14</div>
-                <div id="B-15" class="item-seat-booked" style="left:760px; top:182px;">15</div>
-                <div id="B-16" class="item-seat-booked" style="left:800px; top:182px;">16</div>
-                <div id="C1" class="item-seat line-seat" style="left:97px; top:226px;">C</div><div id="C-1" class="item-seat-booked" style="left:132px; top:227px;">1</div><div id="C-2" class="item-seat-booked" style="left:173px; top:227px;">2</div><div id="C-3" class="item-seat-booked" style="left:241px; top:227px;">3</div><div id="C-4" class="item-seat-booked" style="left:282px; top:227px;">4</div><div id="C-5" class="item-seat-booked" style="left:323px; top:227px;">5</div><div id="C-6" class="item-seat-booked" style="left:364px; top:227px;">6</div><div id="C-7" class="item-seat-booked" style="left:405px; top:227px;">7</div><div id="C-8" class="item-seat-booked" style="left:446px; top:227px;">8</div><div id="C-9" class="item-seat-booked" style="left:487px; top:227px;">9</div><div id="C-10" class="item-seat-booked" style="left:528px; top:227px;">10</div><div id="C-11" class="item-seat-booked" style="left:569px; top:227px;">11</div><div id="C-12" class="item-seat-booked" style="left:610px; top:227px;">12</div><div id="C-13" class="item-seat-booked" style="left:650px; top:227px;">13</div><div id="C-14" class="item-seat-booked" style="left:691px; top:227px;">14</div><div id="C-15" class="item-seat-booked" style="left:760px; top:227px;">15</div><div id="C-16" class="item-seat-booked" style="left:800px; top:227px;">16</div><div id="D1" class="item-seat line-seat" style="left:97px; top:270px;">D</div><div id="D-1" class="item-seat-booked" style="left:132px; top:271px;">1</div><div id="D-2" class="item-seat-booked" style="left:173px; top:271px;">2</div><div id="D-3" class="item-seat-booked" style="left:241px; top:271px;">3</div><div id="D-4" class="item-seat-booked" style="left:282px; top:271px;">4</div><div id="D-5" class="item-seat-booked" style="left:323px; top:271px;">5</div><div id="D-6" class="item-seat-booked" style="left:364px; top:271px;">6</div><div id="D-7" class="item-seat-booked" style="left:405px; top:271px;">7</div><div id="D-8" class="item-seat-booked" style="left:446px; top:271px;">8</div><div id="D-9" class="item-seat-booked" style="left:487px; top:271px;">9</div><div id="D-10" class="item-seat-booked" style="left:528px; top:271px;">10</div><div id="D-11" class="item-seat-booked" style="left:569px; top:271px;">11</div><div id="D-12" class="item-seat-booked" style="left:610px; top:271px;">12</div><div id="D-13" class="item-seat-booked" style="left:650px; top:271px;">13</div><div id="D-14" class="item-seat-booked" style="left:691px; top:271px;">14</div><div id="D-15" class="item-seat-booked" style="left:760px; top:271px;">15</div><div id="D-16" class="item-seat-booked" style="left:800px; top:271px;">16</div><div id="E1" class="item-seat line-seat" style="left:97px; top:314px;">E</div><div id="E-1" class="item-seat-booked" style="left:132px; top:315px;">1</div><div id="E-2" class="item-seat-booked" style="left:173px; top:315px;">2</div><div id="E-3" class="item-seat-booked" style="left:241px; top:315px;">3</div><div id="E-4" class="item-seat-booked" style="left:282px; top:315px;">4</div><div id="E-5" class="item-seat-booked" style="left:323px; top:315px;">5</div><div id="E-6" class="item-seat-booked" style="left:364px; top:315px;">6</div><div id="E-7" class="item-seat-booked" style="left:405px; top:315px;">7</div><div id="E-8" class="item-seat-booked" style="left:446px; top:315px;">8</div><div id="E-9" class="item-seat-booked" style="left:487px; top:315px;">9</div><div id="E-10" class="item-seat-booked" style="left:528px; top:315px;">10</div><div id="E-11" class="item-seat-booked" style="left:569px; top:315px;">11</div><div id="E-12" class="item-seat-booked" style="left:610px; top:315px;">12</div><div id="E-13" class="item-seat-booked" style="left:650px; top:315px;">13</div><div id="E-14" class="item-seat-booked" style="left:691px; top:315px;">14</div><div id="E-15" class="item-seat-booked" style="left:760px; top:315px;">15</div><div id="E-16" class="item-seat-booked" style="left:800px; top:315px;">16</div><div id="F1" class="item-seat line-seat" style="left:97px; top:358px;">F</div><div id="F-1" class="item-seat-booked" style="left:132px; top:359px;">1</div><div id="F-2" class="item-seat-booked" style="left:173px; top:359px;">2</div><div id="F-3" class="item-seat-booked" style="left:241px; top:359px;">3</div><div id="F-4" class="item-seat-booked" style="left:282px; top:359px;">4</div><div id="F-5" class="item-seat-booked" style="left:323px; top:359px;">5</div><div id="F-6" class="item-seat-booked" style="left:364px; top:359px;">6</div><div id="F-7" class="item-seat-booked" style="left:405px; top:359px;">7</div><div id="F-8" class="item-seat-booked" style="left:446px; top:359px;">8</div><div id="F-9" class="item-seat-booked" style="left:487px; top:359px;">9</div><div id="F-10" class="item-seat-booked" style="left:528px; top:359px;">10</div><div id="F-11" class="item-seat-booked" style="left:569px; top:359px;">11</div><div id="F-12" class="item-seat-booked" style="left:610px; top:359px;">12</div><div id="F-13" class="item-seat-booked" style="left:650px; top:359px;">13</div><div id="F-14" class="item-seat-booked" style="left:691px; top:359px;">14</div><div id="F-15" class="item-seat-booked" style="left:760px; top:359px;">15</div><div id="F-16" class="item-seat-booked" style="left:800px; top:359px;">16</div><div id="G4" class="item-seat line-seat" style="left:142px; top:402px;">G</div><div id="G-4" class="item-seat-booked" style="left:282px; top:403px;">4</div><div id="G-5" class="item-seat-booked" style="left:323px; top:403px;">5</div><div id="G-6" class="item-seat-booked" style="left:364px; top:403px;">6</div><div id="G-7" class="item-seat-booked" style="left:405px; top:403px;">7</div><div id="G-8" class="item-seat-booked" style="left:446px; top:403px;">8</div><div id="G-9" class="item-seat-booked" style="left:487px; top:403px;">9</div><div id="G-10" class="item-seat-booked" style="left:528px; top:403px;">10</div><div id="G-11" class="item-seat-booked" style="left:569px; top:403px;">11</div><div id="G-12" class="item-seat-booked" style="left:610px; top:403px;">12</div><div id="G-13" class="item-seat-booked" style="left:650px; top:403px;">13</div><div id="G-14" class="item-seat-booked" style="left:691px; top:403px;">14</div><div id="G-15" class="item-seat-booked" style="left:760px; top:403px;">15</div><div id="G-16" class="item-seat-booked" style="left:800px; top:403px;">16</div><div id="H4" class="item-seat line-seat" style="left:142px; top:446px;">H</div><div onclick="selectSeat('H-4')" id="H-4" class="item-seat" style="left:282px; top:447px;">4</div><div onclick="selectSeat('H-5')" id="H-5" class="item-seat" style="left:323px; top:447px;">5</div><div onclick="selectSeat('H-6')" id="H-6" class="item-seat" style="left:364px; top:447px;">6</div><div onclick="selectSeat('H-7')" id="H-7" class="item-seat" style="left:405px; top:447px;">7</div><div onclick="selectSeat('H-8')" id="H-8" class="item-seat-selected" style="left:446px; top:447px;">8</div><div onclick="selectSeat('H-9')" id="H-9" class="item-seat" style="left:487px; top:447px;">9</div><div onclick="selectSeat('H-10')" id="H-10" class="item-seat" style="left:528px; top:447px;">10</div><div onclick="selectSeat('H-11')" id="H-11" class="item-seat" style="left:569px; top:447px;">11</div><div onclick="selectSeat('H-12')" id="H-12" class="item-seat" style="left:610px; top:447px;">12</div><div onclick="selectSeat('H-13')" id="H-13" class="item-seat" style="left:650px; top:447px;">13</div><div onclick="selectSeat('H-14')" id="H-14" class="item-seat" style="left:691px; top:447px;">14</div><div onclick="selectSeat('H-15')" id="H-15" class="item-seat" style="left:760px; top:447px;">15</div><div onclick="selectSeat('H-16')" id="H-16" class="item-seat" style="left:800px; top:447px;">16</div><div id="I4" class="item-seat line-seat" style="left:142px; top:490px;">I</div><div onclick="selectSeat('I-4')" id="I-4" class="item-seat" style="left:282px; top:491px;">4</div><div onclick="selectSeat('I-5')" id="I-5" class="item-seat" style="left:323px; top:491px;">5</div><div onclick="selectSeat('I-6')" id="I-6" class="item-seat" style="left:364px; top:491px;">6</div><div onclick="selectSeat('I-7')" id="I-7" class="item-seat" style="left:405px; top:491px;">7</div><div onclick="selectSeat('I-8')" id="I-8" class="item-seat" style="left:446px; top:491px;">8</div><div onclick="selectSeat('I-9')" id="I-9" class="item-seat" style="left:487px; top:491px;">9</div><div onclick="selectSeat('I-10')" id="I-10" class="item-seat" style="left:528px; top:491px;">10</div><div onclick="selectSeat('I-11')" id="I-11" class="item-seat" style="left:569px; top:491px;">11</div><div onclick="selectSeat('I-12')" id="I-12" class="item-seat" style="left:610px; top:491px;">12</div><div onclick="selectSeat('I-13')" id="I-13" class="item-seat" style="left:650px; top:491px;">13</div><div onclick="selectSeat('I-14')" id="I-14" class="item-seat" style="left:691px; top:491px;">14</div><div onclick="selectSeat('I-15')" id="I-15" class="item-seat" style="left:760px; top:491px;">15</div><div onclick="selectSeat('I-16')" id="I-16" class="item-seat" style="left:800px; top:491px;">16</div><div id="J4" class="item-seat line-seat" style="left:142px; top:535px;">J</div><div onclick="selectSeat('J-4')" id="J-4" class="item-seat" style="left:282px; top:536px;">4</div><div onclick="selectSeat('J-5')" id="J-5" class="item-seat" style="left:323px; top:536px;">5</div><div onclick="selectSeat('J-6')" id="J-6" class="item-seat" style="left:364px; top:536px;">6</div><div onclick="selectSeat('J-7')" id="J-7" class="item-seat" style="left:405px; top:536px;">7</div><div onclick="selectSeat('J-8')" id="J-8" class="item-seat" style="left:446px; top:536px;">8</div><div onclick="selectSeat('J-9')" id="J-9" class="item-seat" style="left:487px; top:536px;">9</div><div onclick="selectSeat('J-10')" id="J-10" class="item-seat" style="left:528px; top:536px;">10</div><div onclick="selectSeat('J-11')" id="J-11" class="item-seat" style="left:569px; top:536px;">11</div><div onclick="selectSeat('J-12')" id="J-12" class="item-seat" style="left:610px; top:536px;">12</div><div onclick="selectSeat('J-13')" id="J-13" class="item-seat" style="left:650px; top:536px;">13</div><div onclick="selectSeat('J-14')" id="J-14" class="item-seat" style="left:691px; top:536px;">14</div><div onclick="selectSeat('J-15')" id="J-15" class="item-seat" style="left:760px; top:536px;">15</div><div onclick="selectSeat('J-16')" id="J-16" class="item-seat" style="left:800px; top:536px;">16</div><div id="K4" class="item-seat line-seat" style="left:142px; top:579px;">K</div><div onclick="selectSeat('K-4')" id="K-4" class="item-seat" style="left:282px; top:580px;">4</div><div onclick="selectSeat('K-5')" id="K-5" class="item-seat" style="left:323px; top:580px;">5</div><div onclick="selectSeat('K-6')" id="K-6" class="item-seat" style="left:364px; top:580px;">6</div><div onclick="selectSeat('K-11')" id="K-11" class="item-seat" style="left:569px; top:580px;">11</div><div onclick="selectSeat('K-12')" id="K-12" class="item-seat" style="left:610px; top:580px;">12</div><div onclick="selectSeat('K-13')" id="K-13" class="item-seat" style="left:650px; top:580px;">13</div><div onclick="selectSeat('K-14')" id="K-14" class="item-seat" style="left:691px; top:580px;">14</div><div onclick="selectSeat('K-15')" id="K-15" class="item-seat" style="left:760px; top:580px;">15</div><div onclick="selectSeat('K-16')" id="K-16" class="item-seat" style="left:800px; top:580px;">16</div>
+                @for (int i = 0; i < Model.listSeat.GetLength(0); i++)
+                {
+                    string top =  (94 + 45 * i) + "px";
+                    char chara = (char) (i+65);
+                    <div class="item-seat line-seat" style="left:97px; top:137px;">@chara</div>
+                    for (int j = 0; j < Model.listSeat.GetLength(1); j++)
+                    {
+                        String id1 = i + "-" + j ;
+                        string left = (91 + 42 * j) + "px";
+                        if (Model.listSeat[i, j])
+                        {
+                            <div id="@id1" class="item-seat-booked" style="left:@left ; top:@top;">@(j+1)</div>
+                        }
+                        else
+                        {
+                            <div onclick="selectSeat('@id1')" id="@id1" class="item-seat" style="left:@left; top:@top;">@(j+1)</div>
+                        }
+                    }
+                }
             </div>
 
             <div>

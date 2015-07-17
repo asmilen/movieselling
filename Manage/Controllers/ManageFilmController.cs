@@ -170,7 +170,7 @@ namespace Manage.Controllers
                                     cmd.Parameters.AddWithValue("@UserID", UserID);
                                     cmd.Parameters.AddWithValue("@CateID", Int32.Parse(model.CategoryID));
 
-                                    cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = model.Name;
+                                    cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = model.Name + " (" + item.Text + ")" ;
 
                                     if (String.IsNullOrEmpty(model.Actor))
                                     {
@@ -203,7 +203,7 @@ namespace Manage.Controllers
                                     }
                                     cmd.Parameters.Add("@Pic", SqlDbType.VarBinary).Value = img;
                                     cmd.Parameters.Add("@StaDate", SqlDbType.DateTime).Value = model.StartDate;
-                                    cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = model.EndDate;
+                                    cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = model.EndDate.AddDays(1);
 
                                     cmd.Parameters.Add("@TechID", SqlDbType.Int).Value = Int32.Parse(item.Value);
                                     // Exec

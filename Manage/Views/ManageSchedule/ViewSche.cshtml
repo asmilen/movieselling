@@ -25,30 +25,43 @@
         </tr>
     </table>
 }
-    <ol class="round">
+ 
         @foreach (var item in Model.listScheduleByFilm)
 {
 
     // Select ten film theo film ID
     System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString);
-    string sqlSelect = @"select Name from Film where FilmID = " + item.Key;
+    string sqlSelect = @"select Name from Room where RoomID = " + item.Key;
     System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sqlSelect, conn);
     conn.Open();
     System.Data.SqlClient.SqlDataReader reader = cmd.ExecuteReader();
     if (reader.Read())
     {
-        <li>
-            <h2> @reader["Name"] </h2>
+        <table>
+            <tr>
+                <th> @reader["Name"] </th>
+            </tr>
             @foreach (var sche in item.Value)
-	{
-		    @Html.ActionLink(sche.startTime, "Edit", new {sche.ScheduleID})  
-	}
-        </li>
+{
+    <tr>
+        <td> @Html.ActionLink(sche.startTime, "Edit", new { sche.ScheduleID }) </td>
+        @{
+            sqlSelect = @"select Name from Film where FilmID = " + sche.FilmID;
+            System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand(sqlSelect, conn);
+            System.Data.SqlClient.SqlDataReader reader1 = cmd.ExecuteReader();
+            if (reader1.Read())
+            {
+                <td> @Html.ActionLink(reader["Name"].ToString(), "Edit", new { sche.ScheduleID }) </td>
+            }
+        }
+    </tr>
+}
+        </table>
     }
     conn.Close();
     conn.Dispose();
 }
-    </ol>
+
 </section>
 
 

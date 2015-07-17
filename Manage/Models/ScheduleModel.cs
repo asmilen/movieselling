@@ -45,7 +45,7 @@ namespace Manage.Models
     {
         public string startTime { get; set; }
         public int ScheduleID { get; set; }
-        public string RoomID { get; set; }
+        public string FilmID { get; set; }
 
         public bool selected { get; set; }
 
@@ -53,7 +53,7 @@ namespace Manage.Models
         {
             this.startTime = startTime;
             this.ScheduleID = ScheduleID;
-            this.RoomID = RoomID.ToString();
+            this.FilmID = RoomID.ToString();
         }
 
         public ScheduleDetail()
