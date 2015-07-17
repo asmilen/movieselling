@@ -1,0 +1,68 @@
+﻿@model MovieSelling.Models.BookingModel
+@{
+    ViewBag.Title = "Step 1";
+}
+@Scripts.Render("~/bundles/jquery")
+<div id="main">
+    <div class="box">
+        @using (Html.BeginForm("Step1", "Booking", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="movie">
+                <table border="1">
+                    <tr>
+                        <th> Select Film</th>
+                    </tr>
+                    <tr>
+                        <td> @Html.ListBoxFor(m => m.filmSelected, Model.listFilm)</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="movie">
+                <table border="1">
+                    <tr>
+                        <th> Select Date</th>
+                    </tr>
+                    <tr>
+                        <td> @Html.ListBoxFor(m => m.dateSelected, Model.listDate)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="Show" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+@using (Html.BeginForm("Step2", "Booking",  FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+             <div class="movie">
+                <table border="1">
+                    <tr>
+                        <th> Chọn suất chiếu</th>
+                    </tr>
+                    <tr>
+                        <td> @Html.ListBoxFor(m => m.ScheID,Model.listTime)</td>
+                    </tr>
+                 </table>
+                @Html.HiddenFor(m => m.filmSelected);
+                 <table>
+                     <tr>
+                         <th> Select number of seat</th>
+                     </tr>
+                    <tr>
+                        <td> @Html.DropDownListFor(m => m.seatSelected, Model.numberOfSeats)</td>
+                    </tr>
+                </table>
+            </div>
+
+
+     <input type="submit" value="Next" />
+}
+        <div class="cl">&nbsp;</div>
+    </div>
+</div>
+

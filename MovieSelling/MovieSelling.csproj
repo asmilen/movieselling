@@ -138,6 +138,7 @@
     </Compile>
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Models\BookingModel.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\FilmModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -227,6 +228,8 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Booking\Step1.cshtml" />
+    <Content Include="Views\Film\OnTheater.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -241,8 +244,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Booking\Step1.cshtml" />
-    <Content Include="Views\Film\OnTheater.cshtml" />
     <Content Include="Views\Film\ViewDetail.cshtml" />
     <Content Include="Views\Booking\Step2.cshtml" />
     <Content Include="Views\Booking\Step3.cshtml" />
