@@ -207,8 +207,6 @@ namespace MovieSelling.Controllers
         //Thanh toan
         public ActionResult Step3(string ListSeat)
         {
-            //ViewBag.Message = Session["scheID"] + Session["time"].ToString();
-            ViewBag.Message = ListSeat;
             // Hien thi thong tin khach hang
             return View();
         }
