@@ -1,5 +1,46 @@
-﻿@{
+﻿@model MovieSelling.Models.Ticket
+@{
     ViewBag.Title = "Step3";
 }
 
 <h1>@ViewBag.Message</h1>
+<section id="loginForm">
+    <h2>Add User</h2>
+    @using (Html.BeginForm("Step3", "booking", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(m => m.ScheID)
+        <fieldset>
+            <legend>Xác nhận đặt vé</legend>
+            <ol>
+                <li>
+                    @Html.LabelFor(m => m.customer.Name)
+                    @Html.TextBoxFor(m => m.customer.Name)
+                    @Html.ValidationMessageFor(m => m.customer.Name)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.customer.address)
+                    @Html.PasswordFor(m => m.customer.address)
+                    @Html.ValidationMessageFor(m => m.customer.address)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.customer.email)
+                    @Html.TextBoxFor(m => m.customer.email)
+                    @Html.ValidationMessageFor(m => m.customer.email)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.customer.cmnd)
+                    @Html.EditorFor(m => m.customer.cmnd)
+                    @Html.ValidationMessageFor(m => m.customer.cmnd)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.customer.phone)
+                    @Html.TextBoxFor(m => m.customer.phone)
+                </li>
+            </ol>
+            <input type="submit" value="Add" />
+        </fieldset>
+    }
+</section>

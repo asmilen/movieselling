@@ -207,8 +207,85 @@ namespace MovieSelling.Controllers
         //Thanh toan
         public ActionResult Step3(string ListSeat)
         {
-            // Hien thi thong tin khach hang
+            // Tach Chuoi de lay ra ghe
+            Ticket model = new Ticket();
+
+            Session["listSeat"] = ListSeat;
+            
+
+            model.ScheID = Session["scheID"].ToString();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Step3(Ticket model)
+        {
+            if (ModelState.IsValid)
+            {
+                // add khach hang vao database va lay ra Customer ID vua tao
+                int CustomerID = InsertCustomerToDB(model.customer);
+
+                // Lay ra danh sach ghe
+                model.seat = new List<Seat>();
+                string ListSeat = Session["listSeat"].ToString();
+                var seatTotal = Int32.Parse(ListSeat.Substring(0, 1));
+                var index = 1;
+                for (int i = 0; i < seatTotal; i++)
+                {
+                    string seatI = ListSeat.Substring(index, 3);
+                    model.seat.Add(new Seat(Int32.Parse(seatI.Substring(0, 1)), Int32.Parse(seatI.Substring(2, 1))));
+                    index += 3;
+                }
+
+                // Xac nhan dat ve va luu thong tin dat ve vao database
+                string code = DatabaseHelper.AutoGenerateCode();
+                foreach (var item in model.seat)
+                {
+                    using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+                    {
+                        conn.Open();
+                        string sqlSelect = @"Insert into TicketBooking values (@ScheID,@CusID,@row,@col,@price,@code)";
+                        using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@ScheID", Int32.Parse(model.ScheID));
+                            cmd.Parameters.AddWithValue("@CusID", CustomerID);
+                            cmd.Parameters.AddWithValue("@row", item.Row);
+                            cmd.Parameters.AddWithValue("@col", item.Column);
+                            cmd.Parameters.AddWithValue("@price", DatabaseHelper.getPriceByScheID(model.ScheID));
+                            cmd.Parameters.AddWithValue("@code", code);
+
+                            cmd.ExecuteScalar();
+                            conn.Close();
+                            conn.Dispose();
+                        }
+                    }
+                }
+            }
+            ModelState.AddModelError("", "Đặt vé thành công");
             return View();
+        }
+
+        private int InsertCustomerToDB(Customer model)
+        {
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                conn.Open();
+                string sqlSelect = @"Insert into Customer output INSERTED.CustomerID values (@Name,@add,@email,@cmnd,@phone)";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", model.Name);
+                    cmd.Parameters.AddWithValue("@add", model.address);
+                    cmd.Parameters.AddWithValue("@email", model.address);
+                    cmd.Parameters.AddWithValue("@cmnd", model.address);
+                    cmd.Parameters.AddWithValue("@phone", model.address);
+
+                    int modified = (int)cmd.ExecuteScalar();
+                    conn.Close();
+                    conn.Dispose();
+                    return modified;
+                }
+            }
         }
     }
 }

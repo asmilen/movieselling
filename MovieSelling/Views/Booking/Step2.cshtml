@@ -44,10 +44,10 @@
     }
     function GetListSeat() {
         var a = document.getElementsByTagName('div');
-        var _listSeat = "";
+        var _listSeat = "" + seatTotal;
         for (i = 0; i < a.length; i++) {
             if (a.item(i).className == "item-seat-selected" || a.item(i).className == "item-seat-selected-vip" || a.item(i).className == "item-seat-selected-couple") {
-                _listSeat += a.item(i).id + ",";
+                _listSeat += a.item(i).id;
             }
         }
         return _listSeat;
@@ -80,15 +80,15 @@
         //alert(_strList);
         //return false;
 
-        ////////////// Ghế chọn vượt quá giới hạng cho phép hoặc thiếu
-        //if (seatCount > seatTotal) {
-        //    alert('Bạn chỉ được chọn' + parseFloat(seatTotal) + 'Ghế');
-        //    return false;
-        //}
-        //if (seatCount < seatTotal) {
-        //    alert('Bạn vui lòng chọn thêm ' + (seatTotal - seatCount) + ' ghế để đủ số lượng');
-        //    return false;
-        //}
+        //////////// Ghế chọn vượt quá giới hạng cho phép hoặc thiếu
+        if (seatCount > seatTotal) {
+            alert('Bạn chỉ được chọn' + parseFloat(seatTotal) + 'Ghế');
+            return false;
+        }
+        if (seatCount < seatTotal) {
+            alert('Bạn vui lòng chọn thêm ' + (seatTotal - seatCount) + ' ghế để đủ số lượng');
+            return false;
+        }
         var _strList = GetListSeat();
         if (_strList != "") {
             var query = "/Booking/Step3?ListSeat=" + _strList;
@@ -180,7 +180,10 @@
                  <div style="float: left; padding-right: 10px;">
                     <span style="color: #3B3B3B">
                         Tổng tiền: <b>
-                            <span id="ctl00_plcMain_lblTongTien">400.000</span>
+                        @{
+                            int price = MovieSelling.DatabaseHelper.getPriceByScheID(Model.ScheID) * Int32.Parse(Model.numberSeat);
+                        } 
+                            <span id="ctl00_plcMain_lblTongTien">@price</span>
                         </b>
                     </span>
                 </div>

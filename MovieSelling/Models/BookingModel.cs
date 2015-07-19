@@ -60,4 +60,33 @@ namespace MovieSelling.Models
 
         public string numberSeat { get; set; }
     }
+
+    public class Ticket
+    {
+        public Customer customer { get; set; }
+
+        public List<Seat> seat { get; set; }
+
+        public string ScheID { get; set; }
+
+    }
+
+    public class Seat
+    {
+        public int Row {get;set;}
+        public int Column {get;set;}
+
+        public int Price { get; set; }
+        public Seat()
+        {
+
+        }
+
+        public Seat(int Row, int Column)
+        {
+            this.Row = Row;
+            this.Column = Column;
+        }
+
+    }
 }

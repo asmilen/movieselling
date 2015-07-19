@@ -4,7 +4,7 @@
 }
 @Scripts.Render("~/bundles/jquery")
 <div id="main">
-    <div class="box">
+    <div>
         @using (Html.BeginForm("Step1", "Booking", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()

@@ -1,4 +1,3 @@
-E:\B's Workshop\MovieSelling\MovieSelling\obj\Debug\MovieSelling.csprojResolveAssemblyReference.cache
 E:\B's Workshop\MovieSelling\MovieSelling\bin\MovieSelling.dll.config
 E:\B's Workshop\MovieSelling\MovieSelling\bin\MovieSelling.dll
 E:\B's Workshop\MovieSelling\MovieSelling\bin\MovieSelling.pdb
