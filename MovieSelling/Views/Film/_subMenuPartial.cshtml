@@ -1,0 +1,17 @@
+﻿<!-- Sub-menu -->
+<div id="sub-navigation">
+    <ul>
+        <li><a href=@Url.Action("Index")>TẤT CẢ</a></li>
+        <li><a href="#">PHIM HOT</a></li>
+        <li><a href=@Url.Action("OnTheater")>PHIM ĐANG CHIẾU</a></li>
+        <li><a href=@Url.Action("ComingSoon")>PHIM SẮP CHIẾU</a></li>
+    </ul>
+    <div id="search">
+        <form action="home_submit" method="get" accept-charset="utf-8">
+            <label for="search-field">TÌM KIẾM</label>
+            <input type="text" name="search field" value="Điền thông tin tìm kiếm ở đây" id="search-field" title="Enter search here" class="blink search-field" />
+            <input type="submit" value="TÌM" class="search-button" />
+        </form>
+    </div>
+</div>
+<!-- end Sub-Menu -->
