@@ -103,7 +103,7 @@ namespace Manage.Controllers
                 foreach (var item in model.listSchedule)
                     if (item.selected)
                     {
-                        AddScheduleToDatabase(item.startTime,item.FilmID,model.FilmID);  
+                        AddScheduleToDatabase(item.startTime,item.RoomID,model.FilmID);  
                     }
             }
             return View(model);
