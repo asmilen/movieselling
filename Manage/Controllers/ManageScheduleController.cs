@@ -117,7 +117,7 @@ namespace Manage.Controllers
                 conn.Open();
                 string sqlSelect = @" IF not EXISTS 
                         (SELECT * FROM Schedule WHERE RoomID = @RoomID and StartTime = @StartTime and DateSche = @DateSche ) 
-                        Insert into Schedule values (@RoomID,@FilmID,@StartTime,@DateSche)";
+                        Insert into Schedule values (@RoomID,@FilmID,@StartTime,@DateSche,@price)";
 
                         using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                         {
@@ -126,6 +126,7 @@ namespace Manage.Controllers
                             cmd.Parameters.AddWithValue("@FilmID", Int32.Parse(filmID));
                             cmd.Parameters.AddWithValue("@StartTime", time);
                             cmd.Parameters.AddWithValue("@DateSche", ((DateTime)Session["date"]).ToString(DatabaseHelper.DateFormat));
+                            cmd.Parameters.AddWithValue("@price",40000);
                             // Exec
                             cmd.ExecuteNonQuery();
                 }

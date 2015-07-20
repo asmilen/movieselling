@@ -15,6 +15,7 @@ namespace MovieSelling.Controllers
         // GET: /Booking/
         public ActionResult Step1()
         {
+            DatabaseHelper.setActiceMenu("Booking");
             ViewBag.SubMenu = "STEP 1: SELECT MOVIE ";
             
             // Tao model booking moi cho view

@@ -111,5 +111,37 @@ namespace MovieSelling
             }
             return new string(result.ToArray());
         }
+
+        public static string Home = "";
+        public static string New = "";
+        public static string Booking = "";
+        public static string Contact = "";
+        public static string Ticket = "";
+        public static void setActiceMenu(string menu)
+        {
+            Home = "";
+            New = "";
+            Booking = "";
+            Contact = "";
+            Ticket = "";
+            switch (menu)
+            {
+                case "Home":
+                    Home = "active";
+                    break;
+                case "New":
+                    New = "active";
+                    break;
+                case "Ticket":
+                    Ticket = "active";
+                    break;
+                case "Booking":
+                    Booking = "active";
+                    break;
+                case "Contact":
+                    Contact = "active";
+                    break;
+            }
+        }
     }
 }

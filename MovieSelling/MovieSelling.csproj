@@ -129,7 +129,6 @@
     <Compile Include="Controllers\FilmController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DatabaseHelper.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -243,10 +242,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Film\ViewDetail.cshtml" />
     <Content Include="Views\Booking\Step2.cshtml" />
     <Content Include="Views\Booking\Step3.cshtml" />
+    <Content Include="Views\Film\ComingSoon.cshtml" />
+    <Content Include="Views\Film\Index.cshtml" />
+    <Content Include="Views\Film\_subMenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

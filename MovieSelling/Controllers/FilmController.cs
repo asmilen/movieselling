@@ -13,6 +13,21 @@ namespace MovieSelling.Controllers
         //
         // GET: /Film/
 
+        public ActionResult Index()
+        {
+            // Set active menu
+            DatabaseHelper.setActiceMenu("Home");
+
+            // Lay ra cac list phim
+            FilmHome model = new FilmHome();
+
+            model.listFilmTheater = getListFilm(1);
+            model.listFilmComing = getListFilm(2);
+            model.listFilmHot = getListFilm(3);
+
+            return View(model);
+        }
+
         public ActionResult ViewDetail(int FilmID)
         {
             return View();
@@ -27,6 +42,7 @@ namespace MovieSelling.Controllers
         //Case
         //    1: On Theater
         //    2: Coming Soon
+        //    3: Phim Hot
         private List<FilmView> getListFilm(int Case)
         {
             List<FilmView> myListFilm = new List<FilmView>();
@@ -61,5 +77,10 @@ namespace MovieSelling.Controllers
             return myListFilm;
         }
 
+        public ActionResult ComingSoon()
+        {
+            List<FilmView> mylist = getListFilm(2);
+            return View(mylist);
+        }
     }
 }

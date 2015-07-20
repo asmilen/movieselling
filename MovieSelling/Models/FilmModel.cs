@@ -62,4 +62,20 @@ namespace MovieSelling.Models
             this.EndDate = DateTime.MaxValue;
         }
     }
+
+    public class FilmHome
+    {
+        public List<FilmView> listFilmHot { get; set; }
+
+        public List<FilmView> listFilmTheater { get; set; }
+
+        public List<FilmView> listFilmComing { get; set; }
+
+        public FilmHome()
+        {
+            listFilmHot = new List<FilmView>();
+            listFilmTheater = new List<FilmView>();
+            listFilmComing = new List<FilmView>();
+        }
+    }
 }
