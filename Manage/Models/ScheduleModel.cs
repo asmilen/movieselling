@@ -47,6 +47,8 @@ namespace Manage.Models
         public int ScheduleID { get; set; }
         public string FilmID { get; set; }
 
+        public string RoomID { get; set; }
+
         public bool selected { get; set; }
 
         public ScheduleDetail(int ScheduleID, int RoomID, string startTime)
