@@ -9,10 +9,11 @@
 <script type="text/javascript">
     var seatTotal = parseFloat(@Model.numberSeat);
 
-    var start = new Date;
-    setInterval(function () {
-        $('.Timer').text((new Date - start) / 1000 + " Seconds");
-    }, 1000);
+    //var start = new Date;
+    //setInterval(function () {
+    //    var intvalue = Math.round(new Date - start);
+    //    $('.Timer').text( intvalue);
+    //}, 1000);
 
     function selectSeat(seatID) {
         // xử lý check chọn ghế
@@ -114,6 +115,8 @@
     }
 
 </script>
+
+@Html.Partial("_subMenuPartial")
 <!--NOI DAT FLASH FILM-->
 <div style= "height: 10px">
 </div>
@@ -169,7 +172,7 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div style="padding: 10px 30px;">
                 <div style="float: left; padding-right: 10px;">
                     <span style="color: #3B3B3B">
                         Tổng ghế: <b>
@@ -177,12 +180,12 @@
                         </b>
                     </span>
                 </div>
-                 <div style="float: left; padding-right: 10px;">
+                <div style="float: left; padding-right: 10px;">
                     <span style="color: #3B3B3B">
                         Tổng tiền: <b>
-                        @{
-                            int price = MovieSelling.DatabaseHelper.getPriceByScheID(Model.ScheID) * Int32.Parse(Model.numberSeat);
-                        } 
+                            @{
+                                int price = MovieSelling.DatabaseHelper.getPriceByScheID(Model.ScheID) * Int32.Parse(Model.numberSeat);
+                            }
                             <span id="ctl00_plcMain_lblTongTien">@price</span>
                         </b>
                     </span>
@@ -247,12 +250,12 @@
                 @for (int i = 0; i < Model.listSeat.GetLength(0); i++)
                 {
                     string top =  (94 + 45 * i) + "px";
-                    char chara = (char) (i+65);
-                    <div class="item-seat line-seat" style="left:97px; top:137px;">@chara</div>
+                    string str = char.ConvertFromUtf32(i+65);
+                    <div class="item-seat line-seat" style="left:97px; top:@top;">@str</div>
                     for (int j = 0; j < Model.listSeat.GetLength(1); j++)
                     {
                         String id1 = i + "-" + j ;
-                        string left = (91 + 42 * j) + "px";
+                        string left = (133 + 42 * j) + "px";
                         if (Model.listSeat[i, j])
                         {
                             <div id="@id1" class="item-seat-booked" style="left:@left ; top:@top;">@(j+1)</div>
@@ -268,8 +271,8 @@
             <div>
                 <div style="margin: 10px; text-align: right !important">
 
-                    <input onclick="Continue();" style="float: right" id="btnNext" class="btn-booking" value="Tiếp tục" type="button">
-                    <input onclick="GoBack();" style="float: right" id="btnChangeTime" class="btn-booking" value="Đổi xuất chiếu" type="button">
+                    <input onclick="Continue();" style="float: right" id="btnNext"  value="Tiếp tục" type="button">
+                    <input onclick="GoBack();" style="float: right" id="btnChangeTime" value="Đổi xuất chiếu" type="button">
 
                 </div>
             </div>

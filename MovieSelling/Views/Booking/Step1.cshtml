@@ -3,66 +3,67 @@
     ViewBag.Title = "Step 1";
 }
 @Scripts.Render("~/bundles/jquery")
+
+@Html.Partial("_subMenuPartial")
 <div id="main">
-    <div>
-        @using (Html.BeginForm("Step1", "Booking", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
-            <div class="movie">
-                <table border="1">
-                    <tr>
-                        <th> Select Film</th>
-                    </tr>
-                    <tr>
-                        <td> @Html.ListBoxFor(m => m.filmSelected, Model.listFilm)</td>
-                    </tr>
-                </table>
+    <div class= "box">
+        <div class="head">
             </div>
-            <div class="movie">
-                <table border="1">
-                    <tr>
-                        <th> Select Date</th>
-                    </tr>
-                    <tr>
-                        <td> @Html.ListBoxFor(m => m.dateSelected, Model.listDate)</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="submit" value="Show" />
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        }
-@using (Html.BeginForm("Step2", "Booking",  FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-             <div class="movie">
-                <table border="1">
-                    <tr>
-                        <th> Chọn suất chiếu</th>
-                    </tr>
-                    <tr>
-                        <td> @Html.ListBoxFor(m => m.ScheID,Model.listTime)</td>
-                    </tr>
-                 </table>
-                @Html.HiddenFor(m => m.filmSelected);
-                 <table>
-                     <tr>
-                         <th> Select number of seat</th>
-                     </tr>
-                    <tr>
-                        <td> @Html.DropDownListFor(m => m.seatSelected, Model.numberOfSeats)</td>
-                    </tr>
-                </table>
-            </div>
-
-
-     <input type="submit" value="Next" />
-}
-        <div class="cl">&nbsp;</div>
-    </div>
+            @using (Html.BeginForm("Step1", "Booking", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="step1">
+                    <table border="1" width="250">
+                        <tr>
+                            <th height="30">Chọn phim</th>
+                        </tr>
+                        <tr>
+                            <td> @Html.ListBoxFor(m => m.filmSelected, Model.listFilm, new { Class = "Step1ListFilm" })</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="step1">
+                    <table border="1" width="250">
+                        <tr>
+                            <th height="30">Chọn ngày chiếu</th>
+                        </tr>
+                        <tr>
+                            <td height="250"> @Html.ListBoxFor(m => m.dateSelected, Model.listDate, new { Class = "Step1List" })</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="submit" value="Hiển thị suất chiếu" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }
+            @using (Html.BeginForm("Step2", "Booking", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="step1">
+                    <table border="1" width="250">
+                        <tr>
+                            <th height="30"> Chọn suất chiếu</th>
+                        </tr>
+                        <tr>
+                            <td height="250"> @Html.ListBoxFor(m => m.ScheID, Model.listTime, new { Class = "Step1List" })</td>
+                        </tr>
+                        <tr>
+                            <th height="30"> Chọn số lượng ghế</th>
+                        </tr>
+                        <tr>
+                            <td>Ghế người lớn  @Html.DropDownListFor(m => m.seatSelected, Model.numberOfSeats)</td>
+                        </tr>
+                    </table>
+                    @Html.HiddenFor(m => m.filmSelected)
+                    @Html.HiddenFor(m => m.dateSelected)
+                    <input type="submit" value="Tiếp tục" />
+                </div>
+            }
+            <div class="cl">&nbsp;</div>
+        </div>
 </div>
 

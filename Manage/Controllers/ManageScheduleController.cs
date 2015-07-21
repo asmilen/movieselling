@@ -49,7 +49,7 @@ namespace Manage.Controllers
                         {
                             List<ScheduleDetail> temp = new List<ScheduleDetail>();
                             temp.Add(new ScheduleDetail(ScheID, FilmID, StartTime));
-                            model.listScheduleByFilm.Add(FilmID, temp);
+                            model.listScheduleByFilm.Add(RoomID, temp);
                         }
                     }
                 }

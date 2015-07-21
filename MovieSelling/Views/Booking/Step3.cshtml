@@ -4,13 +4,14 @@
 }
 
 <h1>@ViewBag.Message</h1>
+
+@Html.Partial("_subMenuPartial")
 <section id="loginForm">
-    <h2>Add User</h2>
-    @using (Html.BeginForm("Step3", "booking", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @{
+    using (Html.BeginForm("Step3", "booking",FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-
         @Html.HiddenFor(m => m.ScheID)
         <fieldset>
             <legend>Xác nhận đặt vé</legend>
@@ -22,7 +23,7 @@
                 </li>
                 <li>
                     @Html.LabelFor(m => m.customer.address)
-                    @Html.PasswordFor(m => m.customer.address)
+                    @Html.TextBoxFor(m => m.customer.address)
                     @Html.ValidationMessageFor(m => m.customer.address)
                 </li>
                 <li>
@@ -32,15 +33,21 @@
                 </li>
                 <li>
                     @Html.LabelFor(m => m.customer.cmnd)
-                    @Html.EditorFor(m => m.customer.cmnd)
+                    @Html.TextBoxFor(m => m.customer.cmnd)
                     @Html.ValidationMessageFor(m => m.customer.cmnd)
                 </li>
                 <li>
                     @Html.LabelFor(m => m.customer.phone)
                     @Html.TextBoxFor(m => m.customer.phone)
+                    @Html.ValidationMessageFor(m => m.customer.phone)
                 </li>
             </ol>
             <input type="submit" value="Add" />
         </fieldset>
     }
+    }
 </section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

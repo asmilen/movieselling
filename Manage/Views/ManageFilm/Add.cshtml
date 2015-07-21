@@ -24,6 +24,22 @@
                     <input type="file" name="file" id="file" />
                 </li>
                 <li>
+                    @Html.LabelFor(m => m.Picture1)
+                    <input type="file" name="file1" id="file1" />
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Picture2)
+                    <input type="file" name="file2" id="file2" />
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Picture3)
+                    <input type="file" name="file3" id="file3" />
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Picture4)
+                    <input type="file" name="file4" id="file4" />
+                </li>
+                <li>
                     @Html.LabelFor(m => m.Name)
                     @Html.TextBoxFor(m => m.Name)
                     @Html.ValidationMessageFor(m => m.Name)
@@ -38,7 +54,15 @@
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Description)
-                    @Html.TextBoxFor(m => m.Description)
+                    @Html.TextAreaFor(m => m.Description)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Company)
+                    @Html.TextBoxFor(m => m.Company)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.filmLong)
+                    @Html.TextBoxFor(m => m.filmLong)
                 </li>
                 <li>
                     @Html.LabelFor(m => m.CategoryID)

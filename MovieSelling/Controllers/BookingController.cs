@@ -16,7 +16,7 @@ namespace MovieSelling.Controllers
         public ActionResult Step1()
         {
             DatabaseHelper.setActiceMenu("Booking");
-            ViewBag.SubMenu = "STEP 1: SELECT MOVIE ";
+            ViewBag.SubMenu = "BƯỚC 1: CHỌN PHIM";
             
             // Tao model booking moi cho view
             BookingModel model = new BookingModel();
@@ -73,7 +73,7 @@ namespace MovieSelling.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Step1(BookingModel model)
         {
-            ViewBag.SubMenu = "STEP 1: SELECT MOVIE ";
+            ViewBag.SubMenu = "BƯỚC 1: CHỌN PHIM ";
 
             // Lay ra List Film dang chieu
             model.listFilm = getListFilm(Int32.Parse(model.filmSelected));
@@ -109,7 +109,8 @@ namespace MovieSelling.Controllers
                             string startTime = reader[DatabaseHelper.StartTime].ToString();
                             
                             // Lay ra so ghe da dat
-                            sqlSelect = @"select count(*) from TicketBooking where ScheduleID=@Scheid";
+                            sqlSelect = @"select count(*) from Ticket join Orders on
+                                            Ticket.OrderID = Orders.OrderID where ScheduleID=@Scheid";
                             using (SqlCommand cmd1 = new SqlCommand(sqlSelect, conn))
                             {
                                 cmd1.Parameters.AddWithValue("@Scheid", ScheID);
@@ -140,7 +141,7 @@ namespace MovieSelling.Controllers
         public ActionResult Step2(BookingModel model)
         {
             // tao session moi
-            ViewBag.SubMenu = "STEP 2: SELECT SEAT";
+            ViewBag.SubMenu = "BƯỚC 2: CHỌN GHẾ";
             Session["time"] = DateTime.Now;
             Session["scheID"] = model.ScheID; 
 
@@ -154,6 +155,7 @@ namespace MovieSelling.Controllers
         {
             BookingStep2 modelStep2 = new BookingStep2();
 
+            // Khoi tao gia tri cho ngay chieu, lich chieu , va tong so ghe
             modelStep2.dateSche = model.dateSelected;
             modelStep2.ScheID = model.ScheID;
             modelStep2.numberSeat = model.seatSelected;
@@ -162,7 +164,7 @@ namespace MovieSelling.Controllers
             {
                 conn.Open();
 
-                // Select trong bang schedule voi film va ngay da chon
+                // Select trong bang schedule,film,room lay ra gio chieu, so ghe trong phong va ten phim
                 string sqlSelect = @"select Schedule.StartTime,Room.NumberOfRow,Room.NumberOfColumn , Film.Name
                                      from 
                                         Schedule left join Room on Schedule.RoomID=Room.RoomID 
@@ -188,7 +190,7 @@ namespace MovieSelling.Controllers
                         modelStep2.listSeat[i, j] = false;
 
                 // Lay ra danh sach ghe da dat
-                sqlSelect = @"select * from TicketBooking where ScheduleID=@id";
+                sqlSelect = @"select * from Ticket inner join Orders on Orders.OrderID=Ticket.OrderID where ScheduleID=@id";
                 using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", modelStep2.ScheID);
@@ -208,6 +210,8 @@ namespace MovieSelling.Controllers
         //Thanh toan
         public ActionResult Step3(string ListSeat)
         {
+            ViewBag.SubMenu = "BƯỚC 3: ĐIỀN THÔNG TIN NGƯỜI ĐẶT";
+
             // Tach Chuoi de lay ra ghe
             Ticket model = new Ticket();
 
@@ -222,39 +226,32 @@ namespace MovieSelling.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Step3(Ticket model)
         {
+            ModelState.Clear();
             if (ModelState.IsValid)
             {
                 // add khach hang vao database va lay ra Customer ID vua tao
                 int CustomerID = InsertCustomerToDB(model.customer);
 
                 // Lay ra danh sach ghe
-                model.seat = new List<Seat>();
-                string ListSeat = Session["listSeat"].ToString();
-                var seatTotal = Int32.Parse(ListSeat.Substring(0, 1));
-                var index = 1;
-                for (int i = 0; i < seatTotal; i++)
-                {
-                    string seatI = ListSeat.Substring(index, 3);
-                    model.seat.Add(new Seat(Int32.Parse(seatI.Substring(0, 1)), Int32.Parse(seatI.Substring(2, 1))));
-                    index += 3;
-                }
+                model.seat = getSeatFromList();
 
-                // Xac nhan dat ve va luu thong tin dat ve vao database
-                string code = DatabaseHelper.AutoGenerateCode();
+                // luu vao bang order
+                int OrderID = InsertToOrder(model,CustomerID);
+
+                // luu vao bang ticket_order
                 foreach (var item in model.seat)
                 {
                     using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                     {
                         conn.Open();
-                        string sqlSelect = @"Insert into TicketBooking values (@ScheID,@CusID,@row,@col,@price,@code)";
+                        string sqlSelect = @"Insert into Ticket values (@price,@OrderID,@Room,@row,@col)";
                         using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                         {
-                            cmd.Parameters.AddWithValue("@ScheID", Int32.Parse(model.ScheID));
-                            cmd.Parameters.AddWithValue("@CusID", CustomerID);
+                            cmd.Parameters.AddWithValue("@OrderID", OrderID);
+                            cmd.Parameters.AddWithValue("@Room", DatabaseHelper.getRoomByScheID(model.ScheID));
                             cmd.Parameters.AddWithValue("@row", item.Row);
                             cmd.Parameters.AddWithValue("@col", item.Column);
                             cmd.Parameters.AddWithValue("@price", DatabaseHelper.getPriceByScheID(model.ScheID));
-                            cmd.Parameters.AddWithValue("@code", code);
 
                             cmd.ExecuteScalar();
                             conn.Close();
@@ -263,8 +260,50 @@ namespace MovieSelling.Controllers
                     }
                 }
             }
-            ModelState.AddModelError("", "Đặt vé thành công");
+            return RedirectToAction("Step4");
+        }
+
+        public ActionResult Step4()
+        {
             return View();
+        }
+        private List<Seat> getSeatFromList()
+        {
+            var temp = new List<Seat>();
+            string ListSeat = Session["listSeat"].ToString();
+            var seatTotal = Int32.Parse(ListSeat.Substring(0, 1));
+            var index = 1;
+            for (int i = 0; i < seatTotal; i++)
+            {
+                string seatI = ListSeat.Substring(index, 3);
+                temp.Add(new Seat(Int32.Parse(seatI.Substring(0, 1)), Int32.Parse(seatI.Substring(2, 1))));
+                index += 3;
+            }
+            return temp;
+        }
+
+        private int InsertToOrder(Ticket model, int CustomerID)
+        {
+            string code = DatabaseHelper.AutoGenerateCode();
+
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                conn.Open();
+                string sqlSelect = @"Insert into Orders output INSERTED.OrderID values (@CusID,@price,@numTicket,@ScheID,@code)";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.AddWithValue("@CusID", CustomerID);
+                    cmd.Parameters.AddWithValue("@price", DatabaseHelper.getPriceByScheID(model.ScheID) * model.seat.Count);
+                    cmd.Parameters.AddWithValue("@numTicket", model.seat.Count);
+                    cmd.Parameters.AddWithValue("@ScheID", model.ScheID);
+                    cmd.Parameters.AddWithValue("@code", code);
+
+                    int modified = (int)cmd.ExecuteScalar();
+                    conn.Close();
+                    conn.Dispose();
+                    return modified;
+                }
+            }
         }
 
         private int InsertCustomerToDB(Customer model)
@@ -277,9 +316,9 @@ namespace MovieSelling.Controllers
                 {
                     cmd.Parameters.AddWithValue("@Name", model.Name);
                     cmd.Parameters.AddWithValue("@add", model.address);
-                    cmd.Parameters.AddWithValue("@email", model.address);
-                    cmd.Parameters.AddWithValue("@cmnd", model.address);
-                    cmd.Parameters.AddWithValue("@phone", model.address);
+                    cmd.Parameters.AddWithValue("@email", model.email);
+                    cmd.Parameters.AddWithValue("@cmnd", model.cmnd);
+                    cmd.Parameters.AddWithValue("@phone", model.phone);
 
                     int modified = (int)cmd.ExecuteScalar();
                     conn.Close();

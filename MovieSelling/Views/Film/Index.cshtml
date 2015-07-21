@@ -20,11 +20,34 @@
 
             @for (int i = 0; i < Model.listFilmHot.Count; i++)
             {
-                if (i < 6)
+                if (i < 5)
                 {
                     var item = Model.listFilmHot.ElementAt(i);
                     <!-- Movie -->
                     <div class="movie">
+
+                        <div class="movie-image">
+
+                            <a href="@Url.Action("ViewDetail", new { item.FilmID })"><span class="play"><span class="name">@item.Name</span></span><img src="data:image;base64,@System.Convert.ToBase64String(@item.Picture)" alt="movie" /></a>
+                        </div>
+
+                        <div class="rating">
+                            <p>RATING</p>
+                            <div class="stars">
+                                <div class="stars-in">
+
+                                </div>
+                            </div>
+                            <span class="comments">12</span>
+                        </div>
+                    </div>
+                    <!-- end Movie -->
+                }
+                if (i == 5)
+                {
+                    var item = Model.listFilmHot.ElementAt(i);
+                    <!-- Movie -->
+                    <div class="movie last">
 
                         <div class="movie-image">
 
@@ -57,11 +80,34 @@
 
             @for (int i = 0; i < Model.listFilmTheater.Count; i++)
             {
-                if (i < 6)
+                if (i < 5)
                 {
                     var item = Model.listFilmTheater.ElementAt(i);
                     <!-- Movie -->
                     <div class="movie">
+
+                        <div class="movie-image">
+
+                            <a href="@Url.Action("ViewDetail", new { item.FilmID })"><span class="play"><span class="name">@item.Name</span></span><img src="data:image;base64,@System.Convert.ToBase64String(@item.Picture)" alt="movie" /></a>
+                        </div>
+
+                        <div class="rating">
+                            <p>RATING</p>
+                            <div class="stars">
+                                <div class="stars-in">
+
+                                </div>
+                            </div>
+                            <span class="comments">12</span>
+                        </div>
+                    </div>
+                    <!-- end Movie -->
+                }
+                if (i == 5)
+                {
+                    var item = Model.listFilmHot.ElementAt(i);
+                    <!-- Movie -->
+                    <div class="movie last">
 
                         <div class="movie-image">
 
@@ -94,11 +140,34 @@
 
             @for (int i = 0; i < Model.listFilmComing.Count; i++)
             {
-                if (i < 6)
+                if (i < 5)
                 {
                     var item = Model.listFilmComing.ElementAt(i);
                     <!-- Movie -->
                     <div class="movie">
+
+                        <div class="movie-image">
+
+                            <a href="@Url.Action("ViewDetail", new { item.FilmID })"><span class="play"><span class="name">@item.Name</span></span><img src="data:image;base64,@System.Convert.ToBase64String(@item.Picture)" alt="movie" /></a>
+                        </div>
+
+                        <div class="rating">
+                            <p>RATING</p>
+                            <div class="stars">
+                                <div class="stars-in">
+
+                                </div>
+                            </div>
+                            <span class="comments">12</span>
+                        </div>
+                    </div>
+                    <!-- end Movie -->
+                }
+                if (i == 5)
+                {
+                    var item = Model.listFilmHot.ElementAt(i);
+                    <!-- Movie -->
+                    <div class="movie last">
 
                         <div class="movie-image">
 

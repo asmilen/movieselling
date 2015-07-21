@@ -1,5 +1,80 @@
-﻿@{
+﻿@model MovieSelling.Models.Film
+@{
     ViewBag.Title = "ViewDetail";
 }
 
-<h2>ViewDetail</h2>
+@Html.Partial("_subMenuPartial")
+<!-- Main -->
+<div id="main">
+    <!-- Content -->
+
+    <div id="content">
+
+        <!-- Box -->
+        <div class="box">
+            <div class="head">
+                <h6>@Model.Name</h6>
+            </div>
+            <!-- Movie -->
+            <div class="movie">
+                <div class="movie-image">
+                    <a><img src="data:image;base64,@System.Convert.ToBase64String(@Model.Picture)" alt="movie" /></a>
+                </div>
+            </div>
+            <div class="movieDetail">
+                <div class="content">
+                    <h5>Khởi chiếu: </h5><p>Từ @Model.StartDate.ToString(MovieSelling.DatabaseHelper.DateFormat) tới @Model.EndDate.ToString(MovieSelling.DatabaseHelper.DateFormat)</p><br>
+                    <h5>Loại phim: </h5><p>@Model.Category</p><br>
+                    <h5>Diễn viên: </h5><p>@Model.Actor</p><br>
+                    <h5>Đạo diễn: </h5><p>@Model.Director</p><br>
+                    <h5>Hãng: </h5><p>@Model.Company</p><br>
+                    <h5>Thời lượng: </h5><p>@Model.filmLong</p><br>
+                </div>
+            </div>
+            <div class="cl">&nbsp;</div>
+    </div>
+        <div class="box">
+            <div class="head">
+                <h6>Tóm tắt nội dung</h6>
+            </div>
+            <div class="movieDetail">
+                <div class="content">
+                    <p>@Model.Description</p>    
+                </div>
+            </div>
+            @if (Model.Picture1!= null)
+            {
+                <div class="movieDetail">
+                    <div class="detail-image">
+                        <a><img src="data:image;base64,@System.Convert.ToBase64String(@Model.Picture1)" alt="movie" /></a>
+                    </div>
+                </div>
+            }
+            @if (Model.Picture2 != null)
+            {
+                <div class="movieDetail">
+                    <div class="detail-image">
+                        <a><img src="data:image;base64,@System.Convert.ToBase64String(@Model.Picture2)" alt="movie" /></a>
+                    </div>
+                </div>
+            }
+            @if (Model.Picture3 != null)
+            {
+                <div class="movieDetail">
+                    <div class="detail-image">
+                        <a><img src="data:image;base64,@System.Convert.ToBase64String(@Model.Picture3)" alt="movie" /></a>
+                    </div>
+                </div>
+            }
+            @if (Model.Picture4 != null)
+            {
+                <div class="movieDetail">
+                    <div class="detail-image">
+                        <a><img src="data:image;base64,@System.Convert.ToBase64String(@Model.Picture4)" alt="movie" /></a>
+                    </div>
+                </div>
+            }
+            <div class="cl">&nbsp;</div>
+        </div>
+</div>
+</div>

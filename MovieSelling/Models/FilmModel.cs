@@ -24,20 +24,28 @@ namespace MovieSelling.Models
     {
         public int FilmID { get; set; }
         public int UserID { get; set; }
-        public int CategoryID { get; set; }
+        public string Category { get; set; }
         public string Name { get; set; }
         public string Actor { get; set; }
         public string Director { get; set; }
+        public string Company { get; set; }
+
         public string Description { get; set; }
+        public string filmLong { get; set; }
         public byte[] Picture { get; set; }
+        public byte[] Picture1 { get; set; }
+        public byte[] Picture2 { get; set; }
+        public byte[] Picture3 { get; set; }
+        public byte[] Picture4 { get; set; }
+
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public Film(int filmID, int UserId, int CategoryID , string Name , string Actor, string Director, string Description, byte[] Picture, DateTime StartDate, DateTime EndDate)
+        public Film(int filmID, int UserId, string Category, string Name, string Actor, string Director, string Description, byte[] Picture, DateTime StartDate, DateTime EndDate, string Company, string FilmLong, byte[] Picture1, byte[] Picture2, byte[] Picture3, byte[] Picture4)
         {
             this.FilmID = filmID;
             this.UserID = UserID;
-            this.CategoryID = CategoryID;
+            this.Category = Category;
             this.Name = Name;
             this.Actor = Actor;
             this.Director = Director;
@@ -45,6 +53,12 @@ namespace MovieSelling.Models
             this.Picture = Picture;
             this.StartDate = StartDate;
             this.EndDate = EndDate;
+            this.Company = Company;
+            this.filmLong = filmLong;
+            this.Picture1 = Picture1;
+            this.Picture2 = Picture2;
+            this.Picture3 = Picture3;
+            this.Picture4 = Picture4;
         }
 
         public Film()
@@ -52,12 +66,18 @@ namespace MovieSelling.Models
             // TODO: Complete member initialization
             this.FilmID = 0;
             this.UserID = 0;
-            this.CategoryID = 0;
+            this.Category = "";
             this.Name = "";
             this.Actor = "";
             this.Director = "";
             this.Description = "";
+            this.Company = "";
+            this.filmLong = "";
             this.Picture = new byte[0];
+            this.Picture1 = null;
+            this.Picture2 = null;
+            this.Picture3 = null;
+            this.Picture4 = null;
             this.StartDate = DateTime.MaxValue;
             this.EndDate = DateTime.MaxValue;
         }

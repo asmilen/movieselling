@@ -25,6 +25,8 @@ textarea { overflow: auto; }
 h2 { font-size:10px; color:#f2a223; font-weight:bold; }
 h3 { font-size:14px; color:#fff; font-weight:bold; }
 h4 { font-size:14px; color:#f3b12b; font-weight:bold; }
+h5 { font-size:14px; color:#f3b12b; font-weight:bold; display:inline}
+h6 { font-size:24px; color:#f3b12b; font-weight:bold; display:inline}
 
 #shell { width:980px; margin:0 auto; }
 
@@ -63,17 +65,31 @@ h1#logo a { float:left; width:239px; height:49px; background:url('themes/base/im
 #main { border-bottom:1px dashed #413e3e; }
 #content {  }
 
-.box { width:980px; border-bottom:1px dashed #413e3e; padding-bottom:21px; }
+.box { width:980px; border-bottom:1px dashed #413e3e; padding-bottom:21px;}
 
 .box .head { width:980px; padding-top:14px; padding-bottom:11px; }
 .box .head h2 { float:left; display:inline; }
+.box .head h3 { font-size:20px; font-weight:bold; color:#fff; line-height:30px; text-decoration:none;display:inline; }
 
-.box .movie { width:152px; float:left; padding-right:12px; }
+.box .movie { width:152px; float:left; padding-right:12px; } 
+
+.box .movieDetail { width:500px; float:left; padding-right:12px; } 
+.box .movieDetail p {}
+.detail-image { float:left; width:500px; position:relative; }
+.detail-image img { width:500px; }
+
+.box .step1 { width:250px; float:left; padding-right:20px; }
+.box .step1 table{ border: 1px solid white; width : 250px; height : 400px;}
+.box .step1 th {color: white;}
+.Step1ListFilm { height:350px ; width: 240px}
+.Step1List { height:250px ; width: 240px}
+
 .movie-image { float:left; width:152px; height:214px; position:relative; }
 .movie-image img { width:152px; height:214px; }
 .movie-image a { float: left; display: inline; width:152px; height:214px; position: relative; z-index: 2; }
 .play { position: absolute; top: 0; left: 0; width:152px; height:214px; background: url('themes/base/images/image-hover.png'); display:block; z-index: 5; cursor:pointer; display:none; }
 .movie span.name { font-weight:bold; color:#fff; font-size:14px; text-align:center; padding-top:160px; display:block; }
+.step1 span.name { font-weight:bold; color:#fff; font-size:14px; text-align:center; padding-top:160px; display:block; }
 
 .box .last { padding:0; }
 
@@ -96,7 +112,7 @@ h1#logo a { float:left; width:239px; height:49px; background:url('themes/base/im
 .content { padding-bottom:28px; }
 .content .date { font-size:10px; color:#fff; }
 .content img { float:left; width:68px; padding-right:8px; }
-.content p { font-size:13px; color:#fff; line-height:16px; }
+.content p { font-size:13px; color:#fff; line-height:16px; display:inline}
 .content a { font-size:11px;  }
 
 #footer { padding:15px 0 0 0; }
@@ -108,174 +124,4 @@ h1#logo a { float:left; width:239px; height:49px; background:url('themes/base/im
 
 /* End */
 
-/*#loginForm {
-    border-right: solid 2px #c8c8c8;
-    float: left;
-    width: 55%;
-}
-
-    #loginForm .validation-error {
-        display: block;
-        margin-left: 15px;
-    }
-
-    #loginForm .validation-summary-errors ul {
-        margin: 0;
-        padding: 0;
-    }
-
-    #loginForm .validation-summary-errors li {
-        display: inline;
-        list-style: none;
-        margin: 0;
-    }
-
-    #loginForm input {
-        width: 250px;
-    }
-
-    #loginForm input[type="checkbox"],
-    #loginForm input[type="submenumit"],
-    #loginForm input[type="button"],
-    #loginForm button {
-        width: auto;
-    }
-
-#socialLoginForm {
-    margin-left: 40px;
-    float: left;
-    width: 40%;
-}
-
-    #socialLoginForm h2 {
-        margin-bottom:  5px;
-    }
-
-#socialLoginList button {
-    margin-bottom: 12px;
-}
-
-#logoutForm {
-    display: inline;
-}
-
-
-fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
-    fieldset legend {
-        display: none;
-    }
-
-    fieldset ol {
-        padding: 0;
-        list-style: none;
-    }
-
-        fieldset ol li {
-            padding-bottom: 5px;
-        }
-
-        input, textarea {
-    border: 1px solid #e2e2e2;
-    background: #fff;
-    color: #333;
-    font-size: 1.2em;
-    margin: 5px 0 6px 0;
-    padding: 5px;
-    width: 300px;
-}
-
-textarea {
-    font-family: inherit;
-    width: 500px;
-}
-
-    input:focus, textarea:focus {
-        border: 1px solid #7ac0da;
-    }
-
-    input[type="checkbox"] {
-        background: transparent;
-        border: inherit;
-        width: auto;
-    }
-
-    input[type="submenumit"],
-    input[type="button"],
-    button {
-        background-color: #d3dce0;
-        border: 1px solid #787878;
-        cursor: pointer;
-        font-size: 1.2em;
-        font-weight: 600;
-        padding: 7px;
-        margin-right: 8px;
-        width: auto;
-    }
-
-   td input[type="submenumit"],
-    td input[type="button"],
-    td button {
-        font-size: 1em;
-        padding: 4px;
-        margin-right: 4px;
-    }
-
-
-.message-info {
-    border: 1px solid;
-    clear: both;
-    padding: 10px 20px;
-}
-
-.message-error {
-    clear: both;
-    color: #e80c4d;
-    font-size: 1.1em;
-    font-weight: bold;
-    margin: 20px 0 10px 0;
-}
-
-.message-success {
-    color: #7ac0da;
-    font-size: 1.3em;
-    font-weight: bold;
-    margin: 20px 0 10px 0;
-}
-
-.error {
-    color: #e80c4d;
-}
-
-
-.field-validation-error {
-    color: #e80c4d;
-    font-weight: bold;
-}
-
-.field-validation-valid {
-    display: none;
-}
-
-input.input-validation-error {
-    border: 1px solid #e80c4d;
-}
-
-input[type="checkbox"].input-validation-error {
-    border: 0 none;
-}
-
-.validation-summary-errors {
-    color: #e80c4d;
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
-.validation-summary-valid {
-    display: none;
-}*/
 

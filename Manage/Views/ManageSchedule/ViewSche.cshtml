@@ -48,10 +48,10 @@
         @{
             sqlSelect = @"select Name from Film where FilmID = " + sche.FilmID;
             System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand(sqlSelect, conn);
-            System.Data.SqlClient.SqlDataReader reader1 = cmd.ExecuteReader();
+            System.Data.SqlClient.SqlDataReader reader1 = cmd1.ExecuteReader();
             if (reader1.Read())
             {
-                <td> @Html.ActionLink(reader["Name"].ToString(), "Edit", new { sche.ScheduleID }) </td>
+                <td> @Html.ActionLink(reader1["Name"].ToString(), "Edit", new { sche.ScheduleID }) </td>
             }
         }
     </tr>

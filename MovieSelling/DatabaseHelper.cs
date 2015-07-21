@@ -9,6 +9,9 @@ namespace MovieSelling
 {
     public static class DatabaseHelper
     {
+        //String Format
+        public static String DateFormat = "dd-MM-yyyy";
+
         public static String FilmID = "FilmID";
         public static String UserID = "UserID";
         public static String CategoryID = "CategoryID";
@@ -19,6 +22,12 @@ namespace MovieSelling
         public static String Picture = "Picture";
         public static String StartDate = "StartDate";
         public static String EndDate = "EndDate";
+        public static String Company = "Company";
+        public static String filmLong = "FilmLong";
+        public static String Picture1 = "Picture1";
+        public static String Picture2 = "Picture2";
+        public static String Picture3 = "Picture3";
+        public static String Picture4 = "Picture4";
 
         // Bang Schedule
         public static String ScheduleID = "ScheduleID";
@@ -35,8 +44,8 @@ namespace MovieSelling
         public static String NumberOfColumn = "NumberOfColumn";
 
         //Bang booking
-        public static String SeatRow = "SeatRow";
-        public static String SeatColumn = "SeatColumn";
+        public static String SeatRow = "Row";
+        public static String SeatColumn = "Col";
 
         public static List<SelectListItem> listTech = getListTech();
 
@@ -142,6 +151,31 @@ namespace MovieSelling
                     Contact = "active";
                     break;
             }
+        }
+
+        public static string getRoomByScheID(string ScheID)
+        {
+            string room = "";
+
+            // Lay list role ra tu database
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                conn.Open();
+                string sqlSelect = @"Select Name from Room inner join Schedule 
+                                        on Schedule.RoomID = Room.RoomID
+                                        where ScheduleID=@ID";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", ScheID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        room = reader[DatabaseHelper.Name].ToString();
+                    }
+                }
+            }
+
+            return room;
         }
     }
 }

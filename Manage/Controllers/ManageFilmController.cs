@@ -150,6 +150,49 @@ namespace Manage.Controllers
             {
                 try
                 {
+                    // Get img from post method
+                    #region image
+                    byte[] img = new byte[0];
+                    HttpPostedFileBase file = Request.Files["file"];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        img = new byte[file.ContentLength];
+                        file.InputStream.Read(img, 0, file.ContentLength);
+                    }
+
+                    byte[] img1 = new byte[0];
+                    file = Request.Files["file1"];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        img1 = new byte[file.ContentLength];
+                        file.InputStream.Read(img1, 0, file.ContentLength);
+                    }
+
+                    byte[] img2 = new byte[0];
+                    file = Request.Files["file2"];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        img2 = new byte[file.ContentLength];
+                        file.InputStream.Read(img2, 0, file.ContentLength);
+                    }
+
+                    byte[] img3 = new byte[0];
+                    file = Request.Files["file3"];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        img3 = new byte[file.ContentLength];
+                        file.InputStream.Read(img3, 0, file.ContentLength);
+                    }
+
+                    byte[] img4 = new byte[0];
+                    file = Request.Files["file4"];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        img4 = new byte[file.ContentLength];
+                        file.InputStream.Read(img4, 0, file.ContentLength);
+                    }
+                    #endregion
+
                     // Get current User
                     int UserID = WebMatrix.WebData.WebSecurity.CurrentUserId;
 
@@ -157,7 +200,7 @@ namespace Manage.Controllers
                     using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                     {
                         conn.Open();
-                        string sqlSelect = @"Insert into Film values (@UserID,@CateID,@Name,@Actor,@Dire,@Desc,@Pic,@StaDate,@EndDate,@TechID)";
+                        string sqlSelect = @"Insert into Film values (@UserID,@CateID,@Name,@Actor,@Dire,@Desc,@Pic,@StaDate,@EndDate,@TechID,@Com,@Pic1,@Pic2,@Pic3,@Pic4,@long)";
 
                         // Xet xem film duoc add vao voi nhung cong nghe nao (2D,3D)
                         foreach (var item in model.listTech)
@@ -193,19 +236,19 @@ namespace Manage.Controllers
                                     else
                                         cmd.Parameters.Add("@Desc", SqlDbType.NVarChar).Value = model.Description;
 
-                                    // Get img from post method
-                                    byte[] img = new byte[0];
-                                    HttpPostedFileBase file = Request.Files["file"];
-                                    if (file != null && file.ContentLength > 0)
-                                    {
-                                        img = new byte[file.ContentLength];
-                                        file.InputStream.Read(img, 0, file.ContentLength);
-                                    }
+                                   
                                     cmd.Parameters.Add("@Pic", SqlDbType.VarBinary).Value = img;
                                     cmd.Parameters.Add("@StaDate", SqlDbType.DateTime).Value = model.StartDate;
                                     cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = model.EndDate.AddDays(1);
 
                                     cmd.Parameters.Add("@TechID", SqlDbType.Int).Value = Int32.Parse(item.Value);
+                                    cmd.Parameters.Add("@Com", SqlDbType.NVarChar).Value = model.Company;
+                                    cmd.Parameters.Add("@long", SqlDbType.Int).Value = model.filmLong;
+
+                                    cmd.Parameters.Add("@Pic1", SqlDbType.VarBinary).Value = img1;
+                                    cmd.Parameters.Add("@Pic2", SqlDbType.VarBinary).Value = img2;
+                                    cmd.Parameters.Add("@Pic3", SqlDbType.VarBinary).Value = img3;
+                                    cmd.Parameters.Add("@Pic4", SqlDbType.VarBinary).Value = img4;
                                     // Exec
                                     cmd.ExecuteNonQuery();
                                 }

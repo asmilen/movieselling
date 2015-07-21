@@ -248,6 +248,8 @@
     <Content Include="Views\Film\ComingSoon.cshtml" />
     <Content Include="Views\Film\Index.cshtml" />
     <Content Include="Views\Film\_subMenuPartial.cshtml" />
+    <Content Include="Views\Booking\_subMenuPartial.cshtml" />
+    <Content Include="Views\Booking\Step4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

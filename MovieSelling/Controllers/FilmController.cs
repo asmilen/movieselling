@@ -30,7 +30,72 @@ namespace MovieSelling.Controllers
 
         public ActionResult ViewDetail(int FilmID)
         {
-            return View();
+            Film film = getFilmByID(FilmID);
+            return View(film);
+        }
+
+        private Film getFilmByID(int FilmID)
+        {
+            Film temp = new Film();
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                string sqlSelect = @"select Film.* , CategoryFilm.Name as CateName from Film join [CategoryFilm] on [CategoryFilm].[CategoryID]= Film.[CategoryID] where FilmID=@ID";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@ID", FilmID);
+                    SqlDataReader test = cmd.ExecuteReader();
+                    while (test.Read())
+                    {
+                        try
+                        {
+                            temp.UserID = (int)test[DatabaseHelper.UserID];
+                            temp.Category = test["CateName"].ToString();
+                            temp.Name = test[DatabaseHelper.Name].ToString();
+
+                            // Vi Actor,director,Description co the null nen phai kiem tra
+                            if (test[DatabaseHelper.Actor] != null)
+                                temp.Actor = test[DatabaseHelper.Actor].ToString();
+
+                            if (test[DatabaseHelper.Director] != null)
+                                temp.Director = test[DatabaseHelper.Director].ToString();
+
+                            if (test[DatabaseHelper.Company] != null)
+                                temp.Company = test[DatabaseHelper.Company].ToString();
+
+                            if (test[DatabaseHelper.filmLong] != null)
+                                temp.filmLong = test[DatabaseHelper.filmLong].ToString();
+
+                            if (test[DatabaseHelper.Description] != null)
+                                temp.Description = test[DatabaseHelper.Description].ToString();
+
+                            temp.StartDate = (DateTime)test[DatabaseHelper.StartDate];
+                            temp.EndDate = (DateTime)test[DatabaseHelper.EndDate];
+
+                            // Retrieve image
+                            if (test[DatabaseHelper.Picture] != null)
+                                temp.Picture = (Byte[])(test[DatabaseHelper.Picture]);
+                            // Retrieve image
+                            if (test[DatabaseHelper.Picture1] != null)
+                                temp.Picture1 = (Byte[])(test[DatabaseHelper.Picture1]);
+                            // Retrieve image
+                            if (test[DatabaseHelper.Picture2] != null)
+                                temp.Picture2 = (Byte[])(test[DatabaseHelper.Picture2]);
+                            // Retrieve image
+                            if (test[DatabaseHelper.Picture] != null)
+                                temp.Picture3 = (Byte[])(test[DatabaseHelper.Picture3]);
+                            // Retrieve image
+                            if (test[DatabaseHelper.Picture4] != null)
+                                temp.Picture4 = (Byte[])(test[DatabaseHelper.Picture4]);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Co loi trong luc load database, bo qua user co loi
+                        }
+                    }
+                }
+            }
+            return temp;
         }
 
         public ActionResult OnTheater()
