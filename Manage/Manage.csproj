@@ -200,7 +200,9 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\FilmModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
-    <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="Models\RoomModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Models\TicketModel.cs">
       <SubType>Code</SubType>
