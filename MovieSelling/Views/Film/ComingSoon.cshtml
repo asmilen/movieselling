@@ -1,5 +1,67 @@
-﻿@{
-    ViewBag.Title = "ComingSoon";
+﻿@model List<MovieSelling.Models.FilmView>
+@{
+    ViewBag.Title = "Home";
 }
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/bundles/myquery")
+<script type="text/javascript" src="~/Scripts/jquery-func.js"></script>
 
-<h2>ComingSoon</h2>
+@Html.Partial("_subMenuPartial")
+<!-- Main -->
+<div id="main">
+    <!-- Box -->
+    <div class="box">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var item = Model.ElementAt(i);
+            if (i % 6 == 5)
+            {
+                <!-- Movie -->
+                <div class="movie last">
+
+                    <div class="movie-image">
+
+                        <a href="@Url.Action("ViewDetail", new { item.FilmID })"><span class="play"><span class="name">@item.Name</span></span><img src="data:image;base64,@System.Convert.ToBase64String(@item.Picture)" alt="movie" /></a>
+                    </div>
+
+                    <div class="rating">
+                        <p>RATING</p>
+                        <div class="stars">
+                            <div class="stars-in">
+
+                            </div>
+                        </div>
+                        <span class="comments">12</span>
+                    </div>
+                </div>
+            }
+            else
+            {
+            <!-- Movie -->
+                <div class="movie">
+
+                    <div class="movie-image">
+
+                        <a href="@Url.Action("ViewDetail", new { item.FilmID })"><span class="play"><span class="name">@item.Name</span></span><img src="data:image;base64,@System.Convert.ToBase64String(@item.Picture)" alt="movie" /></a>
+                    </div>
+
+                    <div class="rating">
+                        <p>RATING</p>
+                        <div class="stars">
+                            <div class="stars-in">
+
+                            </div>
+                        </div>
+                        <span class="comments">12</span>
+                    </div>
+                </div>
+        <!-- end Movie -->
+            }
+        }
+
+        <div class="cl">&nbsp;</div>
+    </div>
+    <!-- end Box -->
+
+</div>
+<!-- end Main -->

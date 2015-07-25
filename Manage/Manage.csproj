@@ -184,9 +184,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageFilmController.cs" />
+    <Compile Include="Controllers\ManageRoomController.cs" />
     <Compile Include="Controllers\ManageScheduleController.cs" />
+    <Compile Include="Controllers\ManageTicketController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\ManageUserController.cs" />
-    <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="DatabaseHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -194,7 +200,11 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\FilmModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
+    <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\ScheduleModel.cs" />
+    <Compile Include="Models\TicketModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -270,6 +280,10 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\ManageRoom\List.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\ManageTicket\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -312,6 +326,7 @@
     <Content Include="Views\ManageSchedule\Add.cshtml" />
     <Content Include="Views\ManageUser\Edit.cshtml" />
     <Content Include="Views\ManageSchedule\AddStep2.cshtml" />
+    <Content Include="Views\ManageRoom\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

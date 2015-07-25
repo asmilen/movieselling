@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Manage.Models.RoomModel>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfRow)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfColumn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfRow)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfColumn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { item.RoomID  }) |
+            @Html.ActionLink("Delete", "Delete", new { item.RoomID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -61,4 +61,3 @@ F:\B's Workshop\MovieSelling\MovieSelling\bin\System.Web.WebPages.Deployment.xml
 F:\B's Workshop\MovieSelling\MovieSelling\bin\System.Web.WebPages.Razor.xml
 F:\B's Workshop\MovieSelling\MovieSelling\obj\Debug\MovieSelling.dll
 F:\B's Workshop\MovieSelling\MovieSelling\obj\Debug\MovieSelling.pdb
-F:\B's Workshop\MovieSelling\MovieSelling\obj\Debug\MovieSelling.csprojResolveAssemblyReference.cache

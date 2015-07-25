@@ -117,22 +117,57 @@ namespace Manage.Controllers
                 conn.Open();
                 string sqlSelect = @" IF not EXISTS 
                         (SELECT * FROM Schedule WHERE RoomID = @RoomID and StartTime = @StartTime and DateSche = @DateSche ) 
-                        Insert into Schedule values (@RoomID,@FilmID,@StartTime,@DateSche,@price)";
+                        Insert into Schedule values (@RoomID,@FilmID,@StartTime,@DateSche)";
 
                         using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                         {
+                            DateTime dateSche = (DateTime)Session["date"];
                             // Add value
                             cmd.Parameters.AddWithValue("@RoomID", room);
                             cmd.Parameters.AddWithValue("@FilmID", Int32.Parse(filmID));
                             cmd.Parameters.AddWithValue("@StartTime", time);
-                            cmd.Parameters.AddWithValue("@DateSche", ((DateTime)Session["date"]).ToString(DatabaseHelper.DateFormat));
-                            cmd.Parameters.AddWithValue("@price",40000);
+                            cmd.Parameters.AddWithValue("@DateSche", dateSche.ToString(DatabaseHelper.DateFormat));
                             // Exec
                             cmd.ExecuteNonQuery();
                 }
                 conn.Close();
                 conn.Dispose();
             }
+        }
+
+        public static int getPriceByFilmID(string filmID,string time,DateTime dateSche)
+        {
+            // Dua vao gio chieu la ban ngay hay buoi toi va ngay chieu la cuoi tuan hay ngay thuong ma lay ra gia tri tuong ung 
+
+            // Convert gio chieu sang dang int VD: 09:00 -> 900 ; 15:00 -> 1500
+            int TimeInt = Int32.Parse(time.Replace(":",""));
+
+            // Neu thoi gian la tu 9h sang den 17h chieu thi DayOrNight = true neu khong DayOrNight = false;
+            bool DayOrNight = (TimeInt>= 900 && TimeInt <= 1700);
+
+            // Lay ra ngay thu may trong tuan theo ngay chieu 
+            bool Weekend = (dateSche.DayOfWeek == DayOfWeek.Saturday || dateSche.DayOfWeek == DayOfWeek.Sunday );
+
+            // Neu la ngay thuong thi 
+            
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                conn.Open();
+                string sqlSelect = @"Select * from [TechOfFilm] inner join Film on TechOfFilm.[TechID]=Film.TechID where Film.FilmID = @ID";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", filmID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (DayOrNight && Weekend) return (int)(reader["WeekendDayPrice"]);
+                        if (!DayOrNight && Weekend) return (int)(reader["WeekendNightPrice"]);
+                        if (DayOrNight && !Weekend) return (int)(reader["NormalDayPrice"]);
+                        if (!DayOrNight && !Weekend) return (int)(reader["NormalNightPrice"]);
+                    }
+                }
+            }
+            return 0;
         }
 
         [HttpPost]

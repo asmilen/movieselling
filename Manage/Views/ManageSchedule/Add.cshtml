@@ -33,7 +33,8 @@
     @using (Html.BeginForm("Add", "ManageSchedule", new { ID = 2 }, FormMethod.Post, new { enctype = "multipart/form-data"  }))
     {
         @Html.AntiForgeryToken()
-        <h2>Add Schedule for @Session["date"] </h2> 
+        
+        <h2>Add Schedule for @(((DateTime)Session["date"]).ToString("dd-MM-yyyy")) </h2> 
         <p class="message-success">@ViewBag.StatusMessage</p>
         <table>
             <tr>

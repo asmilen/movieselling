@@ -76,23 +76,6 @@ namespace MovieSelling
         public static int getPriceByScheID(string ScheID)
         {
             int price = 0;
-
-            // Lay list role ra tu database
-            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
-            {
-                conn.Open();
-                string sqlSelect = @"Select Price from Schedule where ScheduleID=@ID";
-                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
-                {
-                    cmd.Parameters.AddWithValue("@ID", ScheID);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        price = (int)reader[DatabaseHelper.Price];
-                    }
-                }
-            }
-
             return price;
         }
 

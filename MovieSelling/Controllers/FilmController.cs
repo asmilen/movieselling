@@ -37,6 +37,7 @@ namespace MovieSelling.Controllers
         private Film getFilmByID(int FilmID)
         {
             Film temp = new Film();
+            temp.FilmID = FilmID;
             using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
             {
                 string sqlSelect = @"select Film.* , CategoryFilm.Name as CateName from Film join [CategoryFilm] on [CategoryFilm].[CategoryID]= Film.[CategoryID] where FilmID=@ID";
@@ -110,12 +111,21 @@ namespace MovieSelling.Controllers
         //    3: Phim Hot
         private List<FilmView> getListFilm(int Case)
         {
+            string sqlSelect = @"select * from Film ";
+            switch (Case)
+            {
+                case 1:
+                    sqlSelect += "Where '" + DateTime.Now + "'<EndDate and '" + DateTime.Now + "'>StartDate";
+                    break;
+                case 2:
+                    sqlSelect += "Where '" + DateTime.Now + "'<StartDate";
+                    break;
+            }
             List<FilmView> myListFilm = new List<FilmView>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                 {
-                    string sqlSelect = @"select * from Film ";
                     using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                     {
                         //cmd.Parameters.AddWithValue("@searchString", concert);

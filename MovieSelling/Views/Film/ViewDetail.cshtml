@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "ViewDetail";
 }
-
+<link rel="stylesheet" type="text/css" href="~/Content/GetResource_005.css"> 
 @Html.Partial("_subMenuPartial")
 <!-- Main -->
 <div id="main">
@@ -23,26 +23,50 @@
             </div>
             <div class="movieDetail">
                 <div class="content">
-                    <h5>Khởi chiếu: </h5><p>Từ @Model.StartDate.ToString(MovieSelling.DatabaseHelper.DateFormat) tới @Model.EndDate.ToString(MovieSelling.DatabaseHelper.DateFormat)</p><br>
-                    <h5>Loại phim: </h5><p>@Model.Category</p><br>
-                    <h5>Diễn viên: </h5><p>@Model.Actor</p><br>
-                    <h5>Đạo diễn: </h5><p>@Model.Director</p><br>
-                    <h5>Hãng: </h5><p>@Model.Company</p><br>
-                    <h5>Thời lượng: </h5><p>@Model.filmLong</p><br>
+                    <h5>Khởi chiếu:&nbsp;&nbsp;&nbsp; </h5><p>Từ @Model.StartDate.ToString(MovieSelling.DatabaseHelper.DateFormat) tới @Model.EndDate.ToString(MovieSelling.DatabaseHelper.DateFormat)</p><br>
+                    <h5>Loại phim:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@Model.Category</p><br>
+                    <h5>Diễn viên:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@Model.Actor</p><br>
+                    <h5>Đạo diễn:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@Model.Director</p><br>
+                    <h5>Hãng:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@Model.Company</p><br>
+                    <h5>Thời lượng: &nbsp;&nbsp;&nbsp;</h5><p>@Model.filmLong phút</p><br>
+                    <br>
+                    <br>
+                    <a class="button" href=@Url.Action("step1", "booking", new { FilmID = Model.FilmID , dateSche = "" , timeSChe = ""})>ĐẶT VÉ</a></>
                 </div>
             </div>
             <div class="cl">&nbsp;</div>
     </div>
-        <div class="box">
-            <div class="head">
-                <h6>Tóm tắt nội dung</h6>
+        <ul class="dn_tabsmvdetail">
+            <li class="dn_tabsmvdt1" id="dn_tabsmvdt1">
+                Tóm tắt nội dung
+            </li>
+            <li class="dn_tabsmvdt2" id="dn_tabsmvdt2">
+                Lịch chiếu phim
+            </li>
+            <li class="dn_tabsmvdt3 tabsmvdtactive" id="dn_tabsmvdt3">
+                Bình luận phim
+            </li>
+        </ul>
+        <div style="display: none;" class="dn_contentmvdt dn_tabsmvdt2">
+
+            <!-- -->
+            <div style="height: 25px; line-height: 25px; background: #BEB195; padding-left: 10px;
+                                            font-weight: bold; color: #FFF">
+                NamSaiGon
             </div>
-            <div class="movieDetail">
-                <div class="content">
-                    <p>@Model.Description</p>    
+            <div style="height: 10px;">
+            </div>
+            </div>
+            <div class="box">
+                <div class="head">
+                    <h6>Tóm tắt nội dung</h6>
                 </div>
-            </div>
-            @if (Model.Picture1!= null)
+                <div class="movieDetail">
+                    <div class="content">
+                        <p>@Model.Description</p>
+                    </div>
+                </div>
+                @if (Model.Picture1!=null && Model.Picture1.Length > 0)
             {
                 <div class="movieDetail">
                     <div class="detail-image">
@@ -50,7 +74,7 @@
                     </div>
                 </div>
             }
-            @if (Model.Picture2 != null)
+                @if (Model.Picture2!=null && Model.Picture2.Length > 0)
             {
                 <div class="movieDetail">
                     <div class="detail-image">
@@ -58,7 +82,7 @@
                     </div>
                 </div>
             }
-            @if (Model.Picture3 != null)
+                @if (Model.Picture3!=null &&  Model.Picture3.Length > 0)
             {
                 <div class="movieDetail">
                     <div class="detail-image">
@@ -66,7 +90,7 @@
                     </div>
                 </div>
             }
-            @if (Model.Picture4 != null)
+                @if (Model.Picture4!=null && Model.Picture4.Length > 0)
             {
                 <div class="movieDetail">
                     <div class="detail-image">
@@ -74,7 +98,7 @@
                     </div>
                 </div>
             }
-            <div class="cl">&nbsp;</div>
+                <div class="cl">&nbsp;</div>
+            </div>
         </div>
-</div>
 </div>

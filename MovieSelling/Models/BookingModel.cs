@@ -33,13 +33,8 @@ namespace MovieSelling.Models
             numberOfSeats.Add(new SelectListItem() { Text = "3", Value = "3" });
             numberOfSeats.Add(new SelectListItem() { Text = "4", Value = "4" });
 
-            // Khoi tao danh sach ngay de chon, chi cho dat ve trong hom nay va ngay mai
+            // Khoi tao danh sach ngay de chon, chi cho dat ve trong 1 tuan ke tu hom nay
             listDate = new List<SelectListItem>();
-            DateTime currDate = DateTime.Now;
-            listDate.Add(new SelectListItem() { Text = currDate.ToString("dd-MM-yyyy"), Value = currDate.ToString("dd-MM-yyyy") });
-            currDate = currDate.AddDays(1);
-            listDate.Add(new SelectListItem() { Text = currDate.ToString("dd-MM-yyyy"), Value = currDate.ToString("dd-MM-yyyy") });
-
             listTime = new List<SelectListItem>();
             listFilm = new List<SelectListItem>();
         }

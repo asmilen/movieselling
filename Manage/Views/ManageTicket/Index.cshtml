@@ -1,0 +1,46 @@
+﻿@model Manage.Models.ListTicket
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Index", "ManageTicket", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <h2>Quản lý giá vé</h2>
+    
+    <br />
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    for (int i = 0; i < Model.mylist.Count; i++)
+    {
+        @Html.HiddenFor(m => m.mylist[i].TechID)     
+        @Html.HiddenFor(m => m.mylist[i].Feature)    
+        <h2>@Model.mylist[i].Feature</h2>
+        <h3> Đây là giá ghế thường, ghế vip sẽ được cộng thêm</h3> @Html.TextBoxFor(m => m.mylist[i].Vip)
+    
+        <table>
+            <tr>
+                <th></th>
+                <th>Thứ 2 - Thứ 6</th>
+                <th>Thứ 7 - Chủ Nhật</th>
+            </tr>
+            <tr>
+                <td>9h- 17h</td>
+                <td>@Html.TextBoxFor(m => m.mylist[i].NormalDayPrice)</td>
+                <td>@Html.TextBoxFor(m => m.mylist[i].WeekendDayPrice)</td>
+            </tr>
+            <tr>
+                <td>17h- 23h</td>
+                <td>@Html.TextBoxFor(m => m.mylist[i].NormalNightPrice)</td>
+                <td>@Html.TextBoxFor(m => m.mylist[i].WeekendNightPrice)</td>
+            </tr>
+        </table>
+        <br />
+    }
+    <input type="submit" value="Lưu" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
