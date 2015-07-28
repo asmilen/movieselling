@@ -6,48 +6,75 @@
 <h1>@ViewBag.Message</h1>
 
 @Html.Partial("_subMenuPartial")
-<section id="loginForm">
-    @{
-    using (Html.BeginForm("Step3", "booking",FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(m => m.ScheID)
-        <fieldset>
-            <legend>Xác nhận đặt vé</legend>
-            <ol>
-                <li>
-                    @Html.LabelFor(m => m.customer.Name)
-                    @Html.TextBoxFor(m => m.customer.Name)
-                    @Html.ValidationMessageFor(m => m.customer.Name)
-                </li>
-                <li>
-                    @Html.LabelFor(m => m.customer.address)
-                    @Html.TextBoxFor(m => m.customer.address)
-                    @Html.ValidationMessageFor(m => m.customer.address)
-                </li>
-                <li>
-                    @Html.LabelFor(m => m.customer.email)
-                    @Html.TextBoxFor(m => m.customer.email)
-                    @Html.ValidationMessageFor(m => m.customer.email)
-                </li>
-                <li>
-                    @Html.LabelFor(m => m.customer.cmnd)
-                    @Html.TextBoxFor(m => m.customer.cmnd)
-                    @Html.ValidationMessageFor(m => m.customer.cmnd)
-                </li>
-                <li>
-                    @Html.LabelFor(m => m.customer.phone)
-                    @Html.TextBoxFor(m => m.customer.phone)
-                    @Html.ValidationMessageFor(m => m.customer.phone)
-                </li>
-            </ol>
-            <input type="submit" value="Add" />
-        </fieldset>
-    }
-    }
-</section>
+@{ var ScheduleDetail = MovieSelling.DatabaseHelper.getScheduleByID(Model.ScheID); }
+<div id="main">
+    <!-- Content -->
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div id="content">
+        <div class="box">
+            <div class="head">
+                <h6>@ScheduleDetail.FilmName</h6>
+            </div>
+            <!-- Movie -->
+            <div class="movie">
+                <div class="movie-image">
+                    <a><img src="data:image;base64,@System.Convert.ToBase64String(@ScheduleDetail.Picture)" alt="movie" /></a>
+                </div>
+            </div>
+            <div class="movieDetail">
+                <div class="content">
+                    <h5>Rạp: </h5><p>Trung tâm chiếu phim quốc gia</p><br>
+                    <h5>Phòng chiếu: </h5><p>@ScheduleDetail.RoomName</p><br>
+                    <h5>Ngày chiếu: </h5><p>@ScheduleDetail.dateSche</p><br>
+                    <h5>Giờ chiếu: </h5><p>@ScheduleDetail.startTime</p><br>
+                    @{
+                        string listSeat = "";
+                        foreach (var item in Model.seat)
+	                    {
+		                    listSeat += char.ConvertFromUtf32(item.Row+65) + "-"  + item.Column + " " ;
+	                    }
+                    }
+                    <h5>Ghế: </h5><p>@listSeat</p><br>
+                    <h5>Giá: </h5><br />
+                    @foreach (var item in Model.seat)
+                    {
+                        string seat = char.ConvertFromUtf32(item.Row + 65) + "-" + item.Column + " ";
+                        <p>@seat : @item.Price đ</p><br />
+                    }
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <div class="cl">&nbsp;</div>
+        </div>
+
+        <div class="box">
+            
+            @{using (Html.BeginForm("Step3", "booking", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(m => m.ScheID)
+                    <div class="head">
+                        <h6>Xác nhận đặt vé</h6>
+                    </div>
+                    <div class="movieDetail">
+                    <div class="content">
+                        <p>@Html.LabelFor(m => m.customer.Name) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>@Html.TextBoxFor(m => m.customer.Name) @Html.ValidationMessageFor(m => m.customer.Name)</p><br />
+                        <p>@Html.LabelFor(m => m.customer.email) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>@Html.TextBoxFor(m => m.customer.email) @Html.ValidationMessageFor(m => m.customer.email)</p><br />
+                        <p>@Html.LabelFor(m => m.customer.cmnd) &nbsp;&nbsp;</p><p>@Html.TextBoxFor(m => m.customer.cmnd) @Html.ValidationMessageFor(m => m.customer.cmnd)</p><br />
+                        <p>@Html.LabelFor(m => m.customer.phone) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>@Html.TextBoxFor(m => m.customer.phone) @Html.ValidationMessageFor(m => m.customer.phone)</p><br />
+                        <p>@Html.LabelFor(m => m.customer.address) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>@Html.TextBoxFor(m => m.customer.address) @Html.ValidationMessageFor(m => m.customer.address)</p><br />
+                        <input type="submit" value="Add" />
+                    </div>
+                        </div>
+                }
+            }
+            <div class="cl">&nbsp;</div>
+        </div>
+    </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

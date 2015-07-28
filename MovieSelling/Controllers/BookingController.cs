@@ -141,25 +141,29 @@ namespace MovieSelling.Controllers
                             var timeNow = Int32.Parse(time.Hour + "" + time.Minute);
 
                             // Lay ra lich chieu lon hon gio hien tai
-                            if (dateSelected!= DateTime.Now.ToString(DatabaseHelper.DateFormat) || timeNow < Int32.Parse(startTime.Replace(":","")))
+                            if (dateSelected != DateTime.Now.ToString(DatabaseHelper.DateFormat) || timeNow < Int32.Parse(startTime.Replace(":", "")))
                             {
-                                // Lay ra so ghe da dat
-                                sqlSelect = @"select count(*) from Ticket join Orders on
-                                            Ticket.OrderID = Orders.OrderID where ScheduleID=@Scheid";
-                                using (SqlCommand cmd1 = new SqlCommand(sqlSelect, conn))
+                                using (SqlConnection conn1 = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                                 {
-                                    cmd1.Parameters.AddWithValue("@Scheid", ScheID);
-                                    Int32 count = (Int32)cmd1.ExecuteScalar();
-                                    startTime += " (" + count + "/";
+                                    // Lay ra so ghe da dat
+                                    sqlSelect = @"select count(*) from Ticket join Orders on
+                                            Ticket.OrderID = Orders.OrderID where ScheduleID=@Scheid";
+                                    conn1.Open();
+                                    using (SqlCommand cmd1 = new SqlCommand(sqlSelect, conn1))
+                                    {
+                                        cmd1.Parameters.AddWithValue("@Scheid", ScheID);
+                                        Int32 count = (Int32)cmd1.ExecuteScalar();
+                                        startTime += " (" + count + "/";
+                                    }
+
+                                    // Tong so ghe
+                                    int TotalSeat = (int)reader[DatabaseHelper.NumberOfRow] * (int)reader[DatabaseHelper.NumberOfColumn];
+
+                                    startTime += TotalSeat + ")";
+
+                                    bool selected = filmSelected == ScheID;
+                                    mylist.Add(new SelectListItem() { Value = ScheID.ToString(), Text = startTime, Selected = selected });
                                 }
-
-                                // Tong so ghe
-                                int TotalSeat = (int)reader[DatabaseHelper.NumberOfRow] * (int)reader[DatabaseHelper.NumberOfColumn];
-
-                                startTime += TotalSeat + ")";
-
-                                bool selected = filmSelected == ScheID;
-                                mylist.Add(new SelectListItem() { Value = ScheID.ToString(), Text = startTime, Selected = selected });
                             }
                         }
                     }
@@ -226,16 +230,21 @@ namespace MovieSelling.Controllers
                         modelStep2.listSeat[i, j] = false;
 
                 // Lay ra danh sach ghe da dat
-                sqlSelect = @"select * from Ticket inner join Orders on Orders.OrderID=Ticket.OrderID where ScheduleID=@id";
-                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                using (SqlConnection conn1 = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                 {
-                    cmd.Parameters.AddWithValue("@id", modelStep2.ScheID);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    conn1.Open();
+
+                    sqlSelect = @"select * from Ticket inner join Orders on Orders.OrderID=Ticket.OrderID where ScheduleID=@id";
+                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn1))
                     {
-                        int row = (int)reader[DatabaseHelper.SeatRow];
-                        int column = (int)reader[DatabaseHelper.SeatColumn];
-                        modelStep2.listSeat[row, column] = true;
+                        cmd.Parameters.AddWithValue("@id", modelStep2.ScheID);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int row = (int)reader[DatabaseHelper.SeatRow];
+                            int column = (int)reader[DatabaseHelper.SeatColumn];
+                            modelStep2.listSeat[row, column] = true;
+                        }
                     }
                 }
             }
@@ -246,13 +255,13 @@ namespace MovieSelling.Controllers
         //Thanh toan
         public ActionResult Step3(string ListSeat)
         {
-            ViewBag.SubMenu = "BƯỚC 3: ĐIỀN THÔNG TIN NGƯỜI ĐẶT";
+            ViewBag.SubMenu = "BƯỚC 3: THÔNG TIN ĐẶT VÉ";
 
             // Tach Chuoi de lay ra ghe
             Ticket model = new Ticket();
 
             Session["listSeat"] = ListSeat;
-            
+            model.seat = getSeatFromList();
 
             model.ScheID = Session["scheID"].ToString();
             return View(model);
@@ -296,12 +305,15 @@ namespace MovieSelling.Controllers
                     }
                 }
             }
+
+            Session["Schedule"] = model;
             return RedirectToAction("Step4");
         }
 
         public ActionResult Step4()
         {
-            return View();
+            Ticket model = (Ticket) Session["Schedule"];
+            return View(model);
         }
         private List<Seat> getSeatFromList()
         {
@@ -325,7 +337,7 @@ namespace MovieSelling.Controllers
             using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
             {
                 conn.Open();
-                string sqlSelect = @"Insert into Orders output INSERTED.OrderID values (@CusID,@price,@numTicket,@ScheID,@code)";
+                string sqlSelect = @"Insert into Orders output INSERTED.OrderID values (@CusID,@price,@numTicket,@ScheID,@code,@status)";
                 using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                 {
                     cmd.Parameters.AddWithValue("@CusID", CustomerID);
@@ -333,6 +345,7 @@ namespace MovieSelling.Controllers
                     cmd.Parameters.AddWithValue("@numTicket", model.seat.Count);
                     cmd.Parameters.AddWithValue("@ScheID", model.ScheID);
                     cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@status", DatabaseHelper.booked);
 
                     int modified = (int)cmd.ExecuteScalar();
                     conn.Close();

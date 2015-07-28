@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MovieSelling.Models;
 
 namespace MovieSelling
 {
@@ -33,6 +34,7 @@ namespace MovieSelling
         public static String ScheduleID = "ScheduleID";
         public static String StartTime = "StartTime";
         public static string Price = "price";
+        public static string dateSche = "DateSche";
 
         // Bang Category
         public static String TechID = "TechID";
@@ -46,6 +48,11 @@ namespace MovieSelling
         //Bang booking
         public static String SeatRow = "Row";
         public static String SeatColumn = "Col";
+
+
+        //Trang that dat ve
+        public static String booked = "Đã đặt";
+        public static String paid = "Đã thanh toán";
 
         public static List<SelectListItem> listTech = getListTech();
 
@@ -109,6 +116,8 @@ namespace MovieSelling
         public static string Booking = "";
         public static string Contact = "";
         public static string Ticket = "";
+        public static string Schedule = "";
+
         public static void setActiceMenu(string menu)
         {
             Home = "";
@@ -116,6 +125,7 @@ namespace MovieSelling
             Booking = "";
             Contact = "";
             Ticket = "";
+            Schedule = "";
             switch (menu)
             {
                 case "Home":
@@ -132,6 +142,9 @@ namespace MovieSelling
                     break;
                 case "Contact":
                     Contact = "active";
+                    break;
+                case "Schedule":
+                    Schedule = "active";
                     break;
             }
         }
@@ -159,6 +172,38 @@ namespace MovieSelling
             }
 
             return room;
+        }
+
+        public static Schedule getScheduleByID(string ScheID)
+        {
+            Schedule model = new Schedule();
+            model.ScheduleID = ScheID;
+
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                string sqlSelect = @"select Schedule.*,Film.Name as FilmName,Film.Picture,Room.Name as RoomName 
+                                    from Schedule 
+                                    left join Room on Schedule.RoomID = Room.RoomID
+                                    join Film on Schedule.FilmID = Film.FilmID
+                                    where ScheduleID = @ID";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", ScheID);
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        model.FilmName = reader["FilmName"].ToString();
+                        model.RoomName = reader["RoomName"].ToString();
+                        model.startTime = reader[DatabaseHelper.StartTime].ToString();
+                        model.dateSche = reader[DatabaseHelper.dateSche].ToString();
+
+                        if (reader[DatabaseHelper.Picture] != null)
+                        model.Picture = (Byte[])reader[DatabaseHelper.Picture];
+                    }
+                }
+            }
+            return model;
         }
     }
 }

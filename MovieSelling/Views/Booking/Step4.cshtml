@@ -1,10 +1,54 @@
-﻿@model MovieSelling.Models.Customer
+﻿@model MovieSelling.Models.Ticket
 
 @{
     ViewBag.Title = "Step4";
 }
 
 @Html.Partial("_subMenuPartial")
-<h2>Step4: đặt vé thành công, tạm thời để thế này đã</h2>
+@{ var ScheduleDetail = MovieSelling.DatabaseHelper.getScheduleByID(Model.ScheID); }
+<div id="main">
+    <!-- Content -->
+
+    <div id="content">
+        <div class="box">
+            <div class="head">
+                <h6>@ScheduleDetail.FilmName</h6>
+            </div>
+            <!-- Movie -->
+            <div class="movie">
+                <div class="movie-image">
+                    <a><img src="data:image;base64,@System.Convert.ToBase64String(@ScheduleDetail.Picture)" alt="movie" /></a>
+                </div>
+            </div>
+            <div class="movieDetail">
+                <div class="content">
+                    <h5>Rạp:&nbsp;&nbsp;&nbsp; </h5><p>Trung tâm chiếu phim quốc gia</p><br>
+                    <h5>Phòng chiếu:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@ScheduleDetail.RoomName</p><br>
+                    <h5>Ngày chiếu:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@ScheduleDetail.dateSche</p><br>
+                    <h5>Giờ chiếu:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@ScheduleDetail.startTime</p><br>
+                    @{
+                        string listSeat = "";
+                        foreach (var item in Model.seat)
+                        {
+                            listSeat += char.ConvertFromUtf32(item.Row) + "-" + item.Column + " ";
+                        }
+                    }
+                    <h5>Ghế:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@listSeat</p><br>
+                    <h5>Giá: &nbsp;&nbsp;&nbsp;</h5>
+                    @foreach (var item in Model.seat)
+                    {
+                        string seat = char.ConvertFromUtf32(item.Row) + "-" + item.Column + " ";
+                        <p>@seat : @item.Price "Đồng"</p>
+                    }
+                    <br>
+                    <br>
+                    <br>
+                    <input type="submit" value="In" />
+                </div>
+            </div>
+            <div class="cl">&nbsp;</div>
+        </div>
+        </div>
+    </div>
 
 

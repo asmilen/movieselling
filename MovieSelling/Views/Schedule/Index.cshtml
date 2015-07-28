@@ -1,0 +1,48 @@
+﻿@model Dictionary<string, Dictionary<int, List<string>>>
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Sub-menu -->
+<div id="sub-navigation">
+    <ul>
+        <li><a href="#">LỊCH CHIẾU PHIM</a></li>
+    </ul>
+    <div id="search">
+        <form action="home_submit" method="get" accept-charset="utf-8">
+            <label for="search-field">TÌM KIẾM</label>
+            <input type="text" name="search field" value="Điền thông tin tìm kiếm ở đây" id="search-field" title="Enter search here" class="blink search-field" />
+            <input type="submit" value="TÌM" class="search-button" />
+        </form>
+    </div>
+</div>
+<!-- end Sub-Menu -->
+<div id="main">
+    <!-- Content -->
+    <div id="content">
+            @foreach (var item in Model)
+            {
+                <!-- Box -->
+                <div class="box">
+                    <div class="head">
+                        <h6>@item.Key</h6>
+                    </div>
+                    <div class="movieDetail">
+                        <table>
+                            @foreach (var film in item.Value)
+{
+    <tr>
+        <td width="400" >@film.Key</td>
+        @foreach (var timeSche in film.Value)
+        {
+            <td width="50"><a href=@Url.Action("step1","booking", new { FilmID = film.Key, dateSche = item.Key, timeSChe = timeSche })>@timeSche</a></td>
+
+        }
+    </tr>
+}
+                        </table>
+                    </div>
+                </div>
+            }
+    </div>
+</div>

@@ -129,6 +129,7 @@
     <Compile Include="Controllers\FilmController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="DatabaseHelper.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -139,6 +140,7 @@
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\FilmModel.cs" />
+    <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +252,7 @@
     <Content Include="Views\Film\_subMenuPartial.cshtml" />
     <Content Include="Views\Booking\_subMenuPartial.cshtml" />
     <Content Include="Views\Booking\Step4.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
