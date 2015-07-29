@@ -11,6 +11,7 @@ namespace MovieSelling.Models
         public string ScheduleID { get; set; }
         public string FilmName { get; set; }
 
+        public int FilmID { get; set; }
         public string RoomName { get; set; }
 
         public string dateSche { get; set; }

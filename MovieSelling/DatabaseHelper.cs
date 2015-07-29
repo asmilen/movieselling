@@ -83,6 +83,39 @@ namespace MovieSelling
         public static int getPriceByScheID(string ScheID)
         {
             int price = 0;
+            Schedule model = getScheduleByID(ScheID);
+
+            // Dua vao gio chieu la ban ngay hay buoi toi va ngay chieu la cuoi tuan hay ngay thuong ma lay ra gia tri tuong ung 
+
+            // Convert gio chieu sang dang int VD: 09:00 -> 900 ; 15:00 -> 1500
+            int TimeInt = Int32.Parse(model.startTime.Replace(":",""));
+
+            // Neu thoi gian la tu 9h sang den 17h chieu thi DayOrNight = true neu khong DayOrNight = false;
+            bool DayOrNight = (TimeInt>= 900 && TimeInt <= 1700);
+
+            DateTime date = DateTime.ParseExact(model.dateSche, DateFormat, System.Globalization.CultureInfo.InvariantCulture);
+            // Lay ra ngay thu may trong tuan theo ngay chieu 
+            bool Weekend = (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday );
+
+            // Neu la ngay thuong thi 
+            
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                conn.Open();
+                string sqlSelect = @"Select * from [TechOfFilm] inner join Film on TechOfFilm.[TechID]=Film.TechID where Film.FilmID = @ID";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", model.FilmID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (DayOrNight && Weekend) return (int)(reader["WeekendDayPrice"]);
+                        if (!DayOrNight && Weekend) return (int)(reader["WeekendNightPrice"]);
+                        if (DayOrNight && !Weekend) return (int)(reader["NormalDayPrice"]);
+                        if (!DayOrNight && !Weekend) return (int)(reader["NormalNightPrice"]);
+                    }
+                }
+            }
             return price;
         }
 
@@ -197,6 +230,7 @@ namespace MovieSelling
                         model.RoomName = reader["RoomName"].ToString();
                         model.startTime = reader[DatabaseHelper.StartTime].ToString();
                         model.dateSche = reader[DatabaseHelper.dateSche].ToString();
+                        model.FilmID = (int)reader[DatabaseHelper.FilmID];
 
                         if (reader[DatabaseHelper.Picture] != null)
                         model.Picture = (Byte[])reader[DatabaseHelper.Picture];
