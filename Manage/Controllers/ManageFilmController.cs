@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Manage.Controllers
 {
+    [Authorize]
     public class ManageFilmController : Controller
     {
         //

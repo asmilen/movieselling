@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Manage.Controllers
 {
+    [Authorize(Roles = "Manager,Administrator")]
     public class ManageScheduleController : Controller
     {
         //

@@ -12,7 +12,7 @@ using System.Data;
 
 namespace Manage.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class ManageUserController : Controller
     {
         //

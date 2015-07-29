@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Manage.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ManageRoomController : Controller
     {
         //
