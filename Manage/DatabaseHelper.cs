@@ -12,6 +12,17 @@ namespace Manage
         //String Format
         public static String DateFormat = "dd-MM-yyyy";
 
+        //Trang that dat ve
+        public static String booked = "Đã đặt";
+        public static String paid = "Đã thanh toán";
+
+        // Bang Order
+        public static String OrderID = "OrderID";
+        public static String Email = "Email";
+        public static String Cmnd = "Cmnd";
+        public static String Phone = "Phone";
+        public static String TotalPrice = "TotalPrice";
+
         //Film
         public static String FilmID = "FilmID";
         public static String UserID = "UserID";

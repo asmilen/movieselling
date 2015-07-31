@@ -220,14 +220,14 @@ namespace MovieSelling.Controllers
                         modelStep2.timeSche = reader[DatabaseHelper.StartTime].ToString();
                         int rows = (int) reader[DatabaseHelper.NumberOfRow];
                         int columns = (int) reader[DatabaseHelper.NumberOfColumn];
-                        modelStep2.listSeat = new bool[rows,columns];
+                        modelStep2.listSeat = new int[rows,columns];
                     }
                 }
 
                 // Khoi tao gia tri danh sach ghe da dat
                 for (int i = 0; i < modelStep2.listSeat.GetLength(0); i++)
                     for (int j = 0; j < modelStep2.listSeat.GetLength(1); j++)
-                        modelStep2.listSeat[i, j] = false;
+                        modelStep2.listSeat[i, j] = 0;
 
                 // Lay ra danh sach ghe da dat
                 using (SqlConnection conn1 = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
@@ -243,7 +243,9 @@ namespace MovieSelling.Controllers
                         {
                             int row = (int)reader[DatabaseHelper.SeatRow];
                             int column = (int)reader[DatabaseHelper.SeatColumn];
-                            modelStep2.listSeat[row, column] = true;
+                            string status = reader["Status"].ToString();
+                            if (status.Equals(DatabaseHelper.booked)) modelStep2.listSeat[row, column] = 1;
+                            else modelStep2.listSeat[row, column] = 2; 
                         }
                     }
                 }
@@ -292,12 +294,12 @@ namespace MovieSelling.Controllers
                         string sqlSelect = @"Insert into Ticket values (@price,@OrderID,@Room,@row,@col)";
                         using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                         {
+                            item.Price = DatabaseHelper.getPriceByScheID(model.ScheID);
                             cmd.Parameters.AddWithValue("@OrderID", OrderID);
                             cmd.Parameters.AddWithValue("@Room", DatabaseHelper.getRoomByScheID(model.ScheID));
                             cmd.Parameters.AddWithValue("@row", item.Row);
                             cmd.Parameters.AddWithValue("@col", item.Column);
-                            cmd.Parameters.AddWithValue("@price", DatabaseHelper.getPriceByScheID(model.ScheID));
-
+                            cmd.Parameters.AddWithValue("@price", item.Price);
                             cmd.ExecuteScalar();
                             conn.Close();
                             conn.Dispose();

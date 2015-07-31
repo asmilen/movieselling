@@ -51,7 +51,7 @@ namespace MovieSelling.Models
 
         public string timeSche { get; set; }
 
-        public bool[,] listSeat { get; set; }
+        public int[,] listSeat { get; set; }
 
         public string numberSeat { get; set; }
     }

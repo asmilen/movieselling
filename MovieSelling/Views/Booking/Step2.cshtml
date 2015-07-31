@@ -223,6 +223,19 @@
                     </div>
                 </div>
                 <div class="div-seat" style="float: left; padding-right: 20px;">
+                <ul>
+                    <li class="item-seat-couple"></li>
+                    <li style="float: left; height: 30px; line-height: 30px; padding-left: 15px;">
+                        <b>
+                            :
+                            Ghế đã thanh toán
+                        </b>
+                    </li>
+                </ul>
+                <div class="clear">
+                </div>
+            </div>
+                <div class="div-seat" style="float: left; padding-right: 20px;">
                     <ul>
                         <li class="item-seat-selected-show"></li>
                         <li style="float: left; height: 30px; line-height: 30px; padding-left: 15px;">
@@ -256,10 +269,15 @@
                     {
                         String id1 = i + "-" + j ;
                         string left = (133 + 42 * j) + "px";
-                        if (Model.listSeat[i, j])
+                        if (Model.listSeat[i, j] == 1)
                         {
                             <div id="@id1" class="item-seat-booked" style="left:@left ; top:@top;">@(j+1)</div>
                         }
+                        else 
+                        if (Model.listSeat[i, j] == 2)
+                        {
+                            <div id="@id1" class="item-seat-couple" style="left:@left ; top:@top;">@(j+1)</div>
+                        } 
                         else
                         {
                             <div onclick="selectSeat('@id1')" id="@id1" class="item-seat" style="left:@left; top:@top;">@(j+1)</div>

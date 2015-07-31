@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageFilmController.cs" />
+    <Compile Include="Controllers\ManageOrderController.cs" />
     <Compile Include="Controllers\ManageRoomController.cs" />
     <Compile Include="Controllers\ManageScheduleController.cs" />
     <Compile Include="Controllers\ManageTicketController.cs">
@@ -199,6 +200,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\FilmModel.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\RoomModel.cs">
       <SubType>Code</SubType>
@@ -329,6 +331,7 @@
     <Content Include="Views\ManageUser\Edit.cshtml" />
     <Content Include="Views\ManageSchedule\AddStep2.cshtml" />
     <Content Include="Views\ManageRoom\Edit.cshtml" />
+    <Content Include="Views\ManageOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

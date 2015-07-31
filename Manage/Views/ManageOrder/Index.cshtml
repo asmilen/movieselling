@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Manage.Models.OrderModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table border="1">
+    <tr>
+        <th width="100">
+            Mã Order
+        </th>
+        <th width="200">
+            E-mail
+        </th>
+        <th width="200">
+            Tên Khách Hàng
+        </th>
+        <th width="150">
+            Số Điện Thoại
+        </th>
+        <th width="30">
+            Tổng Giá
+        </th>
+        <th width="100">
+            Ghế
+        </th>
+        <th>
+            Code
+        </th>
+        <th width="100">
+            Status
+        </th>
+        <th width="100"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.listTicket)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.ActionLink("Change Status", "change", new { item.OrderID})
+        </td>
+    </tr>
+}
+
+</table>

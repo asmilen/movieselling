@@ -119,6 +119,23 @@ namespace MovieSelling
             return price;
         }
 
+        public static string getFilmNamebyID(int FilmID)
+        {
+            string Name = "";
+            // Select ten film theo film ID
+            System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString);
+            string sqlSelect = @"select Name from Film where FilmID = " + FilmID;
+            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sqlSelect, conn);
+            conn.Open();
+            System.Data.SqlClient.SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                Name = reader["Name"].ToString();
+            }
+            conn.Close();
+            conn.Dispose();
+            return Name;
+        }
 
         public static string AutoGenerateCode()
         {
