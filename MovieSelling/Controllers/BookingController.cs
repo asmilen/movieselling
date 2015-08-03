@@ -45,7 +45,7 @@ namespace MovieSelling.Controllers
             {
                 using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                 {
-                    string sqlSelect = @"select * from Film ";
+                    string sqlSelect = @"select Name,FilmID,StartDate,EndDate from Film ";
                     using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                     {
                         conn.Open();
@@ -274,14 +274,17 @@ namespace MovieSelling.Controllers
         public ActionResult Step3(Ticket model)
         {
             ModelState.Clear();
+            // add khach hang vao database va lay ra Customer ID vua tao
+            int CustomerID = InsertCustomerToDB(model.customer,model.ScheID);
+
+            if (CustomerID == 0) 
+                ModelState.AddModelError("","Email hoặc số điện thoại này đã được dùng để đặt vé, vui lòng sử dụng thông tin khác");
+            // Lay ra danh sach ghe
+            model.seat = getSeatFromList();
+
+            // Neu kiem tra khong trung email va so dien thoai
             if (ModelState.IsValid)
             {
-                // add khach hang vao database va lay ra Customer ID vua tao
-                int CustomerID = InsertCustomerToDB(model.customer);
-
-                // Lay ra danh sach ghe
-                model.seat = getSeatFromList();
-
                 // luu vao bang order
                 int OrderID = InsertToOrder(model,CustomerID);
 
@@ -306,14 +309,16 @@ namespace MovieSelling.Controllers
                         }
                     }
                 }
+                Session["Schedule"] = model;
+                return RedirectToAction("Step4");
             }
 
-            Session["Schedule"] = model;
-            return RedirectToAction("Step4");
+            return View(model);
         }
 
         public ActionResult Step4()
         {
+            ViewBag.SubMenu = "ĐẶT VÉ THÀNH CÔNG";
             Ticket model = (Ticket) Session["Schedule"];
             return View(model);
         }
@@ -357,12 +362,16 @@ namespace MovieSelling.Controllers
             }
         }
 
-        private int InsertCustomerToDB(Customer model)
+        private int InsertCustomerToDB(Customer model,string ScheID)
         {
-            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            using(SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
             {
                 conn.Open();
-                string sqlSelect = @"Insert into Customer output INSERTED.CustomerID values (@Name,@add,@email,@cmnd,@phone)";
+                string sqlSelect = @"IF not EXISTS 
+                                    (SELECT * FROM Customer 
+                                    join Orders on Orders.CustomerID = Customer.CustomerID 
+                                    WHERE (email = @email or phone = @phone) and ScheduleID=@ID )
+                                    Insert into Customer output INSERTED.CustomerID values (@Name,@add,@email,@cmnd,@phone)";
                 using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                 {
                     cmd.Parameters.AddWithValue("@Name", model.Name);
@@ -370,8 +379,12 @@ namespace MovieSelling.Controllers
                     cmd.Parameters.AddWithValue("@email", model.email);
                     cmd.Parameters.AddWithValue("@cmnd", model.cmnd);
                     cmd.Parameters.AddWithValue("@phone", model.phone);
+                    cmd.Parameters.AddWithValue("@ID", ScheID);
 
-                    int modified = (int)cmd.ExecuteScalar();
+                    int modified = 0;
+                    var scalar = cmd.ExecuteScalar();
+                    if (scalar != null)
+                        modified = (int)scalar;
                     conn.Close();
                     conn.Dispose();
                     return modified;

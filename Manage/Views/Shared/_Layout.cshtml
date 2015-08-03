@@ -23,7 +23,7 @@
                             <li>@Html.ActionLink("User", "List", "ManageUser")</li>
                             <li>@Html.ActionLink("Film", "List", "ManageFilm")</li>
                             <li>@Html.ActionLink("Ticket", "Index", "ManageTicket")</li>
-                            <li>@Html.ActionLink("Schedule", "ViewSche", "ManageSchedule")</li>
+                            <li>@Html.ActionLink("Schedule", "ViewSche", "ManageSchedule", new { currDate = DateTime.Now.ToString(Manage.DatabaseHelper.DateFormat) }, new { })</li>
                             <li>@Html.ActionLink("Room", "List", "ManageRoom")</li>
                         </ul>
                     </nav>

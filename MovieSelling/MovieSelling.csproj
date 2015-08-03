@@ -129,6 +129,7 @@
     <Compile Include="Controllers\FilmController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="DatabaseHelper.cs">
       <SubType>Code</SubType>
@@ -149,6 +150,8 @@
     <Content Include="Content\themes\base\images\comments.gif" />
     <Content Include="Content\themes\base\images\favicon.ico" />
     <Content Include="Content\themes\base\images\image-hover.png" />
+    <Content Include="Content\themes\base\images\sapchieu1.jpg" />
+    <Content Include="Content\themes\base\images\sapchieu2.jpg" />
     <Content Include="Content\themes\base\images\social.gif" />
     <Content Include="Content\themes\base\images\stars.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -253,6 +256,7 @@
     <Content Include="Views\Booking\_subMenuPartial.cshtml" />
     <Content Include="Views\Booking\Step4.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Home\Ticket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

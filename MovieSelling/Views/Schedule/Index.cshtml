@@ -27,12 +27,12 @@
                     <div class="head">
                         <h6>@item.Key</h6>
                     </div>
-                    <div class="movieDetail">
+                    <div class="schedule">
                         <table class="tableCus">
                             @foreach (var film in item.Value)
 {
     <tr>
-        <td width="400" height="50" >@MovieSelling.DatabaseHelper.getFilmNamebyID(film.Key)</td>
+        <td width="350" height="50" >@MovieSelling.DatabaseHelper.getFilmNamebyID(film.Key)</td>
         @foreach (var timeSche in film.Value)
         {
             <td width="50"><a href=@Url.Action("step1","booking", new { FilmID = film.Key, dateSche = item.Key, timeSChe = timeSche })>@timeSche</a></td>

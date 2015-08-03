@@ -332,6 +332,7 @@
     <Content Include="Views\ManageSchedule\AddStep2.cshtml" />
     <Content Include="Views\ManageRoom\Edit.cshtml" />
     <Content Include="Views\ManageOrder\Index.cshtml" />
+    <Content Include="Views\ManageSchedule\Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

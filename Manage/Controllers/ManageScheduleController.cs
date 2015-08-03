@@ -15,11 +15,11 @@ namespace Manage.Controllers
         //
         // GET: /ManageSchedule/
 
-        public ActionResult ViewSche()
+        public ActionResult ViewSche(string currDate)
         {
             Schedule model = new Schedule();
             model.DateSche = DateTime.Now;
-            model.listScheduleByFilm = new Dictionary<int, List<ScheduleDetail>>();
+            model.listScheduleByFilm = getScheduleByDate(currDate);
             return View(model);
         }
 
@@ -27,13 +27,19 @@ namespace Manage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ViewSche(Schedule model)
         {
-            model.listScheduleByFilm = new Dictionary<int, List<ScheduleDetail>>();
+            model.listScheduleByFilm = getScheduleByDate(model.DateSche.ToString(DatabaseHelper.DateFormat));
+            return View(model);
+        }
+
+        private Dictionary<int, List<ScheduleDetail>> getScheduleByDate(string dateTime)
+        {
+            var model = new Dictionary<int, List<ScheduleDetail>>();
             using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
             {
                 string sqlSelect = @"select * from Schedule where DateSche = @Date";
                 using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Date", model.DateSche.ToString(DatabaseHelper.DateFormat));
+                    cmd.Parameters.AddWithValue("@Date", dateTime);
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -44,18 +50,18 @@ namespace Manage.Controllers
                         int FilmID = (int)reader[DatabaseHelper.FilmID];
 
                         // Loc lich chieu theo phong chieu
-                        if (model.listScheduleByFilm.ContainsKey(RoomID))
-                            model.listScheduleByFilm[RoomID].Add(new ScheduleDetail(ScheID, FilmID, StartTime));
+                        if (model.ContainsKey(RoomID))
+                            model[RoomID].Add(new ScheduleDetail(ScheID, FilmID, StartTime));
                         else
                         {
                             List<ScheduleDetail> temp = new List<ScheduleDetail>();
                             temp.Add(new ScheduleDetail(ScheID, FilmID, StartTime));
-                            model.listScheduleByFilm.Add(RoomID, temp);
+                            model.Add(RoomID, temp);
                         }
                     }
                 }
             }
-            return View(model);
+            return model;
         }
 
         public ActionResult Add()
@@ -100,18 +106,25 @@ namespace Manage.Controllers
             // case 2 button Save
             if (ID == 2 && !String.IsNullOrEmpty(model.FilmID))
             {
-                @ViewBag.StatusMessage = "Nếu room đã được xếp lịch trước đó, sẽ tự động bỏ qua và tiếp tục add những suất chiếu khác";
+                ViewBag.StatusMessage = "";
                 foreach (var item in model.listSchedule)
                     if (item.selected)
                     {
-                        AddScheduleToDatabase(item.startTime,item.RoomID,model.FilmID);  
+                        // Add lịch chiếu vào database và trả về có thành công hay không
+                        int row = AddScheduleToDatabase(item.startTime,item.RoomID,model.FilmID);
+
+                        // Nếu không thành công thì hiển thị giờ không thành công 
+                        if (row <= 0) ViewBag.StatusMessage += item.startTime + ",";
                     }
+                if (String.IsNullOrEmpty(ViewBag.StatusMessage)) ViewBag.StatusMessage = "Add lịch chiếu thành công";
+                else ViewBag.StatusMessage += "đã được xếp lịch, không thể thêm lịch chiếu mới cho giờ chiếu này";
             }
             return View(model);
         }
 
-        private void AddScheduleToDatabase(string time, string room, string filmID)
+        private int AddScheduleToDatabase(string time, string room, string filmID)
         {
+            int rowAffected = 0;
             //Insert into database
             using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
             {
@@ -129,11 +142,12 @@ namespace Manage.Controllers
                             cmd.Parameters.AddWithValue("@StartTime", time);
                             cmd.Parameters.AddWithValue("@DateSche", dateSche.ToString(DatabaseHelper.DateFormat));
                             // Exec
-                            cmd.ExecuteNonQuery();
+                            rowAffected = cmd.ExecuteNonQuery();
                 }
                 conn.Close();
                 conn.Dispose();
             }
+            return rowAffected;
         }
 
         public static int getPriceByFilmID(string filmID,string time,DateTime dateSche)
@@ -201,6 +215,61 @@ namespace Manage.Controllers
             }
 
             return mylist;
+        }
+
+        public ActionResult Delete(int ScheID)
+        {
+            string dateSche = "";
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                string sqlSelect = @"select DateSche from Schedule where ScheduleID = @ID";
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", ScheID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        dateSche = reader[DatabaseHelper.DateSche].ToString();
+                    }
+                }
+                conn.Close();
+                conn.Open();
+                sqlSelect = @"Delete from Schedule where ScheduleID = @ID";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", ScheID);
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+            }
+            return RedirectToAction("ViewSche", new { currDate=dateSche });
+        }
+
+        public ActionResult Copy(DateTime fromDate,DateTime toDate)
+        {
+            if (fromDate != toDate)
+            {
+                int rowAffected = 0;
+                using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+                {
+                    conn.Open();
+                    string sqlSelect = @"Insert into Schedule (RoomID,FilmID,StartTime,DateSche)
+                                    (Select RoomID , FilmID , StartTime , @toDate from Schedule where dateSche=@fromDate)";
+                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@toDate", toDate.ToString(DatabaseHelper.DateFormat));
+                        cmd.Parameters.AddWithValue("@fromDate", fromDate.ToString(DatabaseHelper.DateFormat));
+                        rowAffected = cmd.ExecuteNonQuery();
+                    }
+                }
+                ViewBag.StatusMessage = rowAffected + " lịch chiếu được sao chép thành công ";
+            }
+            else
+            {
+                ViewBag.StatusMessage = "";
+            }
+            return View();
         }
     }
 }

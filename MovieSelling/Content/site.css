@@ -75,6 +75,7 @@ h1#logo a { float:left; width:239px; height:49px; background:url('themes/base/im
 .box .movie { width:152px; float:left; padding-right:12px; } 
 
 .box .movieDetail { width:500px; float:left; padding-right:12px; } 
+.box .schedule { width:980px; float:left; padding-right:12px; } 
 .box .movieDetail p {}
 .detail-image { float:left; width:500px; position:relative; }
 .detail-image img { width:500px; }

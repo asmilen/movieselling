@@ -111,7 +111,7 @@ namespace MovieSelling.Controllers
         //    3: Phim Hot
         private List<FilmView> getListFilm(int Case)
         {
-            string sqlSelect = @"select * from Film ";
+            string sqlSelect = @"select FilmID,Name,Picture from Film ";
             switch (Case)
             {
                 case 1:
@@ -120,7 +120,11 @@ namespace MovieSelling.Controllers
                 case 2:
                     sqlSelect += "Where '" + DateTime.Now + "'<StartDate";
                     break;
+                case 3:
+                    sqlSelect += "Where '" + DateTime.Now + "'<EndDate and '" + DateTime.Now + "'>StartDate";
+                    break;
             }
+
             List<FilmView> myListFilm = new List<FilmView>();
             try
             {
