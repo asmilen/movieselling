@@ -55,6 +55,19 @@ namespace MovieSelling
         public static String paid = "Đã thanh toán";
 
         public static List<SelectListItem> listTech = getListTech();
+        public static int FilmSelected;
+
+        public static List<SelectListItem> numberOfSeats = getlistSeat();
+
+        private static List<SelectListItem> getlistSeat()
+        {
+            var numberOfSeat = new List<SelectListItem>();
+            numberOfSeat.Add(new SelectListItem() { Text = "1", Value = "1" });
+            numberOfSeat.Add(new SelectListItem() { Text = "2", Value = "2" });
+            numberOfSeat.Add(new SelectListItem() { Text = "3", Value = "3" });
+            numberOfSeat.Add(new SelectListItem() { Text = "4", Value = "4" });
+            return numberOfSeat;
+        }
 
         private static List<SelectListItem> getListTech()
         {
@@ -256,5 +269,7 @@ namespace MovieSelling
             }
             return model;
         }
+
+
     }
 }

@@ -27,153 +27,10 @@ namespace MovieSelling.Controllers
             // Lay ra List Film dang chieu
             model.listFilm = getListFilm(FilmID);
 
-
-
-            return View(model);
-        }
-
-        // getListFilm
-        // Lay ra List Film dang chieu 
-        // filmSelected 
-        // Truyen vao gia tri select default cho list film
-        private List<SelectListItem> getListFilm(int filmSelected)
-        {
-            bool flag = false;
-
-            List<SelectListItem> myListFilm = new List<SelectListItem>();
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
-                {
-                    string sqlSelect = @"select Name,FilmID,StartDate,EndDate from Film ";
-                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
-                    {
-                        conn.Open();
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            int FilmID = (int)reader[DatabaseHelper.FilmID];
-                            string Name = reader[DatabaseHelper.Name].ToString();
-                            DateTime startDate = (DateTime) reader[DatabaseHelper.StartDate];
-                            DateTime endDate = (DateTime)reader[DatabaseHelper.EndDate];
-                            endDate = endDate.AddDays(1);
-
-                            //Kiem tra neu Start Date < current Date < End Date thi moi add vao list
-                            if (!(startDate > DateTime.Now.AddDays(7) || DateTime.Now > endDate))
-                            {
-                                // set gia tri selected theo gia tri truyen vao
-                                bool selected = filmSelected == FilmID ;
-
-                                // Neu khong co gia tri nao duoc select thi flag = false
-                                if (selected) flag = true;
-
-                                myListFilm.Add(new SelectListItem() {Value=FilmID.ToString() , Text= Name , Selected = selected });
-                            }
-                        }
-                    }
-                }
-                if (!flag) myListFilm[0].Selected = true;
-            }
-            catch (Exception ex)
-            {
-                // Film nao bi loi thi bo qua
-            }
-            return myListFilm;            
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Step1(BookingModel model)
-        {
-            ViewBag.SubMenu = "BƯỚC 1: CHỌN PHIM ";
-
-            // Lay ra List Film dang chieu
-            model.listFilm = getListFilm(Int32.Parse(model.filmSelected));
-
-            // Lay ra cac ngay chieu
-            model.listDate = getListDate(DateTime.Now.ToString(DatabaseHelper.DateFormat));
-
             // Lay ra cac gio chieu 
-            model.listTime = getListSchedule(0,Int32.Parse(model.filmSelected),model.dateSelected);
+            model.listTime = getListSchedule(timeSche, FilmID, dateSche);
 
             return View(model);
-        }
-
-        private List<SelectListItem> getListDate(string dateSche)
-        {
-            var listDate = new List<SelectListItem>();
-            DateTime currDate = DateTime.Now;
-            for (int i = 0; i < 7; i++)
-            {
-                string tempDate = currDate.ToString(DatabaseHelper.DateFormat);
-                bool selected = dateSche == tempDate;
-                listDate.Add(new SelectListItem() { Text = tempDate, Value = tempDate, Selected = selected });
-                currDate = currDate.AddDays(1);
-            }
-            return listDate;
-        }
-
-        // getListSchedule
-        // Lay ra cac gio chieu theo film va ngay da chon
-        // timeSelected 
-        // Truyen vao gia tri select default cho list lich chieu
-        private List<SelectListItem> getListSchedule(int timeSelected, int filmSelected, string dateSelected)
-        {
-            List<SelectListItem> mylist = new List<SelectListItem>();
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
-                {
-                    // Select trong bang schedule voi film va ngay da chon
-                    string sqlSelect = @"select Schedule.ScheduleID,Schedule.StartTime,Room.NumberOfRow,Room.NumberOfColumn from Schedule inner join Room on Schedule.RoomID=Room.RoomID where FilmID=@id and DateSche=@date ";
-                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
-                    {
-                        conn.Open();
-                        cmd.Parameters.AddWithValue("@id",filmSelected);
-                        cmd.Parameters.AddWithValue("@date", dateSelected);
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            int ScheID = (int)reader[DatabaseHelper.ScheduleID];
-                            string startTime = reader[DatabaseHelper.StartTime].ToString();
-
-                            var time = DateTime.Now.AddMinutes(60);
-                            var timeNow = Int32.Parse(time.Hour + "" + time.Minute);
-
-                            // Lay ra lich chieu lon hon gio hien tai
-                            if (dateSelected != DateTime.Now.ToString(DatabaseHelper.DateFormat) || timeNow < Int32.Parse(startTime.Replace(":", "")))
-                            {
-                                using (SqlConnection conn1 = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
-                                {
-                                    // Lay ra so ghe da dat
-                                    sqlSelect = @"select count(*) from Ticket join Orders on
-                                            Ticket.OrderID = Orders.OrderID where ScheduleID=@Scheid";
-                                    conn1.Open();
-                                    using (SqlCommand cmd1 = new SqlCommand(sqlSelect, conn1))
-                                    {
-                                        cmd1.Parameters.AddWithValue("@Scheid", ScheID);
-                                        Int32 count = (Int32)cmd1.ExecuteScalar();
-                                        startTime += " (" + count + "/";
-                                    }
-
-                                    // Tong so ghe
-                                    int TotalSeat = (int)reader[DatabaseHelper.NumberOfRow] * (int)reader[DatabaseHelper.NumberOfColumn];
-
-                                    startTime += TotalSeat + ")";
-
-                                    bool selected = filmSelected == ScheID;
-                                    mylist.Add(new SelectListItem() { Value = ScheID.ToString(), Text = startTime, Selected = selected });
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Film nao bi loi thi bo qua
-            }
-            return mylist;
         }
 
         //Step 2
@@ -390,6 +247,135 @@ namespace MovieSelling.Controllers
                     return modified;
                 }
             }
+        }
+
+        private List<SelectListItem> getListSchedule(string timeSelected, int filmSelected, string dateSelected)
+        {
+            List<SelectListItem> mylist = new List<SelectListItem>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+                {
+                    // Select trong bang schedule voi film va ngay da chon
+                    string sqlSelect = @"select Schedule.ScheduleID,Schedule.StartTime,Room.NumberOfRow,Room.NumberOfColumn from Schedule inner join Room on Schedule.RoomID=Room.RoomID where FilmID=@id and DateSche=@date ";
+                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                    {
+                        conn.Open();
+                        cmd.Parameters.AddWithValue("@id", filmSelected);
+                        cmd.Parameters.AddWithValue("@date", dateSelected);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int ScheID = (int)reader[DatabaseHelper.ScheduleID];
+                            string startTime = reader[DatabaseHelper.StartTime].ToString();
+                            bool selected = timeSelected == startTime;
+
+                            // Bien lay ra gio hien tai de lay ra lich chieu lon hon gio hien tai
+                            var time = DateTime.Now.AddMinutes(60);
+                            var timeNow = Int32.Parse(time.Hour + "" + time.Minute);
+
+                            // Lay ra lich chieu lon hon gio hien tai
+                            if (dateSelected != DateTime.Now.ToString(DatabaseHelper.DateFormat) || timeNow < Int32.Parse(startTime.Replace(":", "")))
+                            {
+                                using (SqlConnection conn1 = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+                                {
+                                    // Lay ra so ghe da dat
+                                    sqlSelect = @"select count(*) from Ticket join Orders on
+                                            Ticket.OrderID = Orders.OrderID where ScheduleID=@Scheid";
+                                    conn1.Open();
+                                    using (SqlCommand cmd1 = new SqlCommand(sqlSelect, conn1))
+                                    {
+                                        cmd1.Parameters.AddWithValue("@Scheid", ScheID);
+                                        Int32 count = (Int32)cmd1.ExecuteScalar();
+                                        startTime += " (" + count + "/";
+                                    }
+
+                                    // Tong so ghe
+                                    int TotalSeat = (int)reader[DatabaseHelper.NumberOfRow] * (int)reader[DatabaseHelper.NumberOfColumn];
+
+                                    startTime += TotalSeat + ")";
+
+                                    
+                                    mylist.Add(new SelectListItem() { Value = ScheID.ToString(), Text = startTime, Selected = selected });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Film nao bi loi thi bo qua
+            }
+            return mylist;
+        }
+
+        private List<SelectListItem> getListFilm(int filmSelected)
+        {
+            bool flag = false;
+
+            List<SelectListItem> myListFilm = new List<SelectListItem>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+                {
+                    string sqlSelect = @"select Name,FilmID,StartDate,EndDate from Film ";
+                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                    {
+                        conn.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int FilmID = (int)reader[DatabaseHelper.FilmID];
+                            string Name = reader[DatabaseHelper.Name].ToString();
+                            DateTime startDate = (DateTime)reader[DatabaseHelper.StartDate];
+                            DateTime endDate = (DateTime)reader[DatabaseHelper.EndDate];
+                            endDate = endDate.AddDays(1);
+
+                            //Kiem tra neu Start Date < current Date < End Date thi moi add vao list
+                            if (!(startDate > DateTime.Now.AddDays(7) || DateTime.Now > endDate))
+                            {
+                                // set gia tri selected theo gia tri truyen vao
+                                bool selected = filmSelected == FilmID;
+
+                                // Neu khong co gia tri nao duoc select thi flag = false
+                                if (selected) flag = true;
+
+                                myListFilm.Add(new SelectListItem() { Value = FilmID.ToString(), Text = Name, Selected = selected });
+                            }
+                        }
+                    }
+                }
+                if (!flag) myListFilm[0].Selected = true;
+            }
+            catch (Exception ex)
+            {
+                // Film nao bi loi thi bo qua
+            }
+            return myListFilm;
+        }
+
+        private List<SelectListItem> getListDate(string dateSchedule)
+        {
+            // bien kiem tra xem co ngay nao duoc chon ko
+            bool flag = false;
+
+            var listDate = new List<SelectListItem>();
+            DateTime currDate = DateTime.Now;
+            for (int i = 0; i < 7; i++)
+            {
+                string tempDate = currDate.ToString(DatabaseHelper.DateFormat);
+                bool selected = dateSchedule == tempDate;
+
+                if (selected) flag = true;
+                listDate.Add(new SelectListItem() { Text = tempDate, Value = tempDate, Selected = selected });
+                currDate = currDate.AddDays(1);
+            }
+
+            // Neu khong co ngay nao duoc chon thi chon ngay hien tai
+            if (!flag) listDate[0].Selected = true;
+
+            return listDate;
         }
     }
 }
