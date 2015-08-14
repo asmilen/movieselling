@@ -54,6 +54,8 @@ namespace MovieSelling.Models
 
         public string ScheID { get; set; }
 
+        public string code { get; set; }
+
     }
 
     public class Seat

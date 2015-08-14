@@ -30,8 +30,46 @@ namespace MovieSelling.Controllers
 
         public ActionResult ViewDetail(int FilmID)
         {
-            Film film = getFilmByID(FilmID);
+            FilmDetail film = new FilmDetail();
+
+            film.filmDetail = getFilmByID(FilmID);
+
+            film.filmSchedule = getScheduleByFilmID(FilmID);
             return View(film);
+        }
+
+        private Dictionary<string, List<string>> getScheduleByFilmID(int FilmID)
+        {
+            Dictionary<string, List<string>> schedule = new Dictionary<string, List<string>>();
+            DateTime now = DateTime.Now;
+            for (int i = 0; i < 4; i++)
+            {
+                // lay ra lich chieu film theo ngay
+                string dateSche = now.ToString(DatabaseHelper.DateFormat);
+                using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+                {
+                    conn.Open();
+                    string sqlSelect = @"select * from Schedule where [DateSche]=@date and filmID=@ID";
+                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@date", dateSche);
+                        cmd.Parameters.AddWithValue("@ID", FilmID);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            string startTime = reader[DatabaseHelper.StartTime].ToString();
+                            int filmID = (int)reader[DatabaseHelper.FilmID];
+
+                            if (schedule.ContainsKey(dateSche))
+                                schedule[dateSche].Add(startTime);
+                            else
+                                schedule.Add(dateSche, new List<string>() { startTime });
+                        }
+                    }
+                    now = now.AddDays(1);
+                }
+            }
+            return schedule;
         }
 
         private Film getFilmByID(int FilmID)
@@ -92,6 +130,7 @@ namespace MovieSelling.Controllers
                         catch (Exception ex)
                         {
                             // Co loi trong luc load database, bo qua user co loi
+                            ViewBag.Message = ex.Message;
                         }
                     }
                 }
@@ -152,6 +191,7 @@ namespace MovieSelling.Controllers
             catch (Exception ex)
             {
                 // Film nao bi loi thi bo qua
+                ViewBag.Message = ex.Message;
             }
             return myListFilm;
         }

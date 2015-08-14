@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieSelling", "MovieSelling\MovieSelling.csproj", "{0028E406-8F1D-4838-9AE2-1A14B5FFD3F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manage", "Manage\Manage.csproj", "{D0830E20-7BAF-4931-A4F1-13E549911AFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobDelete", "JobDelete\JobDelete.csproj", "{0864DBA8-7339-4C87-8DEB-7091DE077316}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D0830E20-7BAF-4931-A4F1-13E549911AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0830E20-7BAF-4931-A4F1-13E549911AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0830E20-7BAF-4931-A4F1-13E549911AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0864DBA8-7339-4C87-8DEB-7091DE077316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0864DBA8-7339-4C87-8DEB-7091DE077316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0864DBA8-7339-4C87-8DEB-7091DE077316}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0864DBA8-7339-4C87-8DEB-7091DE077316}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

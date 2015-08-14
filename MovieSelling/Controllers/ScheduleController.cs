@@ -36,7 +36,7 @@ namespace MovieSelling.Controllers
         private Dictionary<int,List<string>> getScheduleByDate(string dateSche)
         {
             Dictionary<int, List<string>> myDic = new Dictionary<int, List<string>>();
-            // Lay list role ra tu database
+            // 
             using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
             {
                 conn.Open();
@@ -56,6 +56,11 @@ namespace MovieSelling.Controllers
                             myDic.Add(filmID, new List<string>() { startTime});
                     }
                 }
+            }
+
+            foreach (var item in myDic)
+            {
+                item.Value.Sort();                        
             }
             return myDic;
         }

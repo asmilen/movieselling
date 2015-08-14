@@ -15,20 +15,20 @@ namespace MovieSelling.Controllers
         // GET: /Booking/
         public ActionResult Step1(int FilmID,string dateSche,string timeSche)
         {
-            DatabaseHelper.setActiceMenu("Booking");
-            ViewBag.SubMenu = "BƯỚC 1: CHỌN PHIM";
-            
-            // Tao model booking moi cho view
-            BookingModel model = new BookingModel();
+                DatabaseHelper.setActiceMenu("Booking");
+                ViewBag.SubMenu = "BƯỚC 1: CHỌN PHIM";
 
-            // Lay ra cac ngay chieu
-            model.listDate = getListDate(dateSche);
+                // Tao model booking moi cho view
+                BookingModel model = new BookingModel();
 
-            // Lay ra List Film dang chieu
-            model.listFilm = getListFilm(FilmID);
+                // Lay ra cac ngay chieu
+                model.listDate = getListDate(dateSche);
 
-            // Lay ra cac gio chieu 
-            model.listTime = getListSchedule(timeSche, FilmID, dateSche);
+                // Lay ra List Film dang chieu
+                model.listFilm = getListFilm(FilmID);
+
+                // Lay ra cac gio chieu 
+                model.listTime = getListSchedule(timeSche, FilmID, dateSche);
 
             return View(model);
         }
@@ -139,6 +139,9 @@ namespace MovieSelling.Controllers
             // Lay ra danh sach ghe
             model.seat = getSeatFromList();
 
+            // Sinh ra ma code
+            model.code = DatabaseHelper.AutoGenerateCode();
+
             // Neu kiem tra khong trung email va so dien thoai
             if (ModelState.IsValid)
             {
@@ -196,8 +199,6 @@ namespace MovieSelling.Controllers
 
         private int InsertToOrder(Ticket model, int CustomerID)
         {
-            string code = DatabaseHelper.AutoGenerateCode();
-
             using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
             {
                 conn.Open();
@@ -208,7 +209,7 @@ namespace MovieSelling.Controllers
                     cmd.Parameters.AddWithValue("@price", DatabaseHelper.getPriceByScheID(model.ScheID) * model.seat.Count);
                     cmd.Parameters.AddWithValue("@numTicket", model.seat.Count);
                     cmd.Parameters.AddWithValue("@ScheID", model.ScheID);
-                    cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@code", model.code);
                     cmd.Parameters.AddWithValue("@status", DatabaseHelper.booked);
 
                     int modified = (int)cmd.ExecuteScalar();
@@ -232,9 +233,9 @@ namespace MovieSelling.Controllers
                 using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                 {
                     cmd.Parameters.AddWithValue("@Name", model.Name);
-                    cmd.Parameters.AddWithValue("@add", model.address);
+                    cmd.Parameters.AddWithValue("@add", "");
                     cmd.Parameters.AddWithValue("@email", model.email);
-                    cmd.Parameters.AddWithValue("@cmnd", model.cmnd);
+                    cmd.Parameters.AddWithValue("@cmnd", "");
                     cmd.Parameters.AddWithValue("@phone", model.phone);
                     cmd.Parameters.AddWithValue("@ID", ScheID);
 
@@ -251,7 +252,10 @@ namespace MovieSelling.Controllers
 
         private List<SelectListItem> getListSchedule(string timeSelected, int filmSelected, string dateSelected)
         {
+            if (dateSelected == null) dateSelected = DateTime.Now.ToString(DatabaseHelper.DateFormat);
             List<SelectListItem> mylist = new List<SelectListItem>();
+            // Bien kiem tra giup select chi 1 gia tri trong list 
+            bool flag = true;
             try
             {
                 using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
@@ -268,7 +272,8 @@ namespace MovieSelling.Controllers
                         {
                             int ScheID = (int)reader[DatabaseHelper.ScheduleID];
                             string startTime = reader[DatabaseHelper.StartTime].ToString();
-                            bool selected = timeSelected == startTime;
+                            bool selected = timeSelected == startTime && flag;
+                            if (selected) flag = false;
 
                             // Bien lay ra gio hien tai de lay ra lich chieu lon hon gio hien tai
                             var time = DateTime.Now.AddMinutes(60);
@@ -306,7 +311,9 @@ namespace MovieSelling.Controllers
             catch (Exception ex)
             {
                 // Film nao bi loi thi bo qua
+                ViewBag.Message = ex.Message;
             }
+            mylist = mylist.OrderBy(x => x.Text).ToList();
             return mylist;
         }
 
@@ -351,6 +358,7 @@ namespace MovieSelling.Controllers
             catch (Exception ex)
             {
                 // Film nao bi loi thi bo qua
+                ViewBag.Message = ex.Message;
             }
             return myListFilm;
         }

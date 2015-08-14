@@ -40,12 +40,7 @@
                                 <th height="30">Chọn ngày chiếu</th>
                             </tr>
                             <tr>
-                                <td height="250"> @Html.ListBoxFor(m => m.dateSelected, Model.listDate, new { Class = "Step1List", ID = "listDate", onclick = "getListTime()" })</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="submit" value="Hiển thị suất chiếu" />
-                                </td>
+                                <td height="250"> @Html.ListBoxFor(m => m.dateSelected, Model.listDate, new { Class = "Step1ListFilm", ID = "listDate", onclick = "getListTime()" })</td>
                             </tr>
                         </table>
                     </div>
@@ -65,7 +60,7 @@
                                 <th height="30"> Chọn số lượng ghế</th>
                             </tr>
                             <tr>
-                                <td>Ghế người lớn  @Html.DropDownListFor(m => m.seatSelected, MovieSelling.DatabaseHelper.numberOfSeats)</td>
+                                <td>Ghế  @Html.DropDownListFor(m => m.seatSelected, MovieSelling.DatabaseHelper.numberOfSeats)</td>
                             </tr>
                         </table>
                         @Html.HiddenFor(m => m.filmSelected)

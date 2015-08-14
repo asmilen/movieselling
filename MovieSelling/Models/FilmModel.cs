@@ -98,4 +98,16 @@ namespace MovieSelling.Models
             listFilmComing = new List<FilmView>();
         }
     }
+
+    public class FilmDetail
+    {
+        public Film filmDetail { get; set; }
+        public Dictionary<string, List<string>> filmSchedule { get; set; }
+
+        public FilmDetail()
+        {
+            filmSchedule = new Dictionary<string, List<string>>();
+        }
+
+    }
 }
