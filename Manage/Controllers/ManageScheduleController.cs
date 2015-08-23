@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Manage.Controllers
@@ -18,7 +19,7 @@ namespace Manage.Controllers
         public ActionResult ViewSche(string currDate)
         {
             Schedule model = new Schedule();
-            model.DateSche = DateTime.Now;
+            model.DateSche = DateTime.UtcNow.AddHours(7);
             model.listScheduleByFilm = getScheduleByDate(currDate);
             return View(model);
         }
@@ -61,13 +62,21 @@ namespace Manage.Controllers
                     }
                 }
             }
+
+            // Sap xep lich chieu theo thoi gian
+            for (int i = 0; i < model.Count; i++)
+            {
+                var item = model.ElementAt(i);
+                model[item.Key] = item.Value.OrderBy(x => x.startTime).ToList();                
+            }
+                
             return model;
         }
 
         public ActionResult Add()
         {
             ViewBag.StatusMessage = "";
-
+            ModelState.AddModelError("","");
             AddSchedule model = new AddSchedule();
             Session["date"] = DateTime.MaxValue;
             return View(model);
@@ -81,7 +90,7 @@ namespace Manage.Controllers
 
             // Validate data
             // Ngay khong duoc nho hon nay hien tai
-            if (model.DateSche < DateTime.Now)
+            if (model.DateSche < DateTime.UtcNow.AddHours(7).AddDays(-1))
             {
                 ModelState.AddModelError("","Ngày được chọn phải lớn hơn ngày hiện tại");
             }
@@ -96,7 +105,7 @@ namespace Manage.Controllers
 
                 model.listSchedule = new List<ScheduleDetail>();
                 // Tao ra list lich chieu de select
-                foreach (var item in DatabaseHelper.listTimes)
+                foreach (var item in DatabaseHelper.getlistTime())
                 {
                     ScheduleDetail temp = new ScheduleDetail(1, 1, item.Text);
                     model.listSchedule.Add(temp);
@@ -219,31 +228,76 @@ namespace Manage.Controllers
 
         public ActionResult Delete(int ScheID)
         {
+            ModelState.Clear();
             string dateSche = "";
-            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            try
             {
-                string sqlSelect = @"select DateSche from Schedule where ScheduleID = @ID";
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                 {
-                    cmd.Parameters.AddWithValue("@ID", ScheID);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    string sqlSelect = @"select DateSche from Schedule where ScheduleID = @ID";
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                     {
-                        dateSche = reader[DatabaseHelper.DateSche].ToString();
+                        cmd.Parameters.AddWithValue("@ID", ScheID);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            dateSche = reader[DatabaseHelper.DateSche].ToString();
+                        }
                     }
-                }
-                conn.Close();
-                conn.Open();
-                sqlSelect = @"Delete from Schedule where ScheduleID = @ID";
-                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
-                {
-                    cmd.Parameters.AddWithValue("@ID", ScheID);
-                    cmd.ExecuteNonQuery();
-                }
-                conn.Close();
+                    conn.Close();
+                    conn.Open();
+                    sqlSelect = @"Delete from Schedule where ScheduleID = @ID";
+                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", ScheID);
+                        cmd.ExecuteNonQuery();
+                    }
+                    conn.Close();
+                }                                    
+            }
+            catch (Exception ex)
+            {
+                return View();
             }
             return RedirectToAction("ViewSche", new { currDate=dateSche });
+        }
+
+        public ActionResult Edit(int ScheID)
+        {
+            ModelState.Clear();
+            string dateSche = "";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+                {
+                    string sqlSelect = @"select DateSche from Schedule where ScheduleID = @ID";
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", ScheID);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            dateSche = reader[DatabaseHelper.DateSche].ToString();
+                        }
+                    }
+                    conn.Close();
+                    conn.Open();
+                    sqlSelect = @"Delete from Schedule where ScheduleID = @ID";
+                    using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", ScheID);
+                        cmd.ExecuteNonQuery();
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+            return RedirectToAction("ViewSche", new { currDate = dateSche });
         }
 
         public ActionResult Copy(DateTime fromDate,DateTime toDate)

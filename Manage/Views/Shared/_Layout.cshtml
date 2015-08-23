@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>TBS - Trang Quản lý</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
@@ -20,18 +20,19 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("User", "List", "ManageUser")</li>
+                            <li>@Html.ActionLink("Nhân viên", "List", "ManageUser")</li>
                             <li>@Html.ActionLink("Film", "List", "ManageFilm")</li>
-                            <li>@Html.ActionLink("Ticket", "Index", "ManageTicket")</li>
-                            <li>@Html.ActionLink("Schedule", "ViewSche", "ManageSchedule", new { currDate = DateTime.Now.ToString(Manage.DatabaseHelper.DateFormat) }, new { })</li>
-                            <li>@Html.ActionLink("Room", "List", "ManageRoom")</li>
+                            <li>@Html.ActionLink("Giá vé", "Index", "ManageTicket")</li>
+                            <li>@Html.ActionLink("Lịch chiếu", "ViewSche", "ManageSchedule", new { currDate = DateTime.UtcNow.AddHours(7).ToString(Manage.DatabaseHelper.DateFormat) }, new { })</li>
+                            <li>@Html.ActionLink("Giờ chiếu", "Index", "ManageTime")</li>
+                            <li>@Html.ActionLink("Phòng chiếu", "List", "ManageRoom")</li>
+                            <li>@Html.ActionLink("Thống kê", "Index", "Statistics")</li>
                         </ul>
                     </nav>
                 </div>
             </div>
         </header>
         <div id="body">
-            @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
                 @RenderBody()
             </section>
@@ -39,7 +40,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p>&copy; @DateTime.UtcNow.AddHours(7).Year - TBS Trang quản lý</p>
                 </div>
             </div>
         </footer>

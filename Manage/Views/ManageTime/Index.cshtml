@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Manage.Models.TimeScheduleModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeSchedule)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeSchedule)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new {  id=item.TimeID  })
+        </td>
+    </tr>
+}
+
+</table>

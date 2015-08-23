@@ -35,6 +35,12 @@ namespace Manage
         public static String StartDate = "StartDate";
         public static String EndDate = "EndDate";
         public static String Password = "password";
+        public static String Company = "Company";
+        public static String filmLong = "FilmLong";
+        public static String Picture1 = "Picture1";
+        public static String Picture2 = "Picture2";
+        public static String Picture3 = "Picture3";
+        public static String Picture4 = "Picture4";
 
         //Role
         public static String RoleID = "RoleID";
@@ -66,7 +72,6 @@ namespace Manage
         //List for View
         public static List<SelectListItem> listRoles = getlistRole(0);
         public static List<SelectListItem> listFilm = new List<SelectListItem>();
-        public static List<SelectListItem> listTimes = getlistTime();
         public static List<SelectListItem> listRoom = getlistRoom();
 
         private static List<SelectListItem> getlistRoom()
@@ -93,7 +98,7 @@ namespace Manage
             return listItems;
         }
 
-        private static List<SelectListItem> getlistTime()
+        public static List<SelectListItem> getlistTime()
         {
             List<SelectListItem> listItems = new List<SelectListItem>();
 
@@ -114,7 +119,7 @@ namespace Manage
                 }
             }
 
-            return listItems;
+            return listItems.OrderBy(x => x.Text).ToList();
         }
 
         private static List<SelectListItem> getlistRole(int selected)
@@ -189,6 +194,7 @@ namespace Manage
             conn.Dispose();
             return Name;
         }
+
     }
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]

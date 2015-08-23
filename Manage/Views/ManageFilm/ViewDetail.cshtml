@@ -1,0 +1,77 @@
+﻿@model Manage.Models.FilmModel
+
+@{
+    ViewBag.Title = "ViewDetail";
+}
+
+<h2>ViewDetail</h2>
+
+<fieldset>
+    <legend>FilmModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FilmID) @Html.DisplayFor(model => model.FilmID)
+    </div>
+    @if (Model.Picture != null)
+    { 
+    <div class="display-field">
+        <a><img width="150" height="200" src="data:image;base64,@System.Convert.ToBase64String(@Model.Picture)" alt="movie" /></a>
+    </div>
+    }
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserID) : @Html.DisplayFor(model => model.UserID)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryID) : @Html.DisplayFor(model => model.CategoryID)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name) : @Html.DisplayFor(model => model.Name)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Actor) : @Html.DisplayFor(model => model.Actor)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Director) : @Html.DisplayFor(model => model.Director)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StartDate) : @Html.DisplayFor(model => model.StartDate)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EndDate) : @Html.DisplayFor(model => model.EndDate)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TechID) : @Html.DisplayFor(model => model.TechID)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.filmLong) : @Html.DisplayFor(model => model.filmLong)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Company) : @Html.DisplayFor(model => model.Company)
+    </div>
+    <div class="display-label">
+        @if (Model.Picture1 != null)
+        {
+            <a><img width="300" height="400" src="data:image;base64,@System.Convert.ToBase64String(@Model.Picture1)" alt="movie" /></a>
+        }
+    </div>
+    @if (Model.Picture2 != null)
+    {
+        <a><img width="300" height="400" src="data:image;base64,@System.Convert.ToBase64String(@Model.Picture2)" alt="movie" /></a>
+    }
+    @if (Model.Picture3 != null)
+    {
+        <a><img width ="300" height="400" src="data:image;base64,@System.Convert.ToBase64String(@Model.Picture3)" alt="movie" /></a>
+    }
+    @if (Model.Picture4 != null)
+    {
+        <a><img width="300" height="400" src="data:image;base64,@System.Convert.ToBase64String(@Model.Picture4)" alt="movie" /></a>
+    }
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

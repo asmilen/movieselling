@@ -9,6 +9,7 @@ using Manage.Models;
 using System.Data.SqlClient;
 using System.IO;
 using System.Data;
+using System.Globalization;
 
 namespace Manage.Controllers
 {
@@ -97,33 +98,25 @@ namespace Manage.Controllers
                     SqlDataReader test = cmd.ExecuteReader();
                     while (test.Read())
                     {
-                        try
-                        {
-                            model.Name = test[DatabaseHelper.FullName].ToString();
-                            model.username = test[DatabaseHelper.username].ToString();
+                        model.Name = test[DatabaseHelper.FullName].ToString();
+                        model.username = test[DatabaseHelper.username].ToString();
 
-                            // Vi Address co the null nen phai kiem tra
-                            if (test[DatabaseHelper.Address] != null)
-                                model.address = test[DatabaseHelper.Address].ToString();
+                        // Vi Address co the null nen phai kiem tra
+                        if (test[DatabaseHelper.Address] != null)
+                            model.address = test[DatabaseHelper.Address].ToString();
 
-                            if (test[DatabaseHelper.DateOfBirth] != null)
-                                model.DateOfBirth = test[DatabaseHelper.DateOfBirth].ToString();
+                        if (test[DatabaseHelper.DateOfBirth] != null)
+                            model.DateOfBirth = DateTime.ParseExact(test[DatabaseHelper.DateOfBirth].ToString(), DatabaseHelper.DateFormat, CultureInfo.InvariantCulture);
 
-                            // Retrieve image
-                            if (test[DatabaseHelper.Picture] != null)
-                                model.picture = (Byte[])(test[DatabaseHelper.Picture]);
+                        // Retrieve image
+                        if (test[DatabaseHelper.Picture] != null)
+                            model.picture = (Byte[])(test[DatabaseHelper.Picture]);
 
-                            model.RoleName = Roles.GetRolesForUser(model.username)[0];
-                        }
-                        catch (Exception ex)
-                        {
-                            // Co loi trong luc load database, bo qua user co loi
-                            ModelState.AddModelError("", ex.Message);
-                        }
+                        model.RoleName = Roles.GetRolesForUser(model.username)[0];
                     }
-                    conn.Close();
-                    conn.Dispose();
                 }
+                conn.Close();
+                conn.Dispose();
             }
             return model;
         }
@@ -140,25 +133,18 @@ namespace Manage.Controllers
                     SqlDataReader test = cmd.ExecuteReader();
                     while (test.Read())
                     {
-                        try
-                        {
-                            int UserID = (int)test[DatabaseHelper.UserID];
-                            string Name = test[DatabaseHelper.FullName].ToString();
-                            string username = test[DatabaseHelper.username].ToString();
+                        int UserID = (int)test[DatabaseHelper.UserID];
+                        string Name = test[DatabaseHelper.FullName].ToString();
+                        string username = test[DatabaseHelper.username].ToString();
 
-                            // Vi Address co the null nen phai kiem tra
-                            string Address = "";
-                            if (test[DatabaseHelper.Address] != null)
-                                Address = test[DatabaseHelper.Address].ToString();
+                        // Vi Address co the null nen phai kiem tra
+                        string Address = "";
+                        if (test[DatabaseHelper.Address] != null)
+                            Address = test[DatabaseHelper.Address].ToString();
 
-                            string DateOfBirth = test[DatabaseHelper.DateOfBirth].ToString();
+                        DateTime DateOfBirth = DateTime.ParseExact(test[DatabaseHelper.DateOfBirth].ToString(), DatabaseHelper.DateFormat, CultureInfo.InvariantCulture);
 
-                            templist.Add(new ViewUser(UserID,Name, DateOfBirth, null, Address, username));
-                        }
-                        catch (Exception ex)
-                        {
-                            // Co loi trong luc load database, bo qua user co loi
-                        }
+                        templist.Add(new ViewUser(UserID, Name, DateOfBirth, null, Address, username));
                     }
                 }
             }
@@ -188,7 +174,7 @@ namespace Manage.Controllers
                         file.InputStream.Read(img, 0, file.ContentLength);
                     }
 
-                    String currentDateOfBirth = model.DateOfBirth.Day + "/" + model.DateOfBirth.Month + "/" + model.DateOfBirth.Year;
+                    String currentDateOfBirth = model.DateOfBirth.Day + "-" + model.DateOfBirth.Month + "-" + model.DateOfBirth.Year;
                     // Create new user
                     WebSecurity.CreateUserAndAccount(model.username, model.password, new { Name = model.Name, Picture = img, DateOfBirth = currentDateOfBirth, Address = model.address });
 

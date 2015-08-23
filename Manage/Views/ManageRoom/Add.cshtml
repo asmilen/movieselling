@@ -1,0 +1,51 @@
+﻿@model Manage.Models.RoomModel
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>RoomModel</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NumberOfRow)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NumberOfRow)
+            @Html.ValidationMessageFor(model => model.NumberOfRow)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NumberOfColumn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NumberOfColumn)
+            @Html.ValidationMessageFor(model => model.NumberOfColumn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RoomName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RoomName)
+            @Html.ValidationMessageFor(model => model.RoomName)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

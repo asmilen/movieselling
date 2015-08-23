@@ -41,7 +41,7 @@ namespace MovieSelling.Controllers
         private Dictionary<string, List<string>> getScheduleByFilmID(int FilmID)
         {
             Dictionary<string, List<string>> schedule = new Dictionary<string, List<string>>();
-            DateTime now = DateTime.Now;
+            DateTime now = DateTime.UtcNow.AddHours(7);
             for (int i = 0; i < 4; i++)
             {
                 // lay ra lich chieu film theo ngay
@@ -154,13 +154,13 @@ namespace MovieSelling.Controllers
             switch (Case)
             {
                 case 1:
-                    sqlSelect += "Where '" + DateTime.Now + "'<EndDate and '" + DateTime.Now + "'>StartDate";
+                    sqlSelect += "Where '" + DateTime.UtcNow.AddHours(7) + "'<EndDate and '" + DateTime.UtcNow.AddHours(7) + "'>StartDate";
                     break;
                 case 2:
-                    sqlSelect += "Where '" + DateTime.Now + "'<StartDate";
+                    sqlSelect += "Where '" + DateTime.UtcNow.AddHours(7) + "'<StartDate";
                     break;
                 case 3:
-                    sqlSelect += "Where '" + DateTime.Now + "'<EndDate and '" + DateTime.Now + "'>StartDate";
+                    sqlSelect += "Where '" + DateTime.UtcNow.AddHours(7) + "'<EndDate and '" + DateTime.UtcNow.AddHours(7) + "'>StartDate";
                     break;
             }
 

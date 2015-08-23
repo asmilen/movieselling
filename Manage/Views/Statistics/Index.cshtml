@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Thống kê</h2>
+
+<ol class="round">
+    <li class="one">
+        <h5>Doanh số bán vé</h5>
+        <a href=@Url.Action("TotalSale", new { year = "2015",month="0"})>Xem Thêm</a>
+    </li>
+
+    <li class="two">
+        <h5>Doanh số theo film</h5>
+        <a href=@Url.Action("FilmSale")>Xem Thêm</a>
+    </li>
+
+    <li class="three">
+        <h5>Số ghế </h5>
+        <a href=@Url.Action("")>Xem Thêm</a>
+    </li>
+</ol>
+

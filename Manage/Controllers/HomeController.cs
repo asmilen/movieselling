@@ -12,7 +12,7 @@ namespace Manage.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            ViewBag.Message = "********** Manage Page";    
+            ViewBag.Message = "Trang Quản Lí";    
             return View();
         }
 

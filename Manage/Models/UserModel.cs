@@ -67,7 +67,7 @@ namespace Manage.Models
 
         [Required]
         [Display(Name = "Date of birth")]
-        public string DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         [Required]
         [Display(Name = "Address")]
@@ -85,7 +85,7 @@ namespace Manage.Models
         [Display(Name = "Role")]
         public string RoleName { get; set; }
 
-        public ViewUser(int UserID, string Name, string DateOfBirth, byte[] Picture, string Address, string username)
+        public ViewUser(int UserID, string Name, DateTime DateOfBirth, byte[] Picture, string Address, string username)
         {
             this.UserID = UserID;
             this.Name = Name;
@@ -102,7 +102,7 @@ namespace Manage.Models
             this.Name = "";
             this.username = "";
             this.address = "";
-            this.DateOfBirth = "";
+            this.DateOfBirth = DateTime.MaxValue;
         }
     }
 }

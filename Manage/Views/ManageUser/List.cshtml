@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<Manage.Models.ViewUser>
 
 
-        <ul id="menu">
-            <li>@Html.ActionLink("Add User ", "Add")</li>
-            <li>@Html.ActionLink("List User ", "List")</li>
-        </ul>
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Add")
+</p>
+
         <table>
             <tr>
                 <th>
@@ -41,7 +43,7 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                        @item.DateOfBirth.ToString(Manage.DatabaseHelper.DateFormat)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.address)

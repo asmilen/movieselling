@@ -6,7 +6,7 @@
 
 <ul id="menu">
     <li>@Html.ActionLink("Add Schedule ", "Add")</li>
-    <li>@Html.ActionLink("View Schedule ", "ViewSche", new { currDate = DateTime.Now.ToString(Manage.DatabaseHelper.DateFormat) })</li>
+    <li>@Html.ActionLink("View Schedule ", "ViewSche", new { currDate = DateTime.UtcNow.AddHours(7).ToString(Manage.DatabaseHelper.DateFormat) })</li>
     <li>@Html.ActionLink("Copy Schedule ", "Copy", new { fromDate = DateTime.MaxValue, toDate = DateTime.MaxValue })</li>
 </ul>
 
@@ -40,6 +40,7 @@
     <tr>
         <td> @Html.ActionLink(sche.startTime, "Index", "ManageOrder", new { ScheID=sche.ScheduleID }, new { }) </td>
         <td> @Manage.DatabaseHelper.getFilmNamebyID(sche.FilmID) </td>
+        <td> @Html.ActionLink("Edit", "Edit", new { ScheID = sche.ScheduleID })</td>
         <td> @Html.ActionLink("Delete", "Delete", new { ScheID = sche.ScheduleID  })</td>
     </tr>
 }

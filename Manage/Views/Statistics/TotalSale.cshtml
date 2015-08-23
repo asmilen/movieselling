@@ -1,0 +1,37 @@
+﻿@model Manage.Models.TotalSale
+@{
+    ViewBag.Title = "TotalSale";
+}
+@Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript">
+    function refreshChart() {
+        
+    }
+    $(document).ready(function () {
+        $('select#listMonth').change(function () {
+            var year = $('#listYear').val();
+            var month = $('#listMonth').val();
+            var query = '/Statistics/TotalSale?year=' + year + '&month=' + month;
+            window.location = query;
+        })
+        $('select#listYear').change(function () {
+            var year = $('#listYear').val();
+            var month = $('#listMonth').val();
+            var query = '/Statistics/TotalSale?year=' + year + '&month=' + month;
+            window.location = query;
+        })
+    });
+</script>
+
+<h2>Doanh số bán vé</h2>
+<table>
+    <tr>
+        <td> Chọn năm</td> 
+        <td>@Html.DropDownListFor(m => m.yearSelect, Model.listYear, new { Name = "listYear", Id = "listYear" })</td>
+        <td> Chọn tháng</td>
+        <td>@Html.DropDownListFor(m => m.monthSelect, Model.listMonth, new { Name = "listMonth", Id = "listMonth" })</td>
+    </tr>
+</table>
+
+<img src="@Url.Action("Mychart", new { year = Model.yearSelect, month = Model.monthSelect  })" alt="Chart" />

@@ -181,7 +181,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BackgroundUptimeServerTimer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FilmAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageFilmController.cs" />
     <Compile Include="Controllers\ManageOrderController.cs" />
@@ -190,7 +192,9 @@
     <Compile Include="Controllers\ManageTicketController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\ManageTimeController.cs" />
     <Compile Include="Controllers\ManageUserController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="DatabaseHelper.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -206,9 +210,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\ScheduleModel.cs" />
+    <Compile Include="Models\statisticsModel.cs" />
     <Compile Include="Models\TicketModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\TimeScheduleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -334,6 +340,14 @@
     <Content Include="Views\ManageRoom\Edit.cshtml" />
     <Content Include="Views\ManageOrder\Index.cshtml" />
     <Content Include="Views\ManageSchedule\Copy.cshtml" />
+    <Content Include="Views\ManageSchedule\Delete.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
+    <Content Include="Views\Statistics\TotalSale.cshtml" />
+    <Content Include="Views\Statistics\FilmSale.cshtml" />
+    <Content Include="Views\ManageTime\Index.cshtml" />
+    <Content Include="Views\ManageTime\Create.cshtml" />
+    <Content Include="Views\ManageRoom\Add.cshtml" />
+    <Content Include="Views\ManageFilm\ViewDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

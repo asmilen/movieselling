@@ -23,7 +23,7 @@ namespace MovieSelling.Controllers
         private Dictionary<string, Dictionary<int, List<string>>> getFromDatabase()
         {
             Dictionary<string, Dictionary<int, List<string>>> model = new Dictionary<string, Dictionary<int, List<string>>>();
-            DateTime now = DateTime.Now;
+            DateTime now = DateTime.UtcNow.AddHours(7);
             for (int i = 0; i < 4; i++)
             {
                 model.Add(now.ToString(DatabaseHelper.DateFormat), getScheduleByDate(now.ToString(DatabaseHelper.DateFormat)) );

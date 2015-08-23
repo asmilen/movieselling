@@ -70,7 +70,6 @@
                                 <tr>
                                     @foreach (var sche in item.Value)
                                     {
-
                                         <td width="50"><a href=@Url.Action("step1","booking", new { FilmID = Model.filmDetail.FilmID, dateSche = item.Key, timeSChe = sche  })>@sche</a></td>
                                     }
                                 </tr>

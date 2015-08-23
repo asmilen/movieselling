@@ -20,6 +20,53 @@ namespace Manage.Controllers
             return View(mylist);
         }
 
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(RoomModel model)
+        {
+            // Add new User to Database
+            ModelState.Clear();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+                    {
+                        conn.Open();
+                        string sqlSelect = @"Insert into Room values (@name,@row,@col)";
+
+                        using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                        {
+                            // Add value
+                            cmd.Parameters.AddWithValue("@row", model.NumberOfRow);
+                            cmd.Parameters.AddWithValue("@col", model.NumberOfColumn);
+                            cmd.Parameters.AddWithValue("@name", model.RoomName);
+                            // Exec
+                            cmd.ExecuteNonQuery();
+                        }
+                        conn.Close();
+                        conn.Dispose();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View();
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", ModelState.Values.All(modelState => modelState.Errors.Count == 0).ToString());
+            }
+            return RedirectToAction("List");
+        }
+
+
         private List<RoomModel> getListRoom()
         {
             List<RoomModel> mylist = new List<RoomModel>();
@@ -131,7 +178,5 @@ namespace Manage.Controllers
             }
             return RedirectToAction("List");
         }
-
-
     }
 }

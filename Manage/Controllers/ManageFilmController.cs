@@ -16,6 +16,7 @@ namespace Manage.Controllers
         // GET: /ManageFilm/
         public ActionResult List()
         {
+            ViewBag.Message = "Danh sách Film";
             List<FilmModel> mylist = getListFilm();
             return View(mylist);
         }
@@ -132,6 +133,83 @@ namespace Manage.Controllers
                 // Film nao bi loi thi bo qua
             }
             return mylist;
+        }
+
+        public ActionResult Edit(int FilmID)
+        {
+            return View();
+        }
+
+        public ActionResult ViewDetail(int FilmID)
+        {
+            var model = getFilmByID(FilmID);
+            return View(model);
+        }
+
+        private FilmModel getFilmByID(int FilmID)
+        {
+            FilmModel temp = new FilmModel();
+            temp.FilmID = FilmID;
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                string sqlSelect = @"select * from Film  where FilmID=@ID";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@ID", FilmID);
+                    SqlDataReader test = cmd.ExecuteReader();
+                    while (test.Read())
+                    {
+                        try
+                        {
+                            temp.UserID = (int)test[DatabaseHelper.UserID];
+                            temp.CategoryID = test[DatabaseHelper.CategoryID].ToString();
+                            temp.Name = test[DatabaseHelper.Name].ToString();
+
+                            // Vi Actor,director,Description co the null nen phai kiem tra
+                            if (test[DatabaseHelper.Actor] != null)
+                                temp.Actor = test[DatabaseHelper.Actor].ToString();
+
+                            if (test[DatabaseHelper.Director] != null)
+                                temp.Director = test[DatabaseHelper.Director].ToString();
+
+                            if (test[DatabaseHelper.Company] != null)
+                                temp.Company = test[DatabaseHelper.Company].ToString();
+
+                            if (test[DatabaseHelper.filmLong] != null)
+                                temp.filmLong = (Int32.Parse((test[DatabaseHelper.filmLong].ToString().Trim())));
+
+                            if (test[DatabaseHelper.Description] != null)
+                                temp.Description = test[DatabaseHelper.Description].ToString();
+
+                            temp.StartDate = (DateTime)test[DatabaseHelper.StartDate];
+                            temp.EndDate = (DateTime)test[DatabaseHelper.EndDate];
+
+                            // Retrieve image
+                            if (test[DatabaseHelper.Picture] != null)
+                                temp.Picture = (Byte[])(test[DatabaseHelper.Picture]);
+                            // Retrieve image
+                            if (test[DatabaseHelper.Picture1] != null)
+                                temp.Picture1 = (Byte[])(test[DatabaseHelper.Picture1]);
+                            // Retrieve image
+                            if (test[DatabaseHelper.Picture2] != null)
+                                temp.Picture2 = (Byte[])(test[DatabaseHelper.Picture2]);
+                            // Retrieve image
+                            if (test[DatabaseHelper.Picture] != null)
+                                temp.Picture3 = (Byte[])(test[DatabaseHelper.Picture3]);
+                            // Retrieve image
+                            if (test[DatabaseHelper.Picture4] != null)
+                                temp.Picture4 = (Byte[])(test[DatabaseHelper.Picture4]);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Co loi trong luc load database, bo qua user co loi
+                            ViewBag.Message = ex.Message;
+                        }
+                    }
+                }
+            }
+            return temp;
         }
 
         [HttpPost]

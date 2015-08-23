@@ -1,34 +1,31 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "TBS";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-        </div>
-    </section>
-}
-<h3>In this page you can:</h3>
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h1>@ViewBag.Title.</h1>
+            <h2>@ViewBag.Message</h2>
+        </hgroup>
+    </div>
+</section>
+<h3>Trong trang này, bạn có thể:</h3>
 <ol class="round">
     <li class="one">
-        <h5>Manage User</h5>
+        <h5>Quản lí Nhân viên</h5>
         
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
+        <a href=@Url.Action("List","ManageUser")>Learn more…</a>
     </li>
 
     <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
+        <h5>Quản lí film và lịch chiếu</h5>
+        Thêm các bộ film mới và các lịch chiếu film theo ngày
+        <a href=@Url.Action("List","ManageFilm")>Learn more…</a>
     </li>
 
     <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
+        <h5>Thống kê </h5>
+        Thống kê doanh số bán vé của từng film 
+        <a href=@Url.Action("Index","Statistics")>Learn more…</a>
     </li>
 </ol>

@@ -39,7 +39,7 @@ namespace MovieSelling.Controllers
         {
             // tao session moi
             ViewBag.SubMenu = "BƯỚC 2: CHỌN GHẾ";
-            Session["time"] = DateTime.Now;
+           // Session["time"] = DateTime.UtcNow.AddHours(7);
             Session["scheID"] = model.ScheID; 
 
             // Khoi tao gia tri cho model
@@ -252,7 +252,7 @@ namespace MovieSelling.Controllers
 
         private List<SelectListItem> getListSchedule(string timeSelected, int filmSelected, string dateSelected)
         {
-            if (dateSelected == null) dateSelected = DateTime.Now.ToString(DatabaseHelper.DateFormat);
+            if (dateSelected == null) dateSelected = DateTime.UtcNow.AddHours(7).ToString(DatabaseHelper.DateFormat);
             List<SelectListItem> mylist = new List<SelectListItem>();
             // Bien kiem tra giup select chi 1 gia tri trong list 
             bool flag = true;
@@ -276,11 +276,11 @@ namespace MovieSelling.Controllers
                             if (selected) flag = false;
 
                             // Bien lay ra gio hien tai de lay ra lich chieu lon hon gio hien tai
-                            var time = DateTime.Now.AddMinutes(60);
+                            var time = DateTime.UtcNow.AddHours(7).AddMinutes(60);
                             var timeNow = Int32.Parse(time.Hour + "" + time.Minute);
 
                             // Lay ra lich chieu lon hon gio hien tai
-                            if (dateSelected != DateTime.Now.ToString(DatabaseHelper.DateFormat) || timeNow < Int32.Parse(startTime.Replace(":", "")))
+                            if (dateSelected != DateTime.UtcNow.AddHours(7).ToString(DatabaseHelper.DateFormat) || timeNow < Int32.Parse(startTime.Replace(":", "")))
                             {
                                 using (SqlConnection conn1 = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                                 {
@@ -340,7 +340,7 @@ namespace MovieSelling.Controllers
                             endDate = endDate.AddDays(1);
 
                             //Kiem tra neu Start Date < current Date < End Date thi moi add vao list
-                            if (!(startDate > DateTime.Now.AddDays(7) || DateTime.Now > endDate))
+                            if (!(startDate > DateTime.UtcNow.AddHours(7).AddDays(7) || DateTime.UtcNow.AddHours(7) > endDate))
                             {
                                 // set gia tri selected theo gia tri truyen vao
                                 bool selected = filmSelected == FilmID;
@@ -369,7 +369,7 @@ namespace MovieSelling.Controllers
             bool flag = false;
 
             var listDate = new List<SelectListItem>();
-            DateTime currDate = DateTime.Now;
+            DateTime currDate = DateTime.UtcNow.AddHours(7);
             for (int i = 0; i < 7; i++)
             {
                 string tempDate = currDate.ToString(DatabaseHelper.DateFormat);
