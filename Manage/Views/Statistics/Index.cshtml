@@ -12,12 +12,12 @@
 
     <li class="two">
         <h5>Doanh số theo film</h5>
-        <a href=@Url.Action("FilmSale")>Xem Thêm</a>
+        <a href=@Url.Action("FilmSale", new { FilmID = "0", month = "1" })>Xem Thêm</a>
     </li>
 
     <li class="three">
         <h5>Số ghế </h5>
-        <a href=@Url.Action("")>Xem Thêm</a>
+        <a href=@Url.Action("TicketSale", new { FilmID = "0", month = "1" })>Xem Thêm</a>
     </li>
 </ol>
 

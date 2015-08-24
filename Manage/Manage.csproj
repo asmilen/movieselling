@@ -348,6 +348,7 @@
     <Content Include="Views\ManageTime\Create.cshtml" />
     <Content Include="Views\ManageRoom\Add.cshtml" />
     <Content Include="Views\ManageFilm\ViewDetail.cshtml" />
+    <Content Include="Views\Statistics\TicketSale.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

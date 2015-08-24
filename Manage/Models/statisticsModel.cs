@@ -50,10 +50,31 @@ namespace Manage.Models
                 if (i < 10) monthInList = "0" + monthInList;
 
                 listMonth.Add(new SelectListItem() { Value = monthInList, Text = "Tháng " + i });
-                currDate = currDate.AddYears(-1);
             }
 
             yearSelect = year;
+            monthSelect = month;
+        }
+    }
+
+    public class FilmSale
+    {
+        public string FilmSelect { get; set; }
+        public string monthSelect { get; set; }
+        public List<SelectListItem> listFilm {get;set;}
+        public List<SelectListItem> listMonth { get; set; }
+
+        public FilmSale(string filmID, string month)
+        {
+            listMonth = new List<SelectListItem>();
+
+            for (int i = 1; i < 13; i++)
+            {
+                var monthInList = i.ToString();
+                if (i < 10) monthInList = "0" + monthInList;
+                listMonth.Add(new SelectListItem() { Value = monthInList, Text = "Tháng " + i });
+            }
+
             monthSelect = month;
         }
     }

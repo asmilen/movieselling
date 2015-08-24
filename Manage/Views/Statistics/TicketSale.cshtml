@@ -1,6 +1,6 @@
 ﻿@model Manage.Models.FilmSale
 @{
-    ViewBag.Title = "FilmSale";
+    ViewBag.Title = "";
 }
 @Scripts.Render("~/bundles/jquery")
 
@@ -12,19 +12,19 @@
         $('select#listMonth').change(function () {
             var year = $('#listYear').val();
             var month = $('#listMonth').val();
-            var query = '/Statistics/FilmSale?FilmID=' + year + '&month=' + month;
+            var query = '/Statistics/TicketSale?FilmID=' + year + '&month=' + month;
             window.location = query;
         })
         $('select#listYear').change(function () {
             var year = $('#listYear').val();
             var month = $('#listMonth').val();
-            var query = '/Statistics/FilmSale?FilmID=' + year + '&month=' + month;
+            var query = '/Statistics/TicketSale?FilmID=' + year + '&month=' + month;
             window.location = query;
         })
     });
 </script>
 
-<h2>Doanh số bán vé theo film</h2>
+<h2>Tổng số vé bán được theo film</h2>
 <table>
     <tr>
         <td> Chọn film</td>
@@ -34,5 +34,4 @@
     </tr>
 </table>
 
-<img src="@Url.Action("FilmSaleChart", new { filmID = Model.FilmSelect, month = Model.monthSelect , type = 1})" alt="Chart" />
-
+<img src="@Url.Action("FilmSaleChart", new { filmID = Model.FilmSelect, month = Model.monthSelect , type = 2})" alt="Chart" />
