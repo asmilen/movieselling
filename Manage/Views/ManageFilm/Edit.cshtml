@@ -1,0 +1,89 @@
+﻿@model Manage.Models.FilmModel
+
+@{
+    ViewBag.Title = "Edit Film";
+}
+
+<ul id="menu">
+    <li>@Html.ActionLink("Add Film ", "Add")</li>
+    <li>@Html.ActionLink("List Film ", "List")</li>
+</ul>
+
+<section id="loginForm">
+    <h2>Edit Film</h2>
+    @using (Html.BeginForm("Edit", "ManageFilm", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.FilmID)
+        <fieldset>
+            <legend>Add new User</legend>
+            <ol>
+                <li>
+                    @Html.LabelFor(m => m.Picture)
+                    <input type="file" name="file" id="file" />
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Picture1)
+                    <input type="file" name="file1" id="file1" />
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Picture2)
+                    <input type="file" name="file2" id="file2" />
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Picture3)
+                    <input type="file" name="file3" id="file3" />
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Picture4)
+                    <input type="file" name="file4" id="file4" />
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Actor)
+                    @Html.TextBoxFor(m => m.Actor)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Director)
+                    @Html.TextBoxFor(m => m.Director)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Description)
+                    @Html.TextAreaFor(m => m.Description)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Company)
+                    @Html.TextBoxFor(m => m.Company)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.filmLong)
+                    @Html.TextBoxFor(m => m.filmLong)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.CategoryID)
+                    @Html.DropDownListFor(m => m.CategoryID, Model.listCate)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.StartDate)
+                    @Html.TextBoxFor(m => m.StartDate)
+                    @Html.ValidationMessageFor(m => m.StartDate)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.EndDate)
+                    @Html.TextBoxFor(m => m.EndDate)
+                    @Html.ValidationMessageFor(m => m.EndDate)
+                </li>
+            </ol>
+            <input type="submit" value="Edit" />
+        </fieldset>
+    }
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

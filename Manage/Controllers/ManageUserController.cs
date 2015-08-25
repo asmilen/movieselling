@@ -174,7 +174,7 @@ namespace Manage.Controllers
                         file.InputStream.Read(img, 0, file.ContentLength);
                     }
 
-                    String currentDateOfBirth = model.DateOfBirth.Day + "-" + model.DateOfBirth.Month + "-" + model.DateOfBirth.Year;
+                    String currentDateOfBirth = model.DateOfBirth.ToString(DatabaseHelper.DateFormat);
                     // Create new user
                     WebSecurity.CreateUserAndAccount(model.username, model.password, new { Name = model.Name, Picture = img, DateOfBirth = currentDateOfBirth, Address = model.address });
 
@@ -244,6 +244,8 @@ namespace Manage.Controllers
                             cmd.Parameters.AddWithValue("@username", model.username);
                             cmd.ExecuteNonQuery();
                         }
+                        conn.Close();
+                        conn.Open();
                         if (img != null) 
                         {
                             sqlSelect = @"update users set Picture = @img where username = @username";

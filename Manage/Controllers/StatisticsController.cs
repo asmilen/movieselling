@@ -111,7 +111,7 @@ namespace Manage.Controllers
                     }
 
                     // gan vao bieu do
-                    model.yValue[i - 1] = ConvertToStringWithSeparator(monthTotal);
+                    model.yValue[i - 1] = monthTotal.ToString();
                     model.xValue[i - 1] = i + "";
                 }
 
@@ -134,20 +134,6 @@ namespace Manage.Controllers
             }
 
             return model;
-        }
-
-        private string ConvertToStringWithSeparator(int p)
-        {
-            string temp = p.ToString();
-            int i = temp.Length;
-            string ret = "";
-            while (i > 0 )
-            {
-                if (i > 3) ret = "." + temp.Substring(i - 3, 3) + ret;
-                else ret = temp.Substring(0, i);
-                i -= 3;
-            }
-            return temp;
         }
 
         public ActionResult FilmSale(string FilmID,string month)

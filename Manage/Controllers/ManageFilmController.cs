@@ -33,37 +33,30 @@ namespace Manage.Controllers
                     SqlDataReader test = cmd.ExecuteReader();
                     while (test.Read())
                     {
-                        try
-                        {
-                            int FilmID = (int)test[DatabaseHelper.FilmID];
-                            int UserID = (int)test[DatabaseHelper.UserID];
-                            string CateID = test[DatabaseHelper.CategoryID].ToString();
-                            string Name = test[DatabaseHelper.Name].ToString();
-                            string TechID = test[DatabaseHelper.TechID].ToString();
+                        int FilmID = (int)test[DatabaseHelper.FilmID];
+                        int UserID = (int)test[DatabaseHelper.UserID];
+                        string CateID = test[DatabaseHelper.CategoryID].ToString();
+                        string Name = test[DatabaseHelper.Name].ToString();
+                        string TechID = test[DatabaseHelper.TechID].ToString();
 
-                            // Vi Actor,director,Description co the null nen phai kiem tra
-                            string Actor = "";
-                            if (test[DatabaseHelper.Actor] != null)
-                                Actor = test[DatabaseHelper.Actor].ToString();
+                        // Vi Actor,director,Description co the null nen phai kiem tra
+                        string Actor = "";
+                        if (test[DatabaseHelper.Actor] != null)
+                            Actor = test[DatabaseHelper.Actor].ToString();
 
-                            string Direc = "";
-                            if (test[DatabaseHelper.Director] != null)
-                                Direc = test[DatabaseHelper.Director].ToString();
+                        string Direc = "";
+                        if (test[DatabaseHelper.Director] != null)
+                            Direc = test[DatabaseHelper.Director].ToString();
 
-                            string Desc = "";
-                            if (test[DatabaseHelper.Description] != null)
-                                Desc = test[DatabaseHelper.Description].ToString();
+                        string Desc = "";
+                        if (test[DatabaseHelper.Description] != null)
+                            Desc = test[DatabaseHelper.Description].ToString();
 
-                            DateTime StartDate = (DateTime)test[DatabaseHelper.StartDate];
-                            DateTime EndDate = (DateTime)test[DatabaseHelper.EndDate];
+                        DateTime StartDate = (DateTime)test[DatabaseHelper.StartDate];
+                        DateTime EndDate = (DateTime)test[DatabaseHelper.EndDate];
 
-                            byte[] data = new byte[0];
-                            templist.Add(new FilmModel(FilmID,UserID,CateID,Name,Actor, Direc,Desc,data,StartDate,EndDate,TechID));
-                        }
-                        catch (Exception ex)
-                        {
-                            // Co loi trong luc load database, bo qua user co loi
-                        }
+                        byte[] data = new byte[0];
+                        templist.Add(new FilmModel(FilmID, UserID, CateID, Name, Actor, Direc, Desc, data, StartDate, EndDate, TechID));
                     }
                 }
             }
@@ -81,8 +74,6 @@ namespace Manage.Controllers
         private List<SelectListItem> getListCate()
         {
             List<SelectListItem> mylist = new List<SelectListItem>();
-            try
-            {
                 using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                 {
                     string sqlSelect = @"select * from CategoryFilm";
@@ -98,11 +89,6 @@ namespace Manage.Controllers
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                // Film nao bi loi thi bo qua
-            }
             mylist[0].Selected = true;
             return mylist;
         }
@@ -110,8 +96,6 @@ namespace Manage.Controllers
         private List<SelectListItem> getListTech()
         {
             List<SelectListItem> mylist = new List<SelectListItem>();
-            try
-            {
                 using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                 {
                     string sqlSelect = @"select * from TechOfFilm";
@@ -127,17 +111,93 @@ namespace Manage.Controllers
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                // Film nao bi loi thi bo qua
-            }
             return mylist;
         }
 
         public ActionResult Edit(int FilmID)
         {
-            return View();
+            var model = getFilmByID(FilmID);
+            model.listCate = getListCate();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(FilmModel model)
+        {
+            // Edit exist User to Database
+            model.listCate = getListCate();
+            ModelState.Clear();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    int UserID = WebMatrix.WebData.WebSecurity.CurrentUserId;
+                    //Update vao database
+                    using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+                    {
+                        conn.Open();
+                        string sqlSelect = @"update film set Name = @name, CategoryId = @cateID, Actor = @Actor, Director = @Director, Description = @Description, 
+                                            StartDate = @StartDate, EndDate = @EndDate, Company = @Company, filmLong = @filmLong,UserID = @userid where FilmID = @filmID ";
+                        using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@name", model.Name);
+                            cmd.Parameters.AddWithValue("@cateID", model.CategoryID);
+                            cmd.Parameters.AddWithValue("@Actor", model.Actor);
+                            cmd.Parameters.AddWithValue("@Director", model.Director);
+                            cmd.Parameters.AddWithValue("@Description", model.Description);
+                            cmd.Parameters.AddWithValue("@StartDate", model.StartDate);
+                            cmd.Parameters.AddWithValue("@EndDate", model.EndDate);
+                            cmd.Parameters.AddWithValue("@Company", model.Company);
+                            cmd.Parameters.AddWithValue("@filmLong", model.filmLong);
+                            cmd.Parameters.AddWithValue("@filmID", model.FilmID);
+                            cmd.Parameters.AddWithValue("@userid", UserID);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        conn.Close();
+                        // update anh
+                        for (int i = 0; i < 5; i++)
+                        {
+                            conn.Open();
+                            // lay file
+                            byte[] img = null;
+                            string filename = "file";
+                            if (i != 0) filename += i;
+                            HttpPostedFileBase file = Request.Files[filename];
+
+                            if (file != null && file.ContentLength > 0)
+                            {
+                                img = new byte[file.ContentLength];
+                                file.InputStream.Read(img, 0, file.ContentLength);
+                            }
+                            if (img != null)
+                            {
+                                if (i == 0 )
+                                    sqlSelect = @"update Film set Picture = @img where FilmID = @FilmID";
+                                else
+                                    sqlSelect = @"update Film set Picture"+i+" = @img where FilmID = @FilmID";
+                                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                                {
+                                    cmd.Parameters.AddWithValue("@FilmID", model.FilmID);
+                                    cmd.Parameters.Add("@img", SqlDbType.VarBinary).Value = img;
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                            conn.Close();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View();
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", ModelState.Values.All(modelState => modelState.Errors.Count == 0).ToString());
+            }
+            return RedirectToAction("List");
         }
 
         public ActionResult ViewDetail(int FilmID)
@@ -160,52 +220,45 @@ namespace Manage.Controllers
                     SqlDataReader test = cmd.ExecuteReader();
                     while (test.Read())
                     {
-                        try
-                        {
-                            temp.UserID = (int)test[DatabaseHelper.UserID];
-                            temp.CategoryID = test[DatabaseHelper.CategoryID].ToString();
-                            temp.Name = test[DatabaseHelper.Name].ToString();
+                        if (test[DatabaseHelper.filmLong] != null)
+                            temp.filmLong = (Int32.Parse((test[DatabaseHelper.filmLong].ToString().Trim())));
 
-                            // Vi Actor,director,Description co the null nen phai kiem tra
-                            if (test[DatabaseHelper.Actor] != null)
-                                temp.Actor = test[DatabaseHelper.Actor].ToString();
+                        temp.UserID = (int)test[DatabaseHelper.UserID];
+                        temp.CategoryID = test[DatabaseHelper.CategoryID].ToString();
+                        temp.Name = test[DatabaseHelper.Name].ToString();
 
-                            if (test[DatabaseHelper.Director] != null)
-                                temp.Director = test[DatabaseHelper.Director].ToString();
+                        // Vi Actor,director,Description co the null nen phai kiem tra
+                        if (test[DatabaseHelper.Actor] != null)
+                            temp.Actor = test[DatabaseHelper.Actor].ToString();
 
-                            if (test[DatabaseHelper.Company] != null)
-                                temp.Company = test[DatabaseHelper.Company].ToString();
+                        if (test[DatabaseHelper.Director] != null)
+                            temp.Director = test[DatabaseHelper.Director].ToString();
 
-                            if (test[DatabaseHelper.filmLong] != null)
-                                temp.filmLong = (Int32.Parse((test[DatabaseHelper.filmLong].ToString().Trim())));
+                        if (test[DatabaseHelper.Company] != null)
+                            temp.Company = test[DatabaseHelper.Company].ToString();
 
-                            if (test[DatabaseHelper.Description] != null)
-                                temp.Description = test[DatabaseHelper.Description].ToString();
 
-                            temp.StartDate = (DateTime)test[DatabaseHelper.StartDate];
-                            temp.EndDate = (DateTime)test[DatabaseHelper.EndDate];
+                        if (test[DatabaseHelper.Description] != null)
+                            temp.Description = test[DatabaseHelper.Description].ToString();
 
-                            // Retrieve image
-                            if (test[DatabaseHelper.Picture] != null)
-                                temp.Picture = (Byte[])(test[DatabaseHelper.Picture]);
-                            // Retrieve image
-                            if (test[DatabaseHelper.Picture1] != null)
-                                temp.Picture1 = (Byte[])(test[DatabaseHelper.Picture1]);
-                            // Retrieve image
-                            if (test[DatabaseHelper.Picture2] != null)
-                                temp.Picture2 = (Byte[])(test[DatabaseHelper.Picture2]);
-                            // Retrieve image
-                            if (test[DatabaseHelper.Picture] != null)
-                                temp.Picture3 = (Byte[])(test[DatabaseHelper.Picture3]);
-                            // Retrieve image
-                            if (test[DatabaseHelper.Picture4] != null)
-                                temp.Picture4 = (Byte[])(test[DatabaseHelper.Picture4]);
-                        }
-                        catch (Exception ex)
-                        {
-                            // Co loi trong luc load database, bo qua user co loi
-                            ViewBag.Message = ex.Message;
-                        }
+                        temp.StartDate = (DateTime)test[DatabaseHelper.StartDate];
+                        temp.EndDate = (DateTime)test[DatabaseHelper.EndDate];
+
+                        // Retrieve image
+                        if (test[DatabaseHelper.Picture] != null)
+                            temp.Picture = (Byte[])(test[DatabaseHelper.Picture]);
+                        // Retrieve image
+                        if (test[DatabaseHelper.Picture1] != null)
+                            temp.Picture1 = (Byte[])(test[DatabaseHelper.Picture1]);
+                        // Retrieve image
+                        if (test[DatabaseHelper.Picture2] != null)
+                            temp.Picture2 = (Byte[])(test[DatabaseHelper.Picture2]);
+                        // Retrieve image
+                        if (test[DatabaseHelper.Picture3] != null)
+                            temp.Picture3 = (Byte[])(test[DatabaseHelper.Picture3]);
+                        // Retrieve image
+                        if (test[DatabaseHelper.Picture4] != null)
+                            temp.Picture4 = (Byte[])(test[DatabaseHelper.Picture4]);
                     }
                 }
             }
@@ -355,8 +408,6 @@ namespace Manage.Controllers
         private List<SelectListItem> mergeList(List<SelectListItem> list)
         {
             List<SelectListItem> mylist = new List<SelectListItem>();
-            try
-            {
                 using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                 {
                     string sqlSelect = @"select * from TechOfFilm";
@@ -372,11 +423,6 @@ namespace Manage.Controllers
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                // Film nao bi loi thi bo qua
-            }
             return mylist;
         }
 
