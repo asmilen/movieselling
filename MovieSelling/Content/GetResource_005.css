@@ -88,7 +88,7 @@
     background-color: #CE3939;
     border: medium none;
     border-radius: 5px;
-    color: #FFFFFF;
+    color: #000000;
     cursor: pointer;
     
     padding: 5px;
@@ -206,7 +206,7 @@
     background: none repeat scroll 0 0 #BEB195;
     border: 1px solid #AA986F;
     border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
+    color: #000000;
     float: left;
     font-family: Tahoma;
     font-size: 9px;
@@ -225,7 +225,7 @@
 #dn_slidefilm .r .position .list li:hover a
 {
     background:#B81515;
-    color:#FFF;
+    color:#000;
 }
 
 #dn_slidefilm .r .position .list li:hover a ul li a
@@ -240,7 +240,7 @@
     background:#B81515;
     border: 1px solid #AA986F;
     border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
+    color: #000000;
     float: left;
     font-family: Tahoma;
     font-size: 9px;
@@ -280,7 +280,7 @@
 }
 
 #dn_slidefilm .r .position .list ul li a.a-sub{
-	color:#fff;
+	color:#000;
 	text-align:left;
 	text-decoration:none;
 	font-size:9pt;
@@ -289,7 +289,7 @@
 }
 
 #dn_slidefilm .r .position .list ul li a.active{
-	color:#fff;
+	color:#000;
 	text-align:left;
 	text-decoration:none;
 	font-size:9pt;
@@ -414,14 +414,14 @@ ul.dn_tabsmovies li{
 	border-top-left-radius:10px;
 	background-color:#E75454;
 	padding:0px 10px;
-	color:#fff;
+	color:#000;
 	font-weight:bold;
 	cursor:pointer;
 	margin-bottom:-2px;
 }
 ul.dn_tabsmovies li:hover,
 ul.dn_tabsmovies li.moviesactive{
-	background-color:#fff;
+	background-color:#000;
 	color:#ff0000;
 
 }
@@ -532,7 +532,7 @@ img.dn_imgmovies:hover
 }
 .dn_moviesrm a{
 	text-decoration:none;
-	color:#fff;
+	color:#000;
 	font-weight:bold;
 	font-size:11px;
 	display:block;
@@ -554,7 +554,7 @@ img.dn_imgmovies:hover
 
 .dn_moviesbook a{
 	display:block;
-	color:#fff;
+	color:#000;
 	font-weight:bold;
 	text-transform:uppercase;
 	text-decoration:none;
@@ -781,7 +781,7 @@ a.dn_lboxmv2book{
 	font-size:12px;
 	font-weight:bold;
 	text-decoration:none;
-	color:#fff;
+	color:#000;
 	position:absolute;
 	bottom:5px;
 	left:125px;
@@ -798,7 +798,7 @@ a.dn_lboxmv2book{
 	font-size:12px;
 	font-weight:bold;
 	text-decoration:none;
-	color:#fff;
+	color:#000;
 	text-align:center;
 	
 }
@@ -840,7 +840,7 @@ ul.dn_tabsmvdetail li{
 	float:left;
 	padding:2px 27px;
 	border:1px solid #838383;
-	color:#fff;
+	color:#000;
 	font-weight:bold;
 	-moz-border-radius-topleft:8px;
 	border-top-left-radius: 8px;
@@ -856,8 +856,8 @@ ul.dn_tabsmvdetail li{
 
 ul.dn_tabsmvdetail li.tabsmvdtactive{
 	color:#434343;
-	background-color:#fff;
-	border-bottom:1px solid #fff;	
+	background-color:#000;
+	border-bottom:1px solid #000;	
 }
 .dn_contentmvdt{
 	width:592px;
@@ -877,7 +877,7 @@ ul.dn_tabsmvdetail li.tabsmvdtactive{
 }
 .dn_contentmvdt img
 {
-    background: none repeat scroll 0 0 #FFFFFF;
+    background: none repeat scroll 0 0 #000000;
     border: 1px solid #E7E7E7;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
     height: auto !important;
@@ -1031,7 +1031,7 @@ ul.dn_limv li img{
     width:100px;
     font-family:Tahoma;
     font-size:11px;
-    color:#FFF;
+    color:#000;
     padding:3px;
     border:0;
     border-radius:10px;
@@ -1112,7 +1112,7 @@ ul.dn_limv li img{
 
 .RegisterButton,.btn-tv
 {
-    background:#FFF;
+    background:#000;
     padding:5px;
     border-radius:3px;
     border:1px solid #CCC;
@@ -1170,8 +1170,8 @@ ul.dn_limv li img{
     text-align:center;
     line-height:30px;
     font-weight:bold;
-    background:#fff;
-    color:#FFF;
+    background:#000;
+    color:#000;
 }
 .item-seat-line
 {
@@ -1594,7 +1594,7 @@ ul.dn_rp12news li{
 	width:704px;
 	height:304px;
 	border:3px solid #B9B4AB;
-	background:#fff;
+	background:#000;
 	padding:5px;
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
@@ -1667,7 +1667,7 @@ ul.dn_tabsfrp li{
 
 ul.dn_tabsfrp li a{
 	background:#C79898;
-	color:#fff;
+	color:#000;
 	font-weight:bold;
 	font-size:11px;
 	border:1px solid #AA6565;
@@ -1687,8 +1687,8 @@ ul.dn_tabsfrp li a{
 ul.dn_tabsfrp li a.activerp2,
 ul.dn_tabsfrp li a:hover{
 	color:#cf2626;
-	background:#fff;
-	border-bottom:1px solid #fff;
+	background:#000;
+	border-bottom:1px solid #000;
 }
 .dn_contentrp2{
 	width:98%;
@@ -1816,7 +1816,7 @@ a.icon_partion img{
 	clear:both;
 	text-align:left;
 	padding:10px;
-	background:#fff;
+	background:#000;
 	display:none;
 }
 ul.dn_lsubside
@@ -1845,12 +1845,12 @@ ul.dn_lsubside li a{
 ul.dn_lsubside li a.activesub,
 ul.dn_lsubside li a:hover
 {
-	background:#D52E2E url('http://lottecinemavn.com/App_Themes/lotte/img/l_subside.png') no-repeat right center!important;color:#fff;	
+	background:#D52E2E url('http://lottecinemavn.com/App_Themes/lotte/img/l_subside.png') no-repeat right center!important;color:#000;	
 	border:1px solid #E41F1F;
 	-moz-border-radius:8px;
 	-webkit-border-radius:8px;
 	border-radius:8px;
-	color:#fff!important;
+	color:#000!important;
 }
 
 ul.tabcontent{
@@ -1911,7 +1911,7 @@ a.close-sub img{
     background: none repeat scroll 0 0 #BEB195;
     border: 1px solid #AA986F;
     border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
+    color: #000000;
     float: left;
     font-weight: bold;
     height: 24px;
@@ -1927,7 +1927,7 @@ a.close-sub img{
     background: none repeat scroll 0 0 blue;
     border: 1px solid blue;
     border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
+    color: #000000;
     float: left;
     font-weight: bold;
     height: 24px;
@@ -1942,7 +1942,7 @@ a.close-sub img{
     background: none repeat scroll 0 0 #4C1686;
     border: 1px solid #4C1686;
     border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
+    color: #000000;
     float: left;
     font-weight: bold;
     height: 24px;
@@ -1957,7 +1957,7 @@ a.close-sub img{
     background: none repeat scroll 0 0 #000000;
     border: 1px solid #AA986F;
     border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
+    color: #000000;
     float: left;
     font-weight: bold;
     height: 24px;
@@ -1972,7 +1972,7 @@ a.close-sub img{
     background: none repeat scroll 0 0 #0A4B7C;
     border: 1px solid #AA986F;
     border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
+    color: #000000;
     float: left;
     font-weight: bold;
     height: 24px;
@@ -2014,7 +2014,7 @@ a.close-sub img{
 }
 .dn_article img
 {
-    background: none repeat scroll 0 0 #FFFFFF;
+    background: none repeat scroll 0 0 #000000;
     border: 1px solid #E7E7E7;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
     height: auto !important;
@@ -2043,7 +2043,7 @@ li.schedule .item
 {
     font-size: 10pt; 
     text-align: left; 
-    color: #FFF; 
+    color: #000; 
     height: 150px;
     width: 110px; 
     position: absolute;
@@ -2093,7 +2093,7 @@ li.schedule .list-schedule
 
 li.schedule .bottom
 {
-    font-size:8pt;position:absolute;width:112px;background:#878787;height:18px;bottom:0;border-radius:0 0 6px 6px;text-align:center;color:#FFF;
+    font-size:8pt;position:absolute;width:112px;background:#878787;height:18px;bottom:0;border-radius:0 0 6px 6px;text-align:center;color:#000;
     text-transform:none;
     cursor:pointer;
     
@@ -2125,7 +2125,7 @@ a img:hover
      background: url('http://lottecinemavn.com/App_Themes/lotte/img/bg_button.gif') repeat-x scroll left top transparent;
             border: 1px solid #D07300;
             border-radius: 3px 3px 3px 3px;
-            color: #FFFFFF;
+            color: #000000;
             cursor: pointer;
             padding: 3px 15px;
             text-shadow: -1px -1px #DB8F34;
@@ -2259,14 +2259,14 @@ ul.fmethod li
 .listbox option:hover
 {
     background:#BEB195;
-    color:#fff;    
+    color:#000;    
 }
 .btn-booking
 {
     background: #BEB195;
     border: 1px solid #AA986F;
     border-radius: 4px;
-    color: #FFFFFF;
+    color: #000000;
     display: block;    
     font-family: Tahoma;
     font-size: 12px;
@@ -2286,7 +2286,7 @@ ul.fmethod li
     background: none repeat scroll 0 0 #BEB195;
     border: 1px solid #AA986F;
     border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
+    color: #000000;
     display: block;
     float: left;
     font-family: Tahoma;
@@ -2310,7 +2310,7 @@ a:focus
 div:forus{-moz-outline-style: none;}
 .link-maps
 {
-    color:#FFF;
+    color:#000;
 }
 .link-maps:hover{color:#BF3518}
 .booking-link-detail

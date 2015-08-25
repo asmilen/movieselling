@@ -1,4 +1,4 @@
-﻿@{
+﻿@model System.Web.Mvc.HandleErrorInfo
     ViewBag.Title = "Error";
 }
 
@@ -6,13 +6,11 @@
 <div id="sub-navigation">
     <ul>
     </ul>
-    @*<div id="search">
+    <div id="search">
         <form action="home_submit" method="get" accept-charset="utf-8">
-            <label for="search-field">TÌM KIẾM</label>
-            <input type="text" name="search field" value="Điền thông tin tìm kiếm ở đây" id="search-field" title="Enter search here" class="blink search-field" />
-            <input type="submit" value="TÌM" class="search-button" />
+            <input type="submit" value="" class="search-button" />
         </form>
-    </div>*@
+    </div>
 </div>
 <!-- end Sub-Menu -->
 
@@ -26,7 +24,7 @@
     <hgroup>
         <h1>Error.</h1>
         <h2>An error occurred while processing your request.</h2>
-        <h3>@ViewBag.Message</h3>
+        <h3>@Model.Exception</h3>
     </hgroup>
 </body>
 </html>

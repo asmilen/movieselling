@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\GetResource_005.css" />
+    <Content Include="Content\themes\base\images\banner.png" />
     <Content Include="Content\themes\base\images\body-bg.gif" />
     <Content Include="Content\themes\base\images\comments.gif" />
     <Content Include="Content\themes\base\images\favicon.ico" />

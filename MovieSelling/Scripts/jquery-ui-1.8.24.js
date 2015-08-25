@@ -837,7 +837,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		
 		if ( o.iframeFix ) {
 			$(o.iframeFix === true ? "iframe" : o.iframeFix).each(function() {
-				$('<div class="ui-draggable-iframeFix" style="background: #fff;"></div>')
+				$('<div class="ui-draggable-iframeFix" style="background: #000;"></div>')
 				.css({
 					width: this.offsetWidth+"px", height: this.offsetHeight+"px",
 					position: "absolute", opacity: "0.001", zIndex: 1000
@@ -4054,7 +4054,7 @@ function getRGB(color) {
 		if (result = /#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(color))
 				return [parseInt(result[1],16), parseInt(result[2],16), parseInt(result[3],16)];
 
-		// Look for #fff
+		// Look for #000
 		if (result = /#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(color))
 				return [parseInt(result[1]+result[1],16), parseInt(result[2]+result[2],16), parseInt(result[3]+result[3],16)];
 
@@ -4947,7 +4947,7 @@ $.effects.highlight = function(o) {
 			.show()
 			.css({
 				backgroundImage: 'none',
-				backgroundColor: o.options.color || '#ffff99'
+				backgroundColor: o.options.color || '#000f99'
 			})
 			.animate(animation, {
 				queue: false,
@@ -10701,7 +10701,7 @@ $.widget( "ui.tabs", {
 	},
 
 	_tabId: function( a ) {
-		return a.title && a.title.replace( /\s/g, "_" ).replace( /[^\w\u00c0-\uFFFF-]/g, "" ) ||
+		return a.title && a.title.replace( /\s/g, "_" ).replace( /[^\w\u00c0-\u000F-]/g, "" ) ||
 			this.options.idPrefix + getNextTabId();
 	},
 

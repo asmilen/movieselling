@@ -8,9 +8,15 @@
 
 @Html.Partial("_subMenuPartial")
 <!-- Main -->
+<div style="height: 10px">
+</div>
 <div id="main">
     <!-- Box -->
     <div class="box">
+        <div class="head">
+            <h2>PHIM SẮP CHIẾU</h2>
+            <p class="text-right"><a href="#">&nbsp;</a></p>
+        </div>
         @for (int i = 0; i < Model.Count; i++)
         {
             var item = Model.ElementAt(i);
@@ -22,16 +28,6 @@
                     <div class="movie-image">
 
                         <a href="@Url.Action("ViewDetail", new { item.FilmID })"><span class="play"><span class="name">@item.Name</span></span><img src="data:image;base64,@System.Convert.ToBase64String(@item.Picture)" alt="movie" /></a>
-                    </div>
-
-                    <div class="rating">
-                        <p>RATING</p>
-                        <div class="stars">
-                            <div class="stars-in">
-
-                            </div>
-                        </div>
-                        <span class="comments">12</span>
                     </div>
                 </div>
             }
@@ -45,15 +41,6 @@
                         <a href="@Url.Action("ViewDetail", new { item.FilmID })"><span class="play"><span class="name">@item.Name</span></span><img src="data:image;base64,@System.Convert.ToBase64String(@item.Picture)" alt="movie" /></a>
                     </div>
 
-                    <div class="rating">
-                        <p>RATING</p>
-                        <div class="stars">
-                            <div class="stars-in">
-
-                            </div>
-                        </div>
-                        <span class="comments">12</span>
-                    </div>
                 </div>
         <!-- end Movie -->
             }

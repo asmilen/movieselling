@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #fff;
+    background-color: #000;
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
@@ -282,7 +282,7 @@ ul#submenuser li {
 ----------------------------------------------------------*/
 /* featured */
 .featured {
-    background-color: #fff;
+    background-color: #000;
 }
 
     .featured .content-wrapper {
@@ -297,7 +297,7 @@ ul#submenuser li {
     }
 
         .featured hgroup.title h1, .featured hgroup.title h2 {
-            color: #fff;
+            color: #000;
         }
 
         .featured p {
@@ -500,7 +500,7 @@ label.checkbox {
 
 input, textarea {
     border: 1px solid #e2e2e2;
-    background: #fff;
+    background: #000;
     color: #333;
     font-size: 1.2em;
     margin: 5px 0 6px 0;
