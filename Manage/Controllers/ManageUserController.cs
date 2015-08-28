@@ -239,7 +239,7 @@ namespace Manage.Controllers
                         using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                         {
                             cmd.Parameters.AddWithValue("@name", model.Name);
-                            cmd.Parameters.AddWithValue("@date", model.DateOfBirth);
+                            cmd.Parameters.AddWithValue("@date", model.DateOfBirth.ToString(DatabaseHelper.DateFormat));
                             cmd.Parameters.AddWithValue("@add", model.address);
                             cmd.Parameters.AddWithValue("@username", model.username);
                             cmd.ExecuteNonQuery();

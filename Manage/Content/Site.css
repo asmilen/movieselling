@@ -5,8 +5,8 @@
 }
 
 body {
-    background-color: #000;
-    border-top: solid 10px #000;
+    background-color: #fff;
+    border-top: solid 10px #fff;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -282,7 +282,7 @@ ul#submenuser li {
 ----------------------------------------------------------*/
 /* featured */
 .featured {
-    background-color: #000;
+    background-color: #fff;
 }
 
     .featured .content-wrapper {
@@ -500,7 +500,7 @@ label.checkbox {
 
 input, textarea {
     border: 1px solid #e2e2e2;
-    background: #000;
+    background: #fff;
     color: #333;
     font-size: 1.2em;
     margin: 5px 0 6px 0;

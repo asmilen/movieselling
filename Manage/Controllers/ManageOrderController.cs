@@ -64,7 +64,7 @@ namespace Manage.Controllers
                     while (reader.Read())
                     {
                         int row = (int)reader["Row"];
-                        int col = (int)reader["Col"];
+                        int col = ((int)reader["Col"])+1;
                         model += Char.ConvertFromUtf32(row + 65) + "-" + col + " ";
                     }
                 }

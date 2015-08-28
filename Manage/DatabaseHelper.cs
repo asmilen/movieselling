@@ -74,7 +74,7 @@ namespace Manage
         public static List<SelectListItem> listFilm = new List<SelectListItem>();
         public static List<SelectListItem> listRoom = getlistRoom();
 
-        private static List<SelectListItem> getlistRoom()
+        public static List<SelectListItem> getlistRoom()
         {
             List<SelectListItem> listItems = new List<SelectListItem>();
 

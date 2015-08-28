@@ -63,6 +63,7 @@ namespace Manage.Controllers
             {
                 ModelState.AddModelError("", ModelState.Values.All(modelState => modelState.Errors.Count == 0).ToString());
             }
+            DatabaseHelper.listRoom = DatabaseHelper.getlistRoom();    
             return RedirectToAction("List");
         }
 
@@ -79,18 +80,12 @@ namespace Manage.Controllers
                     SqlDataReader test = cmd.ExecuteReader();
                     while (test.Read())
                     {
-                        try
-                        {
+
                             int RoomId = (int)test[DatabaseHelper.RoomID];
                             string Name = test[DatabaseHelper.Name].ToString();
                             string NumberOfColumn = test[DatabaseHelper.NumberOfColumn].ToString();
                             string NumberOfRow = test[DatabaseHelper.NumberOfRow].ToString();
                             mylist.Add(new RoomModel(RoomId, NumberOfRow, NumberOfColumn, Name));
-                        }
-                        catch (Exception ex)
-                        {
-                            // Co loi trong luc load database, bo qua user co loi
-                        }
                     }
                 }
             }
@@ -134,6 +129,7 @@ namespace Manage.Controllers
                     return View();
                 }
             }
+            DatabaseHelper.listRoom = DatabaseHelper.getlistRoom();
             return RedirectToAction("List");
         }
 
@@ -176,6 +172,7 @@ namespace Manage.Controllers
                 conn.Close();
                 conn.Dispose();
             }
+            DatabaseHelper.listRoom = DatabaseHelper.getlistRoom();
             return RedirectToAction("List");
         }
     }

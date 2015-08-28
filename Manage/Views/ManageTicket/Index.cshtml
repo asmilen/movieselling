@@ -17,7 +17,7 @@
         @Html.HiddenFor(m => m.mylist[i].TechID)     
         @Html.HiddenFor(m => m.mylist[i].Feature)    
         <h2>@Model.mylist[i].Feature</h2>
-        <h3> Đây là giá ghế thường, ghế vip sẽ được cộng thêm</h3> @Html.TextBoxFor(m => m.mylist[i].Vip)
+        @*<h3> Đây là giá ghế thường, ghế vip sẽ được cộng thêm</h3>*@ @Html.HiddenFor(m => m.mylist[i].Vip)
     
         <table>
             <tr>

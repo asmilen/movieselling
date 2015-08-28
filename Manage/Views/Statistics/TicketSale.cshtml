@@ -1,4 +1,4 @@
-﻿@model Manage.Models.FilmSale
+﻿@model Manage.Models.TicketSale
 @{
     ViewBag.Title = "";
 }
@@ -12,13 +12,13 @@
         $('select#listMonth').change(function () {
             var year = $('#listYear').val();
             var month = $('#listMonth').val();
-            var query = '/Statistics/TicketSale?FilmID=' + year + '&month=' + month;
+            var query = '/Statistics/TicketSale?RoomID=' + year + '&month=' + month;
             window.location = query;
         })
         $('select#listYear').change(function () {
             var year = $('#listYear').val();
             var month = $('#listMonth').val();
-            var query = '/Statistics/TicketSale?FilmID=' + year + '&month=' + month;
+            var query = '/Statistics/TicketSale?RoomID=' + year + '&month=' + month;
             window.location = query;
         })
     });
@@ -27,11 +27,11 @@
 <h2>Tổng số vé bán được theo film</h2>
 <table>
     <tr>
-        <td> Chọn film</td>
-        <td>@Html.DropDownListFor(m => m.FilmSelect, Model.listFilm, new { Name = "listYear", Id = "listYear" })</td>
+        <td> Chọn phòng chiếu</td>
+        <td>@Html.DropDownListFor(m => m.roomSelect, Model.listRoom, new { Name = "listYear", Id = "listYear" })</td>
         <td> Chọn tháng</td>
         <td>@Html.DropDownListFor(m => m.monthSelect, Model.listMonth, new { Name = "listMonth", Id = "listMonth" })</td>
     </tr>
 </table>
 
-<img src="@Url.Action("FilmSaleChart", new { filmID = Model.FilmSelect, month = Model.monthSelect , type = 2})" alt="Chart" />
+<img src="@Url.Action("TicketSaleChart", new { roomID = Model.roomSelect, month = Model.monthSelect })" alt="Chart" />

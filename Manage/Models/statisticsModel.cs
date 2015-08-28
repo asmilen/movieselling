@@ -14,6 +14,8 @@ namespace Manage.Models
         public string[] xValue { get; set; }
         public string[] yValue { get; set; }
 
+        public string[] yValue2 { get; set; }
+
         public StatisticsDetail()
         {
 
@@ -76,6 +78,31 @@ namespace Manage.Models
             }
 
             monthSelect = month;
+        }
+    }
+
+    public class TicketSale
+    {
+        public string roomSelect { get; set; }
+        public string monthSelect { get; set; }
+        public List<SelectListItem> listRoom { get; set; }
+        public List<SelectListItem> listMonth { get; set; }
+
+        public TicketSale(string roomSelect, string month)
+        {
+            listMonth = new List<SelectListItem>();
+
+            for (int i = 1; i < 13; i++)
+            {
+                var monthInList = i.ToString();
+                if (i < 10) monthInList = "0" + monthInList;
+                listMonth.Add(new SelectListItem() { Value = monthInList, Text = "Tháng " + i });
+            }
+
+            monthSelect = month;
+
+            listRoom = DatabaseHelper.getlistRoom();
+            this.roomSelect = roomSelect;
         }
     }
 }

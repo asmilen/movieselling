@@ -1,0 +1,299 @@
+﻿@model MovieSelling.Models.BookingStep2
+@{
+    ViewBag.Title = "Step2";
+}
+@Scripts.Render("~/bundles/jquery")
+
+<link rel="stylesheet" type="text/css" href="~/Content/GetResource_005.css"> 
+
+<script type="text/javascript">
+    var seatTotal = parseFloat(@Model.numberSeat);
+
+    //var start = new Date;
+    //setInterval(function () {
+    //    var intvalue = Math.round(new Date - start);
+    //    $('.Timer').text( intvalue);
+    //}, 1000);
+
+    function selectSeat(seatID) {
+        // xử lý check chọn ghế
+        var _value = document.getElementById(seatID).className;
+        if (_value == "item-seat") {
+            document.getElementById(seatID).className = "item-seat-selected";
+        }
+        else if (_value == "item-seat-selected") {
+            document.getElementById(seatID).className = "item-seat";
+        }
+        var seatCount = 0;
+        var a = document.getElementsByTagName('div');
+        for (i = 0; i < a.length; i++) {
+            if (a.item(i).className == "item-seat-selected" ) {
+                seatCount += 1;
+            }
+        }
+
+        if (seatCount > seatTotal) {
+            var _classSeat = document.getElementById(seatID).className;
+            if (_classSeat == "item-seat-selected") {
+                document.getElementById(seatID).className = "item-seat";
+            }
+
+            alert('Bạn chỉ được chọn tối đa ' + parseFloat(seatTotal) + ' Ghế');
+            return false;
+        }
+
+    }
+    function GetListSeat() {
+        var a = document.getElementsByTagName('div');
+        var _listSeat = "" + seatTotal;
+        for (i = 0; i < a.length; i++) {
+            if (a.item(i).className == "item-seat-selected" || a.item(i).className == "item-seat-selected-vip" || a.item(i).className == "item-seat-selected-couple") {
+                _listSeat += a.item(i).id;
+            }
+        }
+        return _listSeat;
+    }
+
+    function Continue() {
+
+        var seatCount = 0;
+        var a = document.getElementsByTagName('div');
+        for (i = 0; i < a.length; i++) {
+            if (a.item(i).className == "item-seat-selected" || a.item(i).className == "item-seat-selected-vip" || a.item(i).className == "item-seat-selected-couple") {
+                seatCount += 1;
+            }
+        }
+        //////////////////////////////
+        // Đếm số lượng ghế trống giữa hai ghế
+        var countCenter = 0;
+        for (i = 0; i < a.length; i++) {
+            if (a.item(i).className == "item-seat-selected" && a.item(i + 1).className != "item-seat-selected" && a.item(i + 2).className == "item-seat-selected") {
+                countCenter += 1;
+            }
+            if (a.item(i).className == "item-seat-selected" && a.item(i + 1).className != "item-seat-selected" && a.item(i + 2).className == "item-seat-selected") {
+                countCenter += 1;
+            }
+        }
+        if (countCenter != 0) {
+            alert('Việc chọn vị trí ghế của bạn không được để trống 1 ghế ở bên trái, giữa hoặc bên phải trên cùng hàng ghế mà bạn vừa chọn.');
+            return false;
+        }
+        //alert(_strList);
+        //return false;
+
+        //////////// Ghế chọn vượt quá giới hạng cho phép hoặc thiếu
+        if (seatCount > seatTotal) {
+            alert('Bạn chỉ được chọn' + parseFloat(seatTotal) + 'Ghế');
+            return false;
+        }
+        if (seatCount < seatTotal) {
+            alert('Bạn vui lòng chọn thêm ' + (seatTotal - seatCount) + ' ghế để đủ số lượng');
+            return false;
+        }
+        var _strList = GetListSeat();
+        if (_strList != "") {
+            var query = "/Booking/Step3?ListSeat=" + _strList;
+            window.location = query;
+        }
+        else {
+            alert('Bạn chưa chọn ghế');
+            return false;
+        }
+    }
+
+    function GoBack() {
+        var query = "/Booking/Step1";
+        window.location = query;
+    }
+
+    function OnSucceeded() {
+
+    }
+
+    function OnFailed(error) {
+        //alert(error.get_message());
+    }
+
+</script>
+
+@Html.Partial("_subMenuPartial")
+<!--NOI DAT FLASH FILM-->
+<div style= "height: 10px">
+</div>
+<!--BOX FILM-->
+<div class="main" >
+    <div class="dn_box" style="height: auto">
+        <div class="dn_boxc" style="margin: 0">
+            <div style="padding: 10px 30px;">
+                <b style="color: #B81515">
+                    <h1 style="margin: 0; padding: 0">
+                        Bạn đã chọn:
+                    </h1>
+                </b>
+                <br>
+                <div>
+                    <div style="float: left; padding-right: 10px;">
+                        <span style="color: #3B3B3B">
+                            Rạp: <b style="text-transform: uppercase">
+                                Trung tâm chiếu phim quốc gia
+                            </b>
+                        </span>
+                    </div>
+                    <div style="float: left; padding-right: 10px;">
+                        <span style="color: #3B3B3B">
+                            Phim: <b style="text-transform: uppercase">
+                                @Model.FilmNameFull
+                            </b>
+                        </span>
+                    </div>
+                    <div style="float: left; padding-right: 10px;">
+                        <span style="color: #3B3B3B">
+                            Ngày chiếu: <b>
+                                @Model.dateSche
+                            </b>
+                        </span>
+                    </div>
+                    <div style="float: left; padding-right: 10px;">
+                        <span style="color: #3B3B3B">
+                            Lịch chiếu phim: <b>
+                                @Model.timeSche
+                            </b>
+                        </span>
+                    </div>
+                    <div style="clear: both">
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 10px 30px;">
+                <div style="float: left; padding-right: 10px;">
+                    <span style="color: #3B3B3B">
+                        Tổng ghế: <b>
+                            @Model.numberSeat
+                        </b>
+                    </span>
+                </div>
+                <div style="float: left; padding-right: 10px;">
+                    <span style="color: #3B3B3B">
+                        Tổng tiền: <b>
+                            @{
+                                int price = MovieSelling.DatabaseHelper.getPriceByScheID(Model.ScheID) * Int32.Parse(Model.numberSeat);
+                            }
+                            <span id="ctl00_plcMain_lblTongTien">@price</span>
+                        </b>
+                    </span>
+                </div>
+
+
+                <div style="clear: both">
+                </div>
+            </div>
+            <div style="padding-left: 75px;">
+                <div class="div-seat" style="float: left; padding-right: 20px;">
+                    <ul>
+                        <li class="item-seat" style="cursor: default"></li>
+                        <li style="float: left; height: 30px; line-height: 30px; padding-left: 15px;">
+                            <b>
+                                :
+                                Ghế trống
+                            </b>
+                        </li>
+                    </ul>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="div-seat" style="float: left; padding-right: 20px;">
+                    <ul>
+                        <li class="item-seat-couple"></li>
+                        <li style="float: left; height: 30px; line-height: 30px; padding-left: 15px;">
+                            <b>
+                                :
+                                Ghế đã đặt
+                            </b>
+                        </li>
+                    </ul>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="div-seat" style="float: left; padding-right: 20px;">
+                <ul>
+                    <li class="item-seat-booked"></li>
+                    <li style="float: left; height: 30px; line-height: 30px; padding-left: 15px;">
+                        <b>
+                            :
+                            Ghế đã bán
+                        </b>
+                    </li>
+                </ul>
+                <div class="clear">
+                </div>
+            </div>
+                <div class="div-seat" style="float: left; padding-right: 20px;">
+                    <ul>
+                        <li class="item-seat-selected-show"></li>
+                        <li style="float: left; height: 30px; line-height: 30px; padding-left: 15px;">
+                            <b>
+                                :
+                                Ghế đang chọn
+                            </b>
+                        </li>
+                    </ul>
+                    <div class="clear">
+                    </div>
+                </div>
+
+
+            </div>
+            <div style="height: 30px">
+            </div>
+
+
+
+            <!-- sơ đồ ghế mới -->
+            <div class="div-seat-booing" style="width:900px;position:relative;min-height:600px;height:auto;">
+
+
+                @for (int i = 0; i < Model.listSeat.GetLength(0); i++)
+                {
+                    string top =  (94 + 45 * i) + "px";
+                    string str = char.ConvertFromUtf32(i+65);
+                    <div class="item-seat line-seat" style="left:97px; top:@top;">@str</div>
+                    for (int j = 0; j < Model.listSeat.GetLength(1); j++)
+                    {
+                        String id1 = i + "-" + j;
+                        string left = (133 + 42 * j) + "px";
+                        if (Model.listSeat[i, j] == 1)
+                        {
+                            <div id="@id1" class="item-seat-couple" style="left:@left ; top:@top;">@(j + 1)</div>
+                        }
+                        else
+                            if (Model.listSeat[i, j] == 2)
+                            {
+                            <div id="@id1" class="item-seat-booked" style="left:@left ; top:@top;">@(j+1)</div>
+                        } 
+                        else
+                        {
+                            <div onclick="selectSeat('@id1')" id="@id1" class="item-seat" style="left:@left; top:@top;">@(j+1)</div>
+                        }
+                    }
+                }
+            </div>
+
+            <div>
+                <div style="margin: 10px; text-align: right !important">
+                    <input onclick="Continue();" style="float: right" id="btnNext"  value="Tiếp tục" type="button" class="button" >
+                </div>
+            </div>
+            <!-- // sơ đồ ghế mới -->
+
+
+            <div style="height: 100px">
+            </div>
+        </div>
+
+        <div class="dn_boxbot">
+        </div>
+
+    </div>
+</div>
+<!--end box-->
+<!--KET THUC BOX FILM-->

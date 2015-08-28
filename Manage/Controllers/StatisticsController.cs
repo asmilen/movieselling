@@ -187,21 +187,98 @@ namespace Manage.Controllers
             {
                 string dateSelect = i + "-" + month + "-" + DateTime.Now.Year;
                 if (i < 10) dateSelect = "0" + dateSelect;
-                if (type == 2) // Số vé
-                {
-                    model.yValue[i - 1] = getTotalTicketByDate(dateSelect, Int32.Parse(filmID)).ToString();
-                }
-                else // So Tien
-                {
                     model.yValue[i - 1] = getTotalSaleByDate(dateSelect, Int32.Parse(filmID)).ToString();
-                }
                 model.xValue[i - 1] = i + "";
             }
 
             return model;
         }
 
-        private object getTotalTicketByDate(string dateSelect, int filmID)
+        
+
+        public ActionResult TicketSale(string RoomID, string month)
+        {
+            TicketSale model = new TicketSale(RoomID, month);
+            return View(model);
+        }
+
+        public ActionResult TicketSaleChart(string roomID, string month)
+        {
+            string themeChart = @"<Chart>
+                      <ChartAreas>
+                        <ChartArea Name=""Default"" _Template_=""All"">
+                          <AxisY>
+                            <LabelStyle Font=""Arial, 14px"" />
+                          </AxisY>
+                          <AxisX LineColor=""64, 64, 64, 64"" Interval=""2"">
+                            <LabelStyle Font=""Arial, 14px"" />
+                            <MajorGrid Enabled =""False"" />
+                          </AxisX>
+                        </ChartArea>
+                      </ChartAreas>
+                    </Chart>";
+            var model = getStaticsticDetailByRoom(roomID, month);
+            var year = DateTime.Now.Year;
+            var bytes = new Chart(width: model.width, height: model.height, theme: themeChart);
+            bytes.AddTitle("Doanh số tháng " + month + "/" + year);
+            bytes.SetXAxis(title: "Ngày");
+
+            bytes.AddSeries(chartType: model.chartType,
+                            xValue: model.xValue, yValues: model.yValue);
+            bytes.AddSeries(chartType: model.chartType, yValues: model.yValue2);
+            bytes.SetYAxis(title: "Số vé");
+            bytes.Write("png");
+            return null;
+        }
+
+        private StatisticsDetail getStaticsticDetailByRoom(string roomID, string month)
+        {
+            var model = new StatisticsDetail();
+            model.height = 600;
+            model.width = 800;
+            // Chọn từng tháng
+            model.xValue = new string[31];
+            model.yValue = new string[31];
+            model.yValue2 = new string[31];
+            model.chartType = "line";
+
+            // Lặp từng ngày trong tháng
+            for (int i = 1; i < 32; i++)
+            {
+                string dateSelect = i + "-" + month + "-" + DateTime.Now.Year;
+                if (i < 10) dateSelect = "0" + dateSelect;
+                model.yValue[i - 1] = getTotalTicketByDate(dateSelect, Int32.Parse(roomID)).ToString();
+                model.yValue2[i - 1] = getTotalSeatByDate(dateSelect, Int32.Parse(roomID)).ToString();
+                model.xValue[i - 1] = i + "";
+            }
+
+            return model;
+        }
+
+        private int getTotalSeatByDate(string dateSelect, int RoomID)
+        {
+            int total = 0;
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                conn.Open();
+                string sqlSelect = @"select Room.NumberOfRow,Room.NumberOfColumn from Schedule inner join Room 
+                                        on Schedule.RoomID=Room.RoomID Where DateSche=@date and Room.RoomID=@ID";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.AddWithValue("@date", dateSelect);
+                    cmd.Parameters.AddWithValue("@ID", RoomID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int price = (int)reader[DatabaseHelper.NumberOfRow] * (int)reader[DatabaseHelper.NumberOfColumn];
+                        total += price;
+                    }
+                }
+            }
+            return total;
+        }
+
+        private int getTotalTicketByDate(string dateSelect, int RoomID)
         {
             int total = 0;
             using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
@@ -209,11 +286,11 @@ namespace Manage.Controllers
                 conn.Open();
                 string sqlSelect = @"Select Orders.numberofticket from Orders join Schedule
                                         on Orders.ScheduleId = Schedule.ScheduleID 
-                                        where Schedule.DateSche = @date and Schedule.FilmID = @ID";
+                                        where Schedule.DateSche = @date and Schedule.RoomID = @ID";
                 using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                 {
                     cmd.Parameters.AddWithValue("@date", dateSelect);
-                    cmd.Parameters.AddWithValue("@ID", filmID);
+                    cmd.Parameters.AddWithValue("@ID", RoomID);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -225,22 +302,12 @@ namespace Manage.Controllers
             return total;
         }
 
-        public ActionResult TicketSale(string FilmID, string month)
-        {
-            FilmSale model = new FilmSale(FilmID, month);
-            model.listFilm = getListFilm(FilmID);
-            model.FilmSelect = FilmID;
-            return View(model);
-        }
-
         private List<SelectListItem> getListFilm(string FilmSelect)
         {
             string sqlSelect = @"select FilmID,Name,Picture from Film ";
             sqlSelect += "Where '" + DateTime.UtcNow.AddHours(7) + "'<EndDate and '" + DateTime.UtcNow.AddHours(7) + "'>StartDate";
 
             List<SelectListItem> myListFilm = new List<SelectListItem>();
-            try
-            {
                 using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
                 {
                     using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
@@ -255,12 +322,6 @@ namespace Manage.Controllers
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                // Film nao bi loi thi bo qua
-                ViewBag.Message = ex.Message;
-            }
             return myListFilm;
         }
     }

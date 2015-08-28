@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/myquery")
+</head>
+
+
+<body>
+    <!-- Shell -->
+    <div id="shell">
+        <!-- Header -->
+        <div id="header">
+            <h1 id="logo"><a href="#">BnP</a></h1>
+            <div class="social">
+                <span></span>
+                <ul></ul>
+            </div>
+            <div id="banner">
+            </div>
+            <div id="banner-right">
+            </div>
+            <!-- Navigation -->
+            <div id="navigation">
+                <ul>
+                    <li><a class="@MovieSelling.DatabaseHelper.Home" href=@Url.Action("index", "film")>TRANG CHỦ</a></li>
+                    <li><a class="@MovieSelling.DatabaseHelper.New" href=@Url.Action("News", "Home")>TIN TỨC</a></li>
+                    <li><a class="@MovieSelling.DatabaseHelper.Schedule" href=@Url.Action("index", "Schedule")>LỊCH CHIẾU</a></li>
+                    <li><a class="@MovieSelling.DatabaseHelper.Booking" href=@Url.Action("step1", "booking", new { FilmID = 0, dateSche = "", timeSChe = "" })>ĐẶT VÉ</a></li>
+                    <li><a class="@MovieSelling.DatabaseHelper.Ticket" href=@Url.Action("Ticket", "Home")>GIÁ VÉ</a></li>
+                </ul>
+            </div>
+            <!-- end Navigation -->
+        </div>
+        <!-- end Header -->
+        @RenderBody()
+
+        <div id="footer">
+            <p>National Cinema Center - Ticket Booking System</p>
+            <p>Thiết kế: TBS Group</p>
+            <p>Địa chỉ: Số 54A, ngõ 47A, Thanh Xuân, Hà Nội - Điện Thoại: 01673219633</p>
+        </div>
+    </div>
+    <!-- end Shell -->
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

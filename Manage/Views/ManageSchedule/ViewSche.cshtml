@@ -40,7 +40,6 @@
     <tr>
         <td> @Html.ActionLink(sche.startTime, "Index", "ManageOrder", new { ScheID=sche.ScheduleID }, new { }) </td>
         <td> @Manage.DatabaseHelper.getFilmNamebyID(sche.FilmID) </td>
-        <td> @Html.ActionLink("Edit", "Edit", new { ScheID = sche.ScheduleID })</td>
         <td> @Html.ActionLink("Delete", "Delete", new { ScheID = sche.ScheduleID  })</td>
     </tr>
 }

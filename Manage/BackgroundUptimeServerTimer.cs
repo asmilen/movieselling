@@ -47,6 +47,7 @@ namespace Manage
                     cmd.Parameters.AddWithValue("@status", DatabaseHelper.booked);
                     cmd.ExecuteNonQuery();
                 }
+                conn.Close();
             }
         }
 

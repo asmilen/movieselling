@@ -1,0 +1,47 @@
+﻿@model List<MovieSelling2.Models.TicketPrice>
+@{
+    ViewBag.Title = "Ticket";
+}
+
+<!-- Sub-menu -->
+<div id="sub-navigation">
+    <ul>
+        <li><a href="#">GIA VÉ</a></li>
+    </ul>
+    <div id="search">
+        <form action="home_submit" method="get" accept-charset="utf-8">
+            <input type="submit" value="" class="search-button" />
+        </form>
+    </div>
+</div>
+<!-- end Sub-Menu -->
+
+ <!-- NEWS -->
+<div style="height: 10px">
+</div>
+<div id="main">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+    <h2>@Model[i].Feature</h2>
+    <h3> Đây là giá ghế thường, ghế vip sẽ được cộng thêm</h3> @Html.DisplayFor(m => m[i].Vip)
+
+    <table>
+        <tr>
+            <th></th>
+            <th>Thứ 2 - Thứ 6</th>
+            <th>Thứ 7 - Chủ Nhật</th>
+        </tr>
+        <tr>
+            <td>9h- 17h</td>
+            <td>@Html.DisplayFor(m => m[i].NormalDayPrice)</td>
+            <td>@Html.DisplayFor(m => m[i].WeekendDayPrice)</td>
+        </tr>
+        <tr>
+            <td>17h- 23h</td>
+            <td>@Html.DisplayFor(m => m[i].NormalNightPrice)</td>
+            <td>@Html.DisplayFor(m => m[i].WeekendNightPrice)</td>
+        </tr>
+    </table>
+    <br />
+    }
+</div>
