@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "News";
+}
+
+<!-- Sub-menu -->
+<div id="sub-navigation">
+    <ul>
+        <li><a href="#">TIN TỨC</a></li>
+    </ul>
+    <div id="search">
+        <form action="home_submit" method="get" accept-charset="utf-8">
+            <input type="submit" value="" class="search-button" />
+        </form>
+    </div>
+</div>
+<!-- end Sub-Menu -->
+
+ <!-- NEWS -->
+<div style="height: 10px">
+</div>
+<div id="main">
+    <div id="news">
+        <div class="head">
+            <h3>TIN TỨC</h3>
+            <p class="text-right"><a href="#">Tất cả</a></p>
+        </div>
+
+        <div class="content">
+            <p class="date">15.08.2015</p>
+            <h4>Tốp 10 phim hay chiếu rạp tháng 9 </h4>
+            <p>Special Monday - Giảm giá vé đặc biệt ngày Thứ 2 cuối cùng mỗi tháng ... </p>
+            <br /><a href="#">Xem thêm</a>
+        </div>
+        <div class="content">
+            <p class="date">15.08.2015</p>
+            <h4>[MINIGAME FACEBOOK] Chỉnh ảnh nhanh tay - Nhận quà liền tay</h4>
+            <p>Nhân dịp ra mắt phim Ant-Man (Người Kiến), Fanpage sẽ dành tặng các thành viên 2 món phụ kiện độc đáo được thiết kế dành riêng cho fan từ ngày ...</p>
+            <br /><a href="#">Xem thêm</a>
+        </div>
+        <div class="content">
+            <p class="date">21.08.2015</p>
+            <h4>Phim hay khởi chiếu từ 17/7</h4>
+            <p>Camilla, 30 tuổi, một nhân vật tiến triển với tính cách sỗ sàng và tự nhiên thái quá, thường nói to cho nhiều người nghe thấy những điều mà mọi người chỉ nghĩ thầm trong bụng. Đó là một phụ nữ quấy đảo, gây thất vọng, phiền hà, vô cùng ngán ngẩm, đầy bất ngờ ...</p>
+            <br /><a href="#">Xem thêm</a>
+        </div>
+    </div>
+    <!-- end NEWS -->
+    <!-- Coming -->
+    <div id="coming">
+        <div class="head">
+            <h3>PHIM SẮP CHIẾU<strong>!</strong></h3>
+            <p class="text-right"><a href=@Url.Action("ComingSoon", "film")>Tất cả</a></p>
+        </div>
+        <div class="content">
+            <h4>Bộ tứ siêu đẳng</h4>
+            <a href="#"><img src="~/Content/themes/base/images/sapchieu2.jpg" alt="coming soon" /></a>
+            <p>Bộ tứ siêu đẳng không những là một bộ phim hành động kịch tính gay cấn mà còn là thể loại khoa học viễn tưởng với những chi tiết siêu nhiên. Đặc biệt hơn yếu tố khác biệt của bộ phim này sẽ là bốn siêu anh hùng sẽ luôn sát cánh như một gia đình để cùng nhau bảo vệ trái đất.</p>
+            <br /><a href="#">Xem thêm</a>
+        </div>
+        <div class="cl">&nbsp;</div>
+        <div class="content">
+            <h4>Nhiệm vụ bất khả thi</h4>
+            <a href="#"><img src="~/Content/themes/base/images/sapchieu1.jpg" alt="coming soon" /></a>
+            <p>Tổ chức IMF mà đặc vụ Ethan Hunt là một thành viên cốt cán vốn vẫn được biết tới là “đại bản doanh” của những điệp viên tinh nhuệ, chuyên thực hiện các ...</p>
+            <br /><a href="#">Xem thêm</a>
+        </div>
+
+    </div>
+    <!-- end Coming -->
+</div>

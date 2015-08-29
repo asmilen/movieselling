@@ -1,0 +1,80 @@
+﻿@model MovieSelling.Models.Ticket
+
+@{
+    ViewBag.Title = "Step4";
+}
+
+@Html.Partial("_subMenuPartial")
+@{ var ScheduleDetail = MovieSelling.DatabaseHelper.getScheduleByID(Model.ScheID); }
+<div style="height: 10px">
+</div>
+<div id="main">
+    <!-- Content -->
+
+    <div id="content">
+        <div class="box">
+            <div class="head">
+                <h6>@ScheduleDetail.FilmName</h6>
+            </div>
+            <!-- Movie -->
+            <div class="movie">
+                <div class="movie-image">
+                    <a><img src="data:image;base64,@System.Convert.ToBase64String(@ScheduleDetail.Picture)" alt="movie" /></a>
+                </div>
+            </div>
+            <div class="movieDetail">
+                <div class="content">
+                    <table class="tableCus">
+                        <tr>
+                            <td>Rạp: </td>
+                            <td>Trung tâm chiếu phim quốc gia</td>
+                        </tr>
+                        <tr>
+                            <td>Phòng chiếu: </td>
+                            <td>@ScheduleDetail.RoomName</td>
+                        </tr>
+                        <tr>
+                            <td>Ngày chiếu: </td>
+                            <td>@ScheduleDetail.dateSche</td>
+                        </tr>
+                        <tr>
+                            <td>Giờ chiếu: </td>
+                            <td>@ScheduleDetail.startTime</td>
+                        </tr>
+                        @{
+                            string listSeat = "";
+                            foreach (var item in Model.seat)
+                            {
+                                listSeat += char.ConvertFromUtf32(item.Row + 65) + "-" + item.Column + " ";
+                            }
+                        }
+                        <tr>
+                            <td>Ghế</td>
+                            <td>@listSeat</td>
+                        </tr>
+                        @{
+                            int i = 0;
+                            foreach (var item in Model.seat)
+                            {
+                                string seat = char.ConvertFromUtf32(item.Row + 65) + "-" + item.Column + " ";
+                                string gia = (i == 0) ? "Giá" : "";
+                                i++;
+                                <tr>
+                                    <td>@gia </td>
+                                    <td>@seat : @item.Price đ</td>
+                                </tr>
+                            }
+                        }
+                        <tr>
+                            <td>Code:</td>
+                            <td>@Model.code</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="cl">&nbsp;</div>
+        </div>
+        </div>
+    </div>
+
+

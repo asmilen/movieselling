@@ -1,0 +1,2358 @@
+.main-all
+{
+    background-color : white;
+}
+/*Container*/
+.PollListActions td
+{
+    width: auto !important;
+}
+
+.PollsInfoLabel, .ActionsInfoLabel
+{
+    font-family: Tahoma;
+    font-size: 11px;
+    line-height: 14px;
+    margin: 0 15px;
+}
+
+.IE9 .ActionsInfoLabel
+{
+    line-height: 17px;
+}
+
+.PollVoteButton
+{
+    width: 100px;
+}
+
+.PollAnswer
+{
+    padding: 3px 3px 3px 0px;
+    overflow: auto;
+}
+
+.PollAnswerText
+{
+    display: block;
+    margin-left: 5px;
+
+}
+
+.PollAnswerRadio
+{
+    display: block;
+}
+
+.PollAnswerCheck
+{
+    display: block;
+}
+
+.PollAnswerClearer
+{
+    clear: both;
+    font-size: 0px;
+    height: 1em;
+}
+
+.PollCount
+{
+    font-size: 12px;
+    padding: 0px 5px 5px 5px;
+}
+.ErrorMessage {
+    color: Red;
+    display: block;
+    padding:10px 0;
+}
+.PollGraph0, .PollGraph1, .PollGraph2, .PollGraph3, .PollGraph4, .PollGraph5, .PollGraph6, .PollGraph7, .PollGraph8, .PollGraph9 {
+    background-image: url('http://lottecinemavn.com/App_Themes/lotte/img/bg_menusidebar.png');   
+    background-repeat: repeat-x;    
+    height:18px;
+}
+.PollGraph div[style="width:100%"] {
+    width: 99.1% !important;
+}
+.PollGraph {
+    border: 1px solid #CCCCCC;
+    font-size: 12px;
+    height: 1em;
+    margin-bottom: 5px;
+    margin-left: 4px;
+    overflow: hidden;
+    height:18px;
+}
+.PollVoteButton
+{
+    background-color: #CE3939;
+    border: medium none;
+    border-radius: 5px;
+    color: #000000;
+    cursor: pointer;
+    
+    padding: 5px;
+}
+.PollTitle
+{
+    display:none;
+}
+.PollQuestion
+{
+    color: #B81515;
+    font-family: "Times New Roman",Times,serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;    
+    line-height:20px;
+}
+.PollAnswers
+{
+    margin:20px 0;
+}
+#dn_slidefilm .l
+{
+    float: left;
+    height:370px;
+    width:205px;
+    margin-left:3px;
+}
+#dn_slidefilm .l .slider
+{
+    width:200px;
+    height:360px;    
+    margin:5px auto;
+    position:relative;
+}
+#dn_slidefilm .l .slider img{border-radius:5px;}
+#dn_slidefilm .c
+{
+    float: left;width:514px;height:370px;
+}
+#dn_slidefilm .r {
+    float: left;
+    height: 370px;
+    padding-left:20px;
+}
+#dn_slidefilm .r .movie-today {
+    border: 1px solid #DE8686;
+    border-radius: 5px 5px 5px 5px;
+    height: 270px;
+    margin: 10px auto;
+    position: relative;
+    width: 214px;
+}
+#dn_slidefilm .r .movie-today .calenda {
+    height: 188px;
+    left: 7px;
+    position: absolute;
+    top: 48px;
+    width: 200px;
+}
+#dn_slidefilm .r .movie-today .today {
+    left: 4px;
+    position: absolute;
+    text-align: center;
+    top: 8px;
+    width: 200px;
+}
+#dn_slidefilm .r .position {
+    border: 1px solid #D4CDC1;
+    border-radius: 5px 5px 5px 5px;
+    height: 67px;
+    margin: 0 auto;
+    position: relative;
+    width: 214px;
+}
+#dn_slidefilm .r .position .title {
+    color: #886C33;
+    font-family: Myriad Pro;
+    font-size: 19pt;
+    font-weight: bold;
+    left: 5px;
+    line-height: 66px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0;
+    width: 203px;
+}
+#dn_slidefilm .r .position .title a{text-decoration:none;color: #886C33;}
+#dn_slidefilm .r .position .list {
+    left: 5px;
+    position: absolute;
+    text-align: center;
+    top: 8px;
+    width: 203px;
+}
+
+#dn_slidefilm .r .position .list li{
+    float: left;
+    position: relative;
+    list-style:none;
+    float:left;
+}
+#dn_slidefilm .r .position .list ul{
+    position: absolute;
+    display: block;
+	top:20px;
+}
+#dn_slidefilm .r .position .list ul li a{
+	float:left;
+	width:100%;
+	text-align:left;
+}
+#dn_slidefilm .r .position .list .item {
+    background: none repeat scroll 0 0 #BEB195;
+    border: 1px solid #AA986F;
+    border-radius: 3px 3px 3px 3px;
+    color: #000000;
+    float: left;
+    font-family: Tahoma;
+    font-size: 9px;
+    font-weight: bold;
+    margin: 2px;
+    padding: 2px;
+    text-align: center;
+    text-decoration: none;
+    width: 57px;
+    display:block;
+}
+#dn_slidefilm .r .position .list .item:hover
+{
+    background:#B81515;
+}
+#dn_slidefilm .r .position .list li:hover a
+{
+    background:#B81515;
+    color:#000;
+}
+
+#dn_slidefilm .r .position .list li:hover a ul li a
+{
+    background:#BEB195;
+}
+
+
+
+#dn_slidefilm .r .position .list .itemactive
+{
+    background:#B81515;
+    border: 1px solid #AA986F;
+    border-radius: 3px 3px 3px 3px;
+    color: #000000;
+    float: left;
+    font-family: Tahoma;
+    font-size: 9px;
+    font-weight: bold;
+    margin: 2px;
+    padding: 2px;
+    text-align: center;
+    text-decoration: none;
+    width: 57px;
+    display:block;
+}
+
+#dn_slidefilm .r .position .list .itemsub{
+	position:absolute;
+	top:6px;
+	left:-3px;
+	float:left;
+	z-index:999999;
+	margin:0;
+	
+}
+#dn_slidefilm .r .position .list ul.sub{
+
+	float:left;
+	list-style:none;
+	display:none;
+	width:130px;
+	background:#BEB195;
+	border-radius:3px;
+	border:1px solid #AA986F;
+}
+	
+#dn_slidefilm .r .position .list ul.sub li{
+	float:left;
+	width:100%;
+	text-align:left;
+}
+
+#dn_slidefilm .r .position .list ul li a.a-sub{
+	color:#000;
+	text-align:left;
+	text-decoration:none;
+	font-size:9pt;
+	font-weight:bold;
+	background: none repeat scroll 0 0 #BEB195;	
+}
+
+#dn_slidefilm .r .position .list ul li a.active{
+	color:#000;
+	text-align:left;
+	text-decoration:none;
+	font-size:9pt;
+	font-weight:bold;
+	background:#B81515;	
+}
+#dn_slidefilm .r .position .list ul li a.active<a
+{
+    color:Blue;
+}
+
+
+#dn_slidefilm .r .position .list ul li a.a-sub:hover{
+	color:Red;
+}
+#dn_slidefilm .r .position .list ul li a.active:hover{color:#CCC}
+/* */
+
+#dn_slidefilm ul{margin-left:2px;margin-top:1px}
+#dn_slidefilm .c ul li
+{
+    width:112px;
+    height:175px;
+    margin:3px;
+    border:1px solid #de8686;
+    border-radius:6px;
+    list-style:none;float:left;
+    background-repeat:no-repeat;
+}
+
+
+.fl{float:left}
+.clear{clear:both}
+/* content block 4 */
+#mcs4_container{margin:0; width:500px; height:370px;}
+#mcs4_container .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#mcs4_container .customScrollBox .container{position:relative; width:485px; top:0; float:left;}
+#mcs4_container .customScrollBox .content{clear:both;}
+#mcs4_container .dragger_container{position:relative; width:0px; height:349px; float:left; margin:10px 0 0 10px; border-left:2px solid #D73533; cursor:pointer;}
+#mcs4_container .dragger{position:absolute; width:12px; height:40px; background:#D73533; margin-left:-5px; text-align:center; overflow:hidden; cursor:pointer;}
+#mcs4_container .dragger_pressed{position:absolute; width:12px; height:40px; background:#D73533; margin-left:-5px; overflow:hidden; cursor:s-resize;}
+
+
+#mcs2_container {   
+    height: 157px;
+    margin: 0;
+    width: 112px;
+}
+#mcs2_container .customScrollBox-hkm {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+#mcs2_container .customScrollBox-hkm .container-hkm {
+    float: left;
+    position: relative;
+    top: 0;
+    width: 97px;
+}
+#mcs2_container .customScrollBox-hkm .content-hkm {
+    clear: both;
+}
+
+#mcs2_container .dragger_container-hkm {
+    box-shadow: 0 0 10px #000000 inset;
+    cursor: pointer;
+    float: left;
+    height: 148px;
+    margin: 3px 0 0 0;
+    position: relative;
+    width: 9px;
+}
+#mcs2_container .dragger-hkm {
+    background: none repeat scroll 0 0 #333333;
+    border-left: 1px solid #787878;
+    border-right: 1px solid #000000;
+    color: #666666;
+    cursor: pointer;
+    height: 60px;
+    line-height: 60px;
+    margin-left: 1px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    width: 6px;
+}
+#mcs2_container .dragger_pressed-hkm {
+    background: none repeat scroll 0 0 #444444;
+    border-left: 1px solid #878787;
+    border-right: 1px solid #000000;
+    color: #777777;
+    cursor: pointer;
+    height: 60px;
+    line-height: 60px;
+    margin-left: 1px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    width: 6px;
+}
+/* content block 5 */
+
+
+/***************FORM MOVIES*******************/
+ul.dn_tabsmovies{
+	list-style:none;	
+	display:block;
+	height:29px;
+	line-height:25px;
+	clear:both;
+	width:100%;
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/hline_tabsmovies.png') no-repeat right bottom;
+	margin:20px 0px 40px 0px;
+}
+ul.dn_tabsmovies li{
+	float:left;
+	margin-right:2px;
+	border:2px solid #CE2525;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-topright:10px;
+	border-top-right-radius:10px;
+	border-top-left-radius:10px;
+	background-color:#E75454;
+	padding:0px 10px;
+	color:#000;
+	font-weight:bold;
+	cursor:pointer;
+	margin-bottom:-2px;
+}
+ul.dn_tabsmovies li:hover,
+ul.dn_tabsmovies li.moviesactive{
+	background-color:#000;
+	color:#ff0000;
+
+}
+
+.dn_contentmv.dn_mvtabs1{
+	display:block;
+}
+.dn_contentmv.dn_mvtabs2,
+.dn_contentmv.dn_mvtabs3{
+	display:none;
+}
+
+.dn_lmovies{
+	list-style:none;
+}
+
+.dn_lmovies li.dn_lmvparent{
+	height:160px;
+	display:block;
+	width:100%;
+	border-bottom:1px solid #e2e1e1;
+	padding-bottom:40px;
+	margin-bottom:40px;
+}
+.dn_lmovies li.dn_lmvparentf{
+	height:135px;
+	display:block;
+	width:100%;
+	padding-bottom:40px;
+	margin-bottom:40px;
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/f_fim1.png') no-repeat bottom center;	
+}
+
+.dn_lmoviesl{
+	width:400px;
+	float:left;
+}
+
+img.dn_imgmovies{
+	border:none;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	float:left;
+	margin-right:15px;
+}
+img.dn_imgmovies:hover
+{
+    opacity:0.7;
+    filter:alpha(opacity=70); /* For IE8 and earlier */
+}
+.dn_lmoviesr{
+	width:150px;
+	float:right;
+	height:130px;
+	position:relative;
+	margin-right:50px;
+}
+.dn_lmoviesr div{
+	display:block;
+	width:100%;
+}
+.dn_number{
+	float:left;
+	margin-right:30px;
+	width:50px;
+	margin-left:20px;
+}
+.dn_numberf{
+	float:left;
+	width:50px;
+	margin-right:50px;
+}
+.dn_number1{
+	border-bottom:1px solid #A58463;
+	width:112px;
+	height:158px;
+	float:left;
+	margin-right:15px;
+}
+.dn_numberf img{
+	margin:90px 0px 0px 25px;
+}
+.dn_number img{
+	border:none;
+	margin-top:60px;
+}
+.dn_lmoviesr1{
+	margin-bottom:10px;
+}
+.dn_lmoviesr1 span{
+	color:#ff9797;font-weight:bold;
+}
+.dn_lmoviesr2 span{
+	color:#ea5050; font-family:'Times New Roman', Times, serif; font-size:34px;	font-weight:bold;
+}
+.dn_moviesrm{
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/btn_f1.png') no-repeat;
+	width:65px;
+	height:26px;
+	text-align:center;
+	display:block;
+	line-height:24px;
+	float:left;
+	position:absolute;
+	bottom:0px;
+	left:0px;
+}
+.dn_moviesrm a{
+	text-decoration:none;
+	color:#000;
+	font-weight:bold;
+	font-size:11px;
+	display:block;
+	text-transform:uppercase;
+	
+}
+.dn_moviesbook{
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/btn_f2.png') no-repeat;
+	width:76px;
+	height:26px;
+	text-align:center;
+	display:block;
+	line-height:26px;
+	float:right;
+	position:absolute;
+	bottom:0px;
+	right:0px;
+}
+
+.dn_moviesbook a{
+	display:block;
+	color:#000;
+	font-weight:bold;
+	text-transform:uppercase;
+	text-decoration:none;
+}
+ul.dn_lmvinfo{
+	list-style:none;
+}
+ul.dn_lmvinfo li{
+	list-style:none;
+	line-height:22px;
+	font-size:11px;
+}
+
+ul.dn_lmvinfo li a
+{
+    text-decoration:none;
+}
+
+.dn_ttmovies{
+	color:#aa0404;
+	font-weight:bold;
+	font-size:16px;
+}
+.dn_ttmovies a{
+	color:#aa0404;
+	text-decoration:none;
+}
+
+.dn_fonti11{
+	font-size:11px;
+	font-style:italic;
+	color:#606060;
+}
+/*Phim xem nhieu*/
+.dn_lmoviesr2pxn{
+	display:block;
+	margin-top:20px;
+}
+
+.f36{
+	font-size:40px;
+	color:#C4433B;
+	font-weight:bold;
+	margin-right:10px;
+}
+.f30{
+	font-size:22px;
+	color:#C4433B;
+	font-weight:bold;	
+}
+/*Danh gia phim*/
+.dn_lmoviesr2star{
+	margin-top:15px;
+	display:block;
+}
+.dn_lmoviesr2star img{
+	width:92px;
+	height:23px;
+}
+
+
+/**********************Movies Box 2***************************/
+.dn_boxoffice
+{
+	height:20px;
+	line-height:20px;
+	display:block;
+	width:100%;
+	margin:10px 0px 20px 5px;
+}
+
+.dn_boxoffice span{
+	font-size:25px;
+	color:#CA4137;
+	font-weight:bold;
+	float:left;
+	margin:0px 5px 0px 0px;
+	text-transform:uppercase;
+}
+.dn_boxoffice span a{
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/box_offrm.png') no-repeat;
+	width:38px;
+	height:27px;
+	float:left;
+	display:block;
+	text-decoration:none;
+	font-size:11px;
+	font-weight:bold;
+	text-indent:-9999px;
+	margin:2px 0px 0px 10px;
+}
+
+
+.dn_slideboff{
+	width:725px;
+	height:310px;
+	margin-bottom:10px;
+	border-radius:5px;
+}
+.dn_slideboff div
+{
+    width:722px;
+    margin:0 auto;
+}
+
+/*BOx Su Kien*/
+.dn_fsk{
+margin-left:10px;
+}
+
+.dn_fsk1{
+	width:350px;
+	float:left;
+}
+
+.dn_fsk2{
+	width:345px;
+	float:right;
+}
+
+.dn_fsktt{
+	color:#c80d0c;
+	font-size:15px;
+	font-weight:bold;
+	text-transform:uppercase;
+	height:30px;
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/bg_sk.png') no-repeat bottom center;
+	display:block;
+	width:100%;
+}
+.dn_fskc{
+	display:inline-block;
+	width:100%;
+	margin:0px;
+}
+.dn_fskc ul{
+	list-style:none;
+}
+.dn_fskc ul li{
+	line-height:20px;
+	color:#555555;
+}
+.dn_fskc ul li span{
+	float:left;
+	margin:0px 5px;
+}
+.dn_fskc ul li span.dn_skc{
+	width:245px;
+	height:20px;
+	overflow:hidden;
+}
+.dn_fskc ul li span.dn_skc2{
+	width:100px;
+	height:20px;
+	overflow:hidden;
+}
+
+.dn_fskc ul li a{
+	text-decoration:none;
+	font-weight:bold;
+	float:left;
+	color:#555;
+	margin-right:5px;
+}
+.dn_fskc ul li a:hover{color:Red}
+.dn_fskc ul li span.dn_fskdate{
+	float:right!important;
+	margin-right:20px;
+}
+.dn_fskc img{
+	float:left;
+	margin-right:5px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+
+.dn_boxmv2{
+	width:350px;
+	height:415px;
+	float:left;
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/box_mv2.png') no-repeat;
+	margin:0px 5px 30px 0px;
+}
+
+
+ul.dn_lboxmv2 li.dn_lboxmv2li{
+	list-style:none;
+	display:inline-block;
+	width:330px;
+	position:relative;
+	height:190px;
+	margin:10px 0px 5px 15px;
+}
+
+a.dn_lboxmv2rm{
+	display:block;
+	position:absolute;
+	top:0px;
+	right:10px;
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/box_mv2rm.png') right center no-repeat;
+	padding-right:15px;
+	font-size:11px;
+	text-decoration:none;
+	color:#c74c4c;
+}
+a.dn_lboxmv2rm:hover{
+	text-decoration:underline;
+}
+
+
+.dn_lboxmv2tt{
+	display:block;
+	margin-bottom:5px;
+}
+
+a.dn_lboxmv2book{
+	display:block;
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/btn_datve2.png') no-repeat;
+	width:65px;
+	height:22px;
+	line-height:20px;
+	text-transform:uppercase;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	color:#000;
+	position:absolute;
+	bottom:5px;
+	left:125px;
+	text-align:center;
+}
+.link-hkm-booking
+{
+    display:block;
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/btn_datve2.png') no-repeat;
+	width:65px;
+	height:22px;
+	line-height:20px;
+	text-transform:uppercase;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	color:#000;
+	text-align:center;
+	
+}
+
+.dn_slideboxoff{
+	width:720px;
+	margin-left:10px;
+}
+
+/**********************Movies Chi Tiet***************************/
+/*Share ring*/
+.dn_sharezing{
+	width:120px;
+	height:20px;
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/sharezing.png') no-repeat;	margin-top:7px;
+	line-height:18px;
+}
+
+.dn_sharezing a{
+	text-decoration:none;
+	color:#434343;
+	margin:0px 0px 0px 20px;
+	font-size:11px;
+}
+
+/*Tag Detail Movies*/
+ul.dn_tabsmvdetail{
+	height:25px;
+	display:inline-block;
+	width:100%;
+	clear:both;
+}
+.dn_hlinedtmv{
+	border-top:1px solid #838383;
+	width:500px;
+	margin:-2px 0px 20px 0px;
+}
+ul.dn_tabsmvdetail li{
+	float:left;
+	padding:2px 27px;
+	border:1px solid #838383;
+	color:#000;
+	font-weight:bold;
+	-moz-border-radius-topleft:8px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	-moz-border-radius-topright:8px;
+	text-align:center;
+	background:#aaa;
+	font-weight:bold;
+	list-style:none;
+	margin-right:2px;
+	cursor:pointer;
+}
+
+ul.dn_tabsmvdetail li.tabsmvdtactive{
+	color:#434343;
+	background-color:#000;
+	border-bottom:1px solid #000;	
+}
+.dn_contentmvdt{
+	width:592px;
+	line-height:20px;
+	text-align:justify;
+	color:#434343;
+	padding-bottom:20px;
+}
+.dn_contentmvdt.dn_tabsmvdt1{
+	display:block;
+}
+
+.dn_contentmvdt.dn_tabsmvdt2,
+.dn_contentmvdt.dn_tabsmvdt3,
+.dn_contentmvdt.dn_tabsmvdt4{
+	display:none;
+}
+.dn_contentmvdt img
+{
+    background: none repeat scroll 0 0 #000000;
+    border: 1px solid #E7E7E7;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    height: auto !important;
+    max-width: 586px;
+    padding: 4px;
+}
+
+
+
+
+.dn_dtmv{
+	height:422px;
+	display:inline-block;
+	width:100%;
+}
+
+.dn_dtmvl{
+	width:590px;
+	float:left;
+}
+.dn_dtmvlt{
+	height:250px;
+	margin-bottom:20px;
+}
+
+.dn_dtmvlt img{
+	margin-right:20px; 
+	float:left;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	border:1px solid #E6EEEE;
+}
+
+ul.dn_ldtmvlt{
+	list-style:none;
+	float:left;
+	width:380px;
+}
+
+ul.dn_ldtmvlt li{
+	line-height:22px;
+	color:#434343;
+	display:inline-block;
+	clear:both;
+	width:390px;
+}
+
+.dn_ldtmv70{
+	width:70px;
+	float:left;
+	font-weight:bold;
+}
+ul.dn_ldtmvlt li a{
+	text-decoration:none;
+	color:#434343;
+}
+ul.dn_ldtmvlt li a:hover{
+	text-decoration:underline;
+}
+.dn_ldtmv330{
+	float:left;
+}
+	
+.dn_dtmvr{
+	width:150px;
+	float:right;
+	position:absolute;
+	right:0px;
+	height:396px;
+	 background:transparent url('http://lottecinemavn.com/App_Themes/lotte/img/bg_scroll.jpg') no-repeat bottom right;
+	top:145px;
+}
+
+
+.dn_dtmvb{
+	border:1px solid #d4d4d4;
+	padding:10px 20px;
+	-moz-box-shadow: inset -2px -5px 5px #ddd;
+	-webkit-box-shadow: inset -2px -5px 5px#ddd;
+	box-shadow: inset -2px -5px 5px #ddd;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	text-align:center;
+}
+.dn_dtmvb img{
+	margin:0px 5px;
+	border:none;
+}
+
+ul.dn_limv{
+	list-style:none;
+	width:100px;
+}
+ul.dn_limv li{
+	display:block;
+	margin:10px 0px;
+}
+
+ul.dn_limv li a{
+	text-decoration:none;
+}
+ul.dn_limv li img{
+	border:none;
+	border-radius:4px;
+}
+
+
+.dn_pcontent{
+	margin-bottom:10px;
+}
+#ctl00_plcMain_rCapCha_CaptchaTextBox
+{
+    border:1px solid #CCC;
+    width:180px;
+}
+.div-view-position
+{
+    width:134px;
+}
+.div-view-position .top
+{
+    height:31px;
+    background-image:url('http://lottecinemavn.com/App_Themes/lotte/img/b-top.png');
+    line-height:31px;
+    color:#606060;
+    font-weight:bold;
+    text-align:center;
+    text-transform:uppercase;
+}
+.div-view-position .middle
+{
+    color:#606060;
+    height:31px;
+    line-height:31px;
+    background-image:url('http://lottecinemavn.com/App_Themes/lotte/img/b-middle.png');
+    padding-left:10px;
+    font-family:Tahoma;
+    font-size:8pt;
+}
+.middle label {padding-left:5px;margin-top:-2px}
+.div-view-position .bottom
+{
+    height:3px;
+    background-image:url('http://lottecinemavn.com/App_Themes/lotte/img/b-bottom.png');
+}
+.btn-view
+{
+    background:#bd2121;
+    width:100px;
+    font-family:Tahoma;
+    font-size:11px;
+    color:#000;
+    padding:3px;
+    border:0;
+    border-radius:10px;
+    cursor:pointer;
+    box-shadow:1px 1px 4px #000;
+    
+}
+.dn_fbooking4 a{text-decoration:none}
+
+.comment .TextBoxField
+{
+    width:300px;
+    border:1px solid #CCC;
+}
+.comment .TextAreaField
+{
+    width:300px;
+    height:60px;
+    border:1px solid #CCC;
+}
+#ctl00_plcMain_rpt_ctl00_messageBoardASPX_msgBoard_msgEdit_captchaElem_captchaControl_txtSecurityCode
+{
+    width:50px;
+    border:1px solid #CCC;
+}
+.CommentAction a{display:none}
+#ctl00_plcMain_rpt_ctl00_messageBoardASPX_msgBoard_lblLeaveMessage{display:none}
+.CommentUserName a{color:Red;font-size:10pt;line-height:18px;text-decoration:none}
+/* */
+.ratingStar 
+{
+    font-size: 0pt;
+    width: 13px;
+    height: 12px;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+.filledRatingStar {
+    background-image: url('http://lottecinemavn.com/App_Themes/lotte/img/FilledStar.png');
+
+}
+
+.emptyRatingStar {
+    background-image: url('http://lottecinemavn.com/App_Themes/lotte/img/EmptyStar.png');
+}
+
+.savedRatingStar {
+    background-image: url('http://lottecinemavn.com/App_Themes/lotte/img/SavedStar.png');
+}
+.CntRatingResult {position:relative}
+.link-user
+{
+    color:#3B3B3B;
+    font-size:11px;
+    text-decoration:none;
+}
+.link-user:hover{text-decoration:underline}
+.CustomRegistrationForm .TextBoxField,.CustomRegistrationForm .LogonTextBox,.txtText
+{
+    width:300px;
+    border:1px solid #CCC;
+    height:22px;
+    line-height:22px;
+    padding-left:3px;
+}
+#ctl00_plcMain_logon_Login1_UserName,#ctl00_plcMain_logon_Login1_Password
+{
+    width:160px;
+    border:1px solid #CCC;
+    height:22px;
+    line-height:22px;
+    padding-left:3px;
+}
+
+.RegisterButton,.btn-tv
+{
+    background:#000;
+    padding:5px;
+    border-radius:3px;
+    border:1px solid #CCC;
+    cursor:pointer;
+    font-weight:bold;
+    color:#333;
+}
+.RegisterButton:hover,.btn-tv:hover{color:Red}
+.ddl
+{
+    padding:2px;
+    border:1px solid #CCC;
+}
+.tbl-tickettype strong
+{
+    font-size:10pt;
+    line-height:18px;
+    color:#B13026
+}
+.tb-ticket td{font-size:10pt;line-height:18px;padding:5px}
+.div-seat
+{
+    
+}
+.div-seat li{cursor:default;float:left;list-style:none}
+.div-seat .item-seat
+{
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_0.png') repeat scroll 0 0 transparent;
+    color: Black;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;
+    
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;
+    
+    padding: 0;
+    text-align: center;
+    width: 25px;
+    display:table-cell;
+}
+.div-seat .item-seat:hover
+{
+    cursor:pointer;
+}
+.div-seat .item-normal
+{
+    
+    height:25px;
+    width:25px;
+    list-style:none;
+    padding:0;    
+    float:left;
+    text-align:center;
+    line-height:30px;
+    font-weight:bold;
+    background:#000;
+    color:#000;
+}
+.item-seat-line
+{
+    
+    height:25px;
+    width:25px;
+    list-style:none;
+    padding:0;    
+    float:left;
+    text-align:center;
+    line-height:25px;
+    font-weight:bold;
+    color:#000;
+}
+.line-seat
+{
+    margin:0;
+    padding:0;
+}
+.line-seat li{float:left;margin:0;padding:0;line-height:25px;height:25px;width:25px;list-style:none;cursor:default}
+.line-seat .item-seat
+{
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_0.png') repeat scroll 0 0 transparent;
+    color: Black;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;
+    
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;
+    
+    padding: 0;
+    text-align: center;
+    width: 25px;
+    display:table-cell;
+}
+.line-seat .item-seat-vip
+{
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_vip.png') repeat scroll 0 0 transparent;
+    color: Black;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;    
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;    
+    padding: 0;
+    text-align: center;
+    width: 25px;
+    display:table-cell;
+	cursor:pointer;
+}
+.seat-name-bold
+{
+    font-weight:bold;
+}
+.line-seat .item-seat-booked
+{
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_1.png') repeat scroll 0 0 transparent;
+    color: Black;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;
+    
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;
+    
+    padding: 0;
+    text-align: center;
+    width: 25px;
+}
+.line-seat .item-seat-selected
+{
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_2.png') repeat scroll 0 0 transparent;
+    color: Black;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;
+   
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;
+    
+    padding: 0;
+    text-align: center;
+    width: 25px;
+}
+.line-seat .item-seat-selected-vip
+{
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_2.png') repeat scroll 0 0 transparent;
+    color: Black;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;   
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;
+    cursor:pointer;
+    padding: 0;
+    text-align: center;
+    width: 25px;
+}
+
+.line-seat .item-seat-selected:hover{cursor:pointer;}
+.line-seat .item-seat:hover{cursor:pointer}
+.div-seat .item-seat-selected,.div-seat .item-seat-selected-show
+{
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_2.png') repeat scroll 0 0 transparent;
+    color: Black;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;
+   
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;
+    
+    padding: 0;
+    text-align: center;
+    width: 25px;
+}
+.div-seat .item-seat-selected:hover{cursor:pointer;}
+.div-seat .item-seat-booked
+{
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_1.png') repeat scroll 0 0 transparent;
+    color: Black;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;
+    
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;
+    
+    padding: 0;
+    text-align: center;
+    width: 25px;
+}
+.div-seat .item-seat-vip
+{
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_vip.png') repeat scroll 0 0 transparent;
+    color: Black;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;
+    
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;
+    
+    padding: 0;
+    text-align: center;
+    width: 25px;
+}
+.div-seat .item-seat-couple
+{
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_couple.png') repeat scroll 0 0 transparent;
+    color: Black;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;
+    
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;
+    
+    padding: 0;
+    text-align: center;
+    width: 25px;
+}
+.div-seat-booing .item-seat-couple
+{
+    width:25px;
+    height:25px;
+    position:absolute;
+    float:left;
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_couple.png') repeat scroll 0 0 transparent;
+    color: Black;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;    
+    line-height: 25px;
+    list-style: none outside none;    
+    padding: 0;
+    text-align: center;
+    display:table-cell;
+}
+.div-seat-booing .item-seat-couple:hover
+{
+    cursor:pointer;
+}
+
+.div-seat-booing .item-seat
+{
+    width:25px;
+    height:25px;
+    position:absolute;
+    float:left;
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_0.png') repeat scroll 0 0 transparent;
+    color: Black;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;    
+    line-height: 25px;
+    list-style: none outside none;    
+    padding: 0;
+    text-align: center;
+    display:table-cell;
+}
+.div-seat-booing .item-seat:hover
+{
+    cursor:pointer;
+}
+.div-seat-booing .line-seat {
+    background-image: none; font-size: 13px; font-weight: bold;
+    color:#000;border:0;line-height:25px;
+}
+
+.div-seat-booing .item-seat-booked
+{
+    width:25px;
+    height:25px;
+    position:absolute;
+    float:left;
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_1.png') repeat scroll 0 0 transparent;
+    color: Black;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;    
+    line-height: 25px;
+    list-style: none outside none;    
+    padding: 0;
+    text-align: center;
+    display:table-cell;
+
+}
+
+.div-seat-booing .item-seat-selected,.div-seat-booing .item-seat-selected-show,.div-seat-booing .item-seat-selected-vip,.div-seat-booing .item-seat-selected-couple
+{
+    cursor:pointer;
+    width:25px;
+    height:25px;
+    position:absolute;
+    float:left;
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_2.png') repeat scroll 0 0 transparent;
+    color: Black;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;    
+    line-height: 25px;
+    list-style: none outside none;    
+    padding: 0;
+    text-align: center;
+    display:table-cell;
+}
+    .div-seat-booing .item-seat-selected:hover, .div-seat-booing .item-seat-selected-show:hover,.div-seat-booing .item-seat-selected-vip:hover {
+    cursor:pointer;
+    }
+.div-seat-booing .item-seat-vip
+{
+    width:25px;
+    height:25px;
+    position:absolute;
+    float:left;
+    background: url('http://lottecinemavn.com/App_Themes/lotte/img/seat_vip.png') repeat scroll 0 0 transparent;
+    color: Black;
+    font-family: Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+    font-size: 10px;    
+    line-height: 25px;
+    list-style: none outside none;    
+    padding: 0;
+    text-align: center;
+    display:table-cell;
+    cursor:pointer;
+}
+    .div-seat-booing .item-seat-vip:hover {
+        cursor:pointer;
+    }
+.tb-confirm
+{
+    
+}
+.tb-confirm caption
+{
+    text-transform:uppercase;
+}
+.tb-confirm td
+{
+    line-height:18px;
+    font-size:10pt;
+    padding:5px 0;
+}
+.tb-confirm td .input
+{
+    width:200px;
+    border:1px solid #CCC;
+    height:22px;
+    line-height:22px;
+}
+
+/*--------------RAP PHIM 1-------------------*/
+ul.dn_rp12news{
+	float:left;
+	width:100%;
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+ul.dn_rp12news li{
+	height:67px;
+	margin:5px 0px;
+	float:left;
+}
+
+.dn_thumbnail{
+	width:86px;
+	height:66px;
+	float:left;
+	display:block;
+	margin:5px 10px 0px 0px;
+		overflow:hidden;
+}
+.img-shadow{
+	position: relative;
+	max-width: 100%;
+	float: left;
+	}
+ 
+    .img-shadow::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		box-shadow: inset 1px 2px 8px rgba(0,0,0,.6);
+		-moz-box-shadow: inset 1px 2px 8px rgba(0,0,0,.6);
+		-webkit-box-shadow: inset 1px 2px 8px rgba(0,0,0,.6);
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+		border-radius:10px;
+		
+	   } 
+ 
+.img-shadow img {
+	float: left;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:none;
+}
+
+.dn_rp12newsinfo{
+	width:190px;
+	float:right;
+	color:#4d4d4d;
+	font-size:12px;
+	margin-right:10px;
+}
+.dn_rp12newsinfo h3{
+	font-size:14px;
+	font-weight:bold;
+}
+.dn_rp12newsinfo a{
+	text-decoration:none;
+	color:#4d4d4d;
+}
+.dn_rp12newsinfo p{
+	list-style:18px;
+	text-align:justify;
+}
+/*--------------RAP PHIM 2-------------------*/
+
+.dn_pcontenttt2{
+	height:35px;
+	line-height:35px;
+	display:block;
+	margin-left:20px;
+	width:680px;
+}
+
+.dn_rp1{
+	width:642px;
+	float:left;
+	margin:20px 0px 0px 40px;
+}
+.dn_imgrp1{
+	width:191px;
+	height:145px;
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/shadow_rp2.png') no-repeat bottom center;
+	float:left;
+	display:block;
+	margin-right:35px;
+}
+.dn_imgrp1 img{
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:none;
+}
+
+.dn_rp1tt{
+	text-align:left;width:415px;
+	float:left;
+	display:block;
+}
+
+.dn_rp1tt h1{
+	font-size:28px;font-weight:bold;color:#C51F1F;
+	display:block;
+	margin:20px 0px 10px 0px;
+	text-transform:uppercase;
+}
+.dn_rp1tt span{
+	color:#000;
+	font-size:10pt;
+}
+
+
+/*MAP*/
+.dn_rp1map{
+	width:704px;
+	height:304px;
+	border:3px solid #B9B4AB;
+	background:#000;
+	padding:5px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+
+}
+.dn_rp1map img{
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	border:1px solid #e0e0e0;
+}
+
+.dn_clear{
+	clear:both;
+	float:none;
+}
+
+/*TABS TAP PHIM*/
+.dn_frp{
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/form_rp2.png') no-repeat;
+	width:708px;
+	height:344px;
+	padding:8px;
+	overflow:hidden;
+}
+.dn_frp1{
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/f_rp1.png') no-repeat;
+	width:382px;
+	height:344px;
+	overflow:hidden;
+	float:left;
+	padding:8px 10px;
+	margin-top:30px;
+}
+.dn_frp12{
+	background:url('http://lottecinemavn.com/App_Themes/lotte/img/f_rp11.png') no-repeat;
+	width:300px;
+	height:344px;
+	float:right;
+	padding:10px 0px 0px 10px;
+	margin-top:30px;
+}
+.dn_frp12 h2{
+	font-size:14px;
+	text-transform:uppercase;
+	color:#BA1717;
+}
+
+.dn_frp h1,
+.dn_frp1 h1
+{
+	display:block;
+	margin:0px 0px 5px 10px;
+	text-transform:uppercase;
+}
+ul.dn_tabsfrp{
+	float:left;
+	width:98%;
+	display:block;
+	border-bottom:1px solid #AA6565;
+	list-style:none;
+	margin:0px 0px 15px 7px;
+}
+
+ul.dn_tabsfrp li{
+	float:left;
+	margin-right:3px;
+}
+
+ul.dn_tabsfrp li a{
+	background:#C79898;
+	color:#000;
+	font-weight:bold;
+	font-size:11px;
+	border:1px solid #AA6565;
+	-moz-border-radius-topleft:8px;
+	-moz-border-radius-topright:8px;
+	border-top-right-radius:8px;
+	border-top-left-radius:8px;
+	padding:5px;
+	text-decoration:none;
+	display:block;
+	margin-bottom:-1px;
+	position:relative;
+	height:10px;
+	line-height:10px;	
+}
+
+ul.dn_tabsfrp li a.activerp2,
+ul.dn_tabsfrp li a:hover{
+	color:#cf2626;
+	background:#000;
+	border-bottom:1px solid #000;
+}
+.dn_contentrp2{
+	width:98%;
+	margin:0 auto;
+	display:block;
+}
+.dn_contentrp2 p{
+	font-size:11px;
+	text-align:justify;
+}
+.dn_contentrp2 img{
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	display:block;
+	margin:0 auto;
+}
+.dn_contentrp2.dn_tabsrp2{
+	display:block;
+}
+.dn_contentrp2.dn_tabsrp21,
+.dn_contentrp2.dn_tabsrp22,
+.dn_contentrp2.dn_tabsrp23,
+.dn_contentrp2.dn_tabsrp24,
+.dn_contentrp2.dn_tabsrp25{
+	display:none;
+}
+
+
+ul.dn_adsrp2{
+	width:740px;
+	float:left;
+	list-style:none;
+	margin-bottom:30px;
+}
+
+ul.dn_adsrp2 li{
+	margin:0 16px 10px 0;
+	float:left;
+	width:166px;
+	height:59px;
+	overflow:hidden;	
+	border:1px solid #c6c6c6;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	text-align:center;
+}
+ul.dn_adsrp2 li a{
+	text-decoration:none;
+}
+ul.dn_adsrp2 li img{
+border:none;
+margin:auto;
+margin-top:5px;
+}
+
+.dn_clearlinenote2{
+	border-top:1px solid #C6BDA6;
+	clear:both;
+	width:100%;
+	display:block;
+	height:2px;
+	margin-bottom:5px;
+	
+}
+
+
+
+
+/*Partion*/
+a.icon_partion,a.icon_partion:hover{
+	background:none!important;
+	float:right;
+	display:block;
+	margin-right:10px;
+}
+
+
+a.icon_partion img{
+	border:none;
+	cursor:pointer;
+	position:absolute;
+	top:5px;
+	right:20px;
+}
+
+
+.curvedContainer{
+	width:70px;
+	float:right;
+	margin-right:10px;
+}
+
+
+.tabcontent#tab_content_2,
+.tabcontent#tab_content_3,
+.tabcontent#tab_content_4,
+.tabcontent#tab_content_5,
+.tabcontent#tab_content_6,
+.tabcontent#tab_content_7,
+.tabcontent#tab_content_8,
+.tabcontent#tab_content_9,
+.tabcontent#tab_content_10,
+.tabcontent#tab_content_11,
+.tabcontent#tab_content_12,
+.tabcontent#tab_content_13,
+.tabcontent#tab_content_14,
+.tabcontent#tab_content_15,
+.tabcontent#tab_content_16,
+.tabcontent#tab_content_17,
+.tabcontent#tab_content_18,
+.tabcontent#tab_content_19,
+.tabcontent#tab_content_20{
+	display:none;
+}
+
+.dn_subside{
+	width:180px;
+	border:1px solid #E25E5D;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	float:left;
+	clear:both;
+	text-align:left;
+	padding:10px;
+	background:#000;
+	display:none;
+}
+ul.dn_lsubside
+{
+	margin:0;
+	padding:0;
+	list-style:none;
+	width:90px;
+	float:left;
+	margin-top:25px;
+}
+ul.dn_lsubside li{
+	margin-bottom:5px;
+}
+ul.dn_lsubside li a{
+	text-decoration:none;	
+	font-weight:bold;
+	display:block;	
+	font-size:12px;
+	padding:0 15px 0 5px;
+	height:16px!important;
+	line-height:16px!important;
+	color:#464646;
+	background:none!important;
+}
+ul.dn_lsubside li a.activesub,
+ul.dn_lsubside li a:hover
+{
+	background:#D52E2E url('http://lottecinemavn.com/App_Themes/lotte/img/l_subside.png') no-repeat right center!important;color:#000;	
+	border:1px solid #E41F1F;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	color:#000!important;
+}
+
+ul.tabcontent{
+	border:1px solid #CD9697;
+	-moz-border-radius:8px;
+	border-radius:8px;
+	-webkit-border-radius:8px;
+	float:left;
+	margin:0px;
+	list-style:none!important;
+	padding:5px;
+	width:65px;
+	margin:10px 0px 0px 0px;
+}
+
+ul.tabcontent li{
+	display:block;
+}
+ul.tabcontent li a{
+	text-decoration:none;
+	font-weight:bold;
+	color:#adadad!important;
+	background:none!important;
+	margin-left:-5px;
+}
+ul.tabcontent li a.active,
+ul.tabcontent li a:hover
+{
+	color:#cf2424!important;
+}
+
+
+
+
+.dn_sidesubp2{
+	position:relative;
+}
+.dn_subside{
+	position:absolute;
+	top:-10px;
+	left:100px;
+	z-index:10;
+}
+
+a.close-sub{
+	background:none!important;
+	border:none!important;
+	position:absolute;
+	left:5px;
+	top:10px;
+}
+
+a.close-sub img{
+	border:none!important;
+}
+
+.nomal-seat{
+    background: none repeat scroll 0 0 #BEB195;
+    border: 1px solid #AA986F;
+    border-radius: 3px 3px 3px 3px;
+    color: #000000;
+    float: left;
+    font-weight: bold;
+    height: 24px;
+    line-height: 26px;
+    list-style: none outside none;
+    margin: 1px;
+    padding: 0;
+    text-align: center;
+    width: 24px;
+}
+
+.disabled-seat{
+    background: none repeat scroll 0 0 blue;
+    border: 1px solid blue;
+    border-radius: 3px 3px 3px 3px;
+    color: #000000;
+    float: left;
+    font-weight: bold;
+    height: 24px;
+    line-height: 26px;
+    list-style: none outside none;
+    margin: 1px;
+    padding: 0;
+    text-align: center;
+    width: 24px;
+}
+.selected-seat{
+    background: none repeat scroll 0 0 #4C1686;
+    border: 1px solid #4C1686;
+    border-radius: 3px 3px 3px 3px;
+    color: #000000;
+    float: left;
+    font-weight: bold;
+    height: 24px;
+    line-height: 26px;
+    list-style: none outside none;
+    margin: 1px;
+    padding: 0;
+    text-align: center;
+    width: 24px;
+}
+.active-seat {
+    background: none repeat scroll 0 0 #000000;
+    border: 1px solid #AA986F;
+    border-radius: 3px 3px 3px 3px;
+    color: #000000;
+    float: left;
+    font-weight: bold;
+    height: 24px;
+    line-height: 26px;
+    list-style: none outside none;
+    margin: 1px;
+    padding: 0;
+    text-align: center;
+    width: 24px;
+}
+.vip-seat {
+    background: none repeat scroll 0 0 #0A4B7C;
+    border: 1px solid #AA986F;
+    border-radius: 3px 3px 3px 3px;
+    color: #000000;
+    float: left;
+    font-weight: bold;
+    height: 24px;
+    line-height: 26px;
+    list-style: none outside none;
+    margin: 1px;
+    padding: 0;
+    text-align: center;
+    width: 24px;
+}
+.dn_leventc .PagerControl
+{
+    
+}
+.language img{border:0}
+.LogonTextBox,#ctl00_plcMain_LogonForm_txtPasswordRetrieval
+{
+    border:1px solid #CCC;
+    width:160px;
+}
+
+.dn_license{
+	height:26px;
+	display:block;
+	margin:0 auto;
+}
+.dn_license span{
+	font-weight:bold;
+	display:block;
+	float:left;
+	font-size:1em;
+}
+.dn_license span a{color:#000}
+.dn_license img{
+	border:none;
+	float:left;
+	margin-top:2px;
+	margin-left:7px;
+}
+.dn_article img
+{
+    background: none repeat scroll 0 0 #000000;
+    border: 1px solid #E7E7E7;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    height: auto !important;
+    max-width: 700px;
+    padding: 4px;
+}
+#dn_slidefilm ul li.movie-item:hover
+{
+    border-color:#000;
+    opacity:0.7;
+    filter:alpha(opacity=70); /* For IE8 and earlier */
+}
+
+li.schedule
+{
+    background:#363636;
+    position:relative;
+}
+
+li.schedule:hover 
+{
+    opacity:1.0;
+    filter:alpha(opacity=100); 
+}
+li.schedule .item
+{
+    font-size: 10pt; 
+    text-align: left; 
+    color: #000; 
+    height: 150px;
+    width: 110px; 
+    position: absolute;
+    top: 2px; 
+    background:#363636;
+    overflow-x: hidden; 
+    overflow-y: scroll;   
+}
+
+li.schedule .item::-webkit-scrollbar,li.schedule .item::-moz-scrollbar {
+width: 10px;
+background: -webkit-gradient(linear,left top,right top,color-stop(0%,rgba(202, 202, 202, 0.07)),color-stop(100%,rgba(229, 229, 229, 0.07)));
+background: -webkit-linear-gradient(left,rgba(202, 202, 202, 0.07) 0%,rgba(229, 229, 229, 0.07) 100%);
+-webkit-box-shadow: 0 0 1px 0 rgba(0, 0, 0, .15) inset,0 1px 0 0 white;
+box-shadow: 0 0 1px 0 rgba(0, 0, 0, .15) inset,0 1px 0 0 white;
+background-color: #363636;
+border-radius: 6px;
+}
+
+li.schedule .item::-webkit-scrollbar,li.schedule .item::-moz-scrollbar, li.schedule .item::-webkit-scrollbar-thumb ,li.schedule .item::-moz-scrollbar-thumb{
+overflow: visible;
+border: solid 1px #A6A6A6;
+border-radius: 6px;
+}
+
+li.schedule .item::-webkit-scrollbar-thumb,li.schedule .item::-moz-scrollbar-thumb {
+background: -webkit-gradient(linear,left top,right top,color-stop(0%,rgba(233, 233, 233, 0.05)),color-stop(100%,rgba(221, 221, 221, 0.05)));
+background: -webkit-linear-gradient(left,rgba(233, 233, 233, 0.05) 0%,rgba(221, 221, 221, 0.05) 100%);
+-webkit-box-shadow: 0 2px 1px 0 rgba(0, 0, 0, .05);
+box-shadow: 0 2px 1px 0 rgba(0, 0, 0, .05);
+background-color: #E9E9E9;
+border-radius: 6px;
+}
+
+li.schedule .item::-webkit-scrollbar-button,li.schedule .item::-moz-scrollbar-button {
+height: 0;
+display: block;
+background-color: transparent;
+}
+
+
+
+li.schedule .list-schedule
+{   
+    padding:0 5px;
+}
+
+li.schedule .bottom
+{
+    font-size:8pt;position:absolute;width:112px;background:#878787;height:18px;bottom:0;border-radius:0 0 6px 6px;text-align:center;color:#000;
+    text-transform:none;
+    cursor:pointer;
+    
+}
+li.schedule .item .span
+{
+   color:#FD5C5C;
+}
+.link-booking{color:#FD5C5C;text-decoration:none}
+.link-booking:hover{color:#CCC}
+a img:hover
+{
+    opacity:0.74;
+    filter:alpha(opacity=70); /* For IE8 and earlier */
+}
+
+#top-link {
+    bottom: 20px;
+    display: none;
+    position: fixed;
+    right: 15px;
+    height:46px;
+	width:46px;
+	background-image:url('http://lottecinemavn.com/App_Themes/lotte/img/icon_top.png');
+	background-repeat:no-repeat;
+}
+.lotte-btn-login
+{
+     background: url('http://lottecinemavn.com/App_Themes/lotte/img/bg_button.gif') repeat-x scroll left top transparent;
+            border: 1px solid #D07300;
+            border-radius: 3px 3px 3px 3px;
+            color: #000000;
+            cursor: pointer;
+            padding: 3px 15px;
+            text-shadow: -1px -1px #DB8F34;
+            margin:0 2px;
+            text-decoration:none;
+}
+.lotte-btn-login:hover
+{
+            background: url('http://lottecinemavn.com/App_Themes/lotte/img/bg_button.gif') repeat-x scroll 0 -24px transparent;
+            border: 1px solid #F7961F;
+            border-radius: 3px 3px 3px 3px;
+            color: #000000;
+            cursor: pointer;
+            padding: 3px 15px;
+            text-shadow: 1px 1px #FBC47F;
+            text-decoration:none;
+}
+.ddl-lotte
+        {
+            border: 1px solid #AAC1D1;
+            color: #555555;
+            display: inline;
+            font-family: Tahoma,Arial,Verdana,sans-serif;
+            font-size: 12px !important;
+            height: 23px !important;            
+            outline: medium none;
+            padding: 2px;
+            text-decoration: none;
+        }
+        .ddl-lotte option
+        {
+            border-bottom: 1px solid #AAC1D1;
+            outline: medium none;
+            padding: 3px 5px;
+        }
+        
+        .tb-point {
+    border-collapse: collapse;
+    font-family: Tahoma;
+}
+.tb-point td {
+    color: #B51919;
+    font-size: 11px;
+    padding: 3px;
+    
+}
+    .tb-point .tr-header {
+        background-color: #ECEADA;
+        color: #005F10;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 30px;
+        }
+.tb-point .tr-header td{text-align:center}
+ul.fmethod li
+{
+    border-left:0;
+}
+.textpaging,.textpagingcurrent
+{
+    font-size:10pt;
+    line-height:18px;
+    color:#000;
+    padding:4px;
+    font-weight:bold;
+}
+.textpaging:hover{color:Red}
+.textpagingcurrent{color:Red}
+.TextBoxField
+{
+    border:1px solid #CCC;
+    height:22px;
+    line-height:22px;
+    padding-left:3px;
+}
+.TextAreaField
+{
+    border:1px solid #CCC;
+    padding-left:3px;
+}
+.InfoLabel
+{
+    display:none;
+}
+.social-header
+{
+    height:25px;line-height:25px;position:absolute;left:10px;bottom:115px;
+}
+
+.div-booking
+{
+
+}
+.div-booking .item
+{
+    width:210px;
+    min-height:200px;
+    border:1px solid #E62424;
+    margin:8px;
+    float:left;
+    border-radius:4px;    
+}
+.div-booking .item .title
+{
+    height:35px;
+    line-height:34px;
+    font-weight:bold;
+    padding-left:10px;
+    color:#B81515;
+    font-weight:bold;
+    text-transform:uppercase;
+    border-bottom:1px solid #E62424;
+}
+.line10{height:10px}
+.div-booking .item .line-item
+{
+    padding:10px 3px;
+}
+.listbox{width:204px;border:1px solid #AAC1D1;}
+.listbox option
+{
+  border-bottom: 1px solid #AAC1D1;
+  outline: medium none;
+  padding: 3px 5px;
+  outline:none;
+  font-weight:bold;
+  font-size:8pt;
+  font-family:Tahoma;
+  color:#333;
+}
+.listbox option:hover
+{
+    background:#BEB195;
+    color:#000;    
+}
+.btn-booking
+{
+    background: #BEB195;
+    border: 1px solid #AA986F;
+    border-radius: 4px;
+    color: #000000;
+    display: block;    
+    font-family: Tahoma;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 2px;
+    padding: 4px;
+    text-align: center;
+    text-decoration: none;
+    cursor:pointer;
+}
+.step span
+{
+    font-family:Arial;
+}
+.booking-home
+{
+    background: none repeat scroll 0 0 #BEB195;
+    border: 1px solid #AA986F;
+    border-radius: 3px 3px 3px 3px;
+    color: #000000;
+    display: block;
+    float: left;
+    font-family: Tahoma;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px;
+    text-align: center;
+    text-decoration: none;
+    cursor:pointer;
+}
+a{text-decoration:none;border:none;outline:none}
+a:active
+{
+    outline: none;
+}
+
+a:focus
+{
+    -moz-outline-style: none;
+}
+div:forus{-moz-outline-style: none;}
+.link-maps
+{
+    color:#000;
+}
+.link-maps:hover{color:#BF3518}
+.booking-link-detail
+{
+	color: Red;
+}
+.booking-link-detail:hover
+{
+	text-decoration:underline;
+	color:#B51919;
+}
+.PagerControl ,.PagerControl a
+{
+	color: #737373;
+	font-family:Arial;
+	font-weight:600;
+	font-size:12px;
+}
+.PagerResults{display:none}
+
+#side-left 
+{ 
+  width: 120px;
+  position:absolute;
+  top:0px;
+  left:-127px;
+  overflow:hidden;
+}
+
+#side-right { 
+
+	width: 120px;
+	right:-130px;
+	position:absolute;
+    top:0px;
+}
+
+#side-left img,#side-right img{opacity:1;border:0;}
+.PollInfo {
+    display:none;
+}
+
+
+
+/* Minification failed (line 3985): An underscore is not a valid CSS1 or CSS2 identifier character */

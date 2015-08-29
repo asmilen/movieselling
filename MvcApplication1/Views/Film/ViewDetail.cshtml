@@ -1,0 +1,128 @@
+﻿@model MovieSelling.Models.FilmDetail
+@{
+    ViewBag.Title = "ViewDetail";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/GetResource_005.css"> 
+@Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript">
+    function display2() {
+        $("#lich").show();
+        $("#tomtat").hide();
+    }
+    function display1() {
+        $("#lich").hide();
+        $("#tomtat").show();
+    }
+</script>
+
+@Html.Partial("_subMenuPartial")
+    <!-- Main -->
+<div style="height: 10px">
+</div>
+    <div id="main">
+        <!-- Content -->
+
+        <div id="content">
+
+            <!-- Box -->
+            <div class="box">
+                <div class="head">
+                    <h6>@Model.filmDetail.Name</h6>
+                </div>
+                <!-- Movie -->
+                <div class="movie">
+                    <div class="movie-image">
+                        <a><img src="data:image;base64,@System.Convert.ToBase64String(@Model.filmDetail.Picture)" alt="movie" /></a>
+                    </div>
+                </div>
+                <div class="movieDetail">
+                    <div class="content">
+                        <h5>Khởi chiếu:&nbsp;&nbsp;&nbsp; </h5><p>Từ @Model.filmDetail.StartDate.ToString(MovieSelling.DatabaseHelper.DateFormat) tới @Model.filmDetail.EndDate.ToString(MovieSelling.DatabaseHelper.DateFormat)</p><br>
+                        <h5>Loại phim:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@Model.filmDetail.Category</p><br>
+                        <h5>Diễn viên:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@Model.filmDetail.Actor</p><br>
+                        <h5>Đạo diễn:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@Model.filmDetail.Director</p><br>
+                        <h5>Hãng:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h5><p>@Model.filmDetail.Company</p><br>
+                        <h5>Thời lượng: &nbsp;&nbsp;&nbsp;</h5><p>@Model.filmDetail.filmLong phút</p><br>
+                        <br>
+                        <br>
+                        <a class="button" href=@Url.Action("step1", "booking", new { FilmID = Model.filmDetail.FilmID , dateSche = "" , timeSChe = ""})>ĐẶT VÉ</a></>
+                    </div>
+                </div>
+                <div class="cl">&nbsp;</div>
+        </div>
+            <ul class="dn_tabsmvdetail">
+                <li class="dn_tabsmvdt1" id="dn_tabsmvdt1" onclick="display1()" >
+                    Tóm tắt nội dung
+                </li>
+                <li class="dn_tabsmvdt2" id="dn_tabsmvdt2" onclick="display2()" >
+                    Lịch chiếu phim
+                </li>
+            </ul>
+            <div class="content" id="lich" style="display:none">
+                @foreach (var item in Model.filmSchedule)
+                {
+                <!-- Box -->
+                    <div class="box">
+                        <div class="head">
+                            <h6>@item.Key</h6>
+                        </div>
+                        <div class="schedule">
+                            <table class="tableCus">
+                                <tr>
+                                    @foreach (var sche in item.Value)
+                                    {
+                                        <td width="50"><a href=@Url.Action("step1","booking", new { FilmID = Model.filmDetail.FilmID, dateSche = item.Key, timeSChe = sche  })>@sche</a></td>
+                                    }
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="cl">&nbsp;</div>
+                    </div>
+                    }
+            </div>
+            <div class="box" id="tomtat" style="display:block">
+                    <div class="head">
+                        <h6>Tóm tắt nội dung</h6>
+                    </div>
+                    <div class="movieDetail">
+                        <div class="content">
+                            <p>@Model.filmDetail.Description</p>
+                        </div>
+                    </div>
+                    @if (Model.filmDetail.Picture1!=null && Model.filmDetail.Picture1.Length > 0)
+            {
+                <div class="movieDetail">
+                        <div class="detail-image">
+                            <a><img src="data:image;base64,@System.Convert.ToBase64String(@Model.filmDetail.Picture1)" alt="movie" /></a>
+                        </div>
+                    </div>
+            }
+                    @if (Model.filmDetail.Picture2!=null && Model.filmDetail.Picture2.Length > 0)
+            {
+                <div class="movieDetail">
+                        <div class="detail-image">
+                            <a><img src="data:image;base64,@System.Convert.ToBase64String(@Model.filmDetail.Picture2)" alt="movie" /></a>
+                        </div>
+                    </div>
+            }
+                    @if (Model.filmDetail.Picture3!=null &&  Model.filmDetail.Picture3.Length > 0)
+            {
+                <div class="movieDetail">
+                        <div class="detail-image">
+                            <a><img src="data:image;base64,@System.Convert.ToBase64String(@Model.filmDetail.Picture3)" alt="movie" /></a>
+                        </div>
+                    </div>
+            }
+                    @if (Model.filmDetail.Picture4!=null && Model.filmDetail.Picture4.Length > 0)
+            {
+                <div class="movieDetail">
+                        <div class="detail-image">
+                            <a><img src="data:image;base64,@System.Convert.ToBase64String(@Model.filmDetail.Picture4)" alt="movie" /></a>
+                        </div>
+                    </div>
+            }
+                    <div class="cl">&nbsp;</div>
+                </div>
+            </div>
+</div>

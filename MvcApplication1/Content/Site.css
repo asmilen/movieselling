@@ -36,7 +36,7 @@ h6 { font-size:24px; color:#990000; font-weight:bold; display:inline}
 #header { position:relative; }
 
 h1#logo { position:absolute; top:37px; left:0; }
-h1#logo a { float:left; width:239px; height:49px; background:url('themes/base/images/logo.gif') no-repeat 0 0; font-size: 0; line-height: 0; text-indent: -4000px; }
+#logo{ position: fixed;  left: 50px; top:10px; width: 10%;   height: 70%;      text-align: right;background: url('themes/base/images/Logo.jpg') no-repeat; background-size:100%;}
 
 .social { float:right; width:160px; padding-top:11px; }
 .social span { float:left; display:inline; font-size:10px; color:#9f9f9f; line-height:16px; padding-right:5px; }

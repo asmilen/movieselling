@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Copy";
+}
+
+<ul id="menu">
+    <li>@Html.ActionLink("Add Schedule ", "Add")</li>
+    <li>@Html.ActionLink("View Schedule ", "ViewSche", new { currDate = DateTime.UtcNow.AddHours(7).ToString(Manage.DatabaseHelper.DateFormat) })</li>
+    <li>@Html.ActionLink("Copy Schedule ", "Copy", new { fromDate = DateTime.MaxValue, toDate = DateTime.MaxValue })</li>
+</ul>
+
+<p class="message-success">@ViewBag.StatusMessage</p>
+
+<form method="get" >
+    <table>
+        <tr>
+            <th>Copy Schedule </th>
+        </tr>
+        <tr>
+            <td>From Date </td>
+            <td><input type="date" name="fromDate" /> </td>
+        </tr>
+        <tr>
+            <td>To Date</td>
+            <td><input type="date" name="toDate" /> </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Copy" /></td>
+        </tr>
+    </table>
+</form>

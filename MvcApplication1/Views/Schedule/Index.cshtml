@@ -1,0 +1,49 @@
+﻿@model Dictionary<string, Dictionary<int, List<string>>>
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Sub-menu -->
+<div id="sub-navigation">
+    <ul>
+        <li><a href="#">LỊCH CHIẾU PHIM</a></li>
+    </ul>
+    <div id="search">
+        <form action="home_submit" method="get" accept-charset="utf-8">
+            <input type="submit" value="" class="search-button" />
+        </form>
+    </div>
+</div>
+<!-- end Sub-Menu -->
+<div style="height: 10px">
+</div>
+<div id="main">
+    <!-- Content -->
+    <div id="content">
+            @foreach (var item in Model)
+            {
+                <!-- Box -->
+                <div class="box">
+                    <div class="head">
+                        <h6>@item.Key</h6>
+                    </div>
+                    <div class="schedule">
+                        <table class="tableCus">
+                            @foreach (var film in item.Value)
+{
+    <tr>
+        <td width="350" height="50" >@MovieSelling.DatabaseHelper.getFilmNamebyID(film.Key)</td>
+        @foreach (var timeSche in film.Value)
+        {
+            <td width="50"><a href=@Url.Action("step1","booking", new { FilmID = film.Key, dateSche = item.Key, timeSChe = timeSche })>@timeSche</a></td>
+
+        }
+    </tr>
+}
+                        </table>
+                    </div>
+                    <div class="cl">&nbsp;</div>
+                </div>
+            }
+    </div>
+</div>

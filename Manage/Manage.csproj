@@ -219,6 +219,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\themes\base\images\Logo.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -276,6 +277,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\fptcapstone.pubxml" />
+    <None Include="Properties\PublishProfiles\TBSmanage - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\TBSmanage - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -294,6 +297,7 @@
     <Content Include="Views\ManageRoom\List.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\ManageSchedule\Copy.cshtml" />
     <Content Include="Views\ManageTicket\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -339,7 +343,6 @@
     <Content Include="Views\ManageSchedule\AddStep2.cshtml" />
     <Content Include="Views\ManageRoom\Edit.cshtml" />
     <Content Include="Views\ManageOrder\Index.cshtml" />
-    <Content Include="Views\ManageSchedule\Copy.cshtml" />
     <Content Include="Views\ManageSchedule\Delete.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Statistics\TotalSale.cshtml" />

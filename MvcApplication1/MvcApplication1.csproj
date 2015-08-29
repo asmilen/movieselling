@@ -144,26 +144,56 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\BookingController.cs" />
-    <Compile Include="Controllers\FilmController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ScheduleController.cs" />
-    <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="App_Start\BundleConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App_Start\FilterConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App_Start\WebApiConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\BookingController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\FilmController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\HomeController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\ScheduleController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DatabaseHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\BookingModel.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\FilmModel.cs" />
-    <Compile Include="Models\HomeModel.cs" />
-    <Compile Include="Models\ScheduleModel.cs" />
+    <Compile Include="Models\BookingModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\FilmModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\HomeModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ScheduleModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ApplicationInsights.config" />
     <Content Include="Content\GetResource_005.css" />
     <Content Include="Content\themes\base\images\banner.png" />
     <Content Include="Content\themes\base\images\banner_left.jpg" />
@@ -172,6 +202,7 @@
     <Content Include="Content\themes\base\images\comments.gif" />
     <Content Include="Content\themes\base\images\favicon.ico" />
     <Content Include="Content\themes\base\images\image-hover.png" />
+    <Content Include="Content\themes\base\images\Logo.jpg" />
     <Content Include="Content\themes\base\images\sapchieu1.jpg" />
     <Content Include="Content\themes\base\images\sapchieu2.jpg" />
     <Content Include="Content\themes\base\images\social.gif" />
@@ -204,6 +235,7 @@
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\Logo.jpg" />
     <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -230,18 +262,22 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Properties\PublishProfiles\MovieSelling2.pubxml" />
-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Properties\PublishProfiles\TBSvn - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\TBSvn - Web Deploy.pubxml" />
+    <Content Include="Global.asax" />
+    <Content Include="packages.config" />
     <Content Include="Scripts\ai.0.15.0-build41087.js" />
     <Content Include="Scripts\ai.0.15.0-build41087.min.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -253,37 +289,32 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Views\Booking\Step1.cshtml" />
-    <Content Include="Views\Film\Index.cshtml" />
-    <Content Include="Views\Home\Ticket.cshtml" />
-    <Content Include="Views\Schedule\Index.cshtml" />
     <Content Include="Views\Booking\Step2.cshtml" />
     <Content Include="Views\Booking\Step3.cshtml" />
     <Content Include="Views\Booking\Step4.cshtml" />
     <Content Include="Views\Booking\_subMenuPartial.cshtml" />
     <Content Include="Views\Film\ComingSoon.cshtml" />
+    <Content Include="Views\Film\Index.cshtml" />
     <Content Include="Views\Film\OnTheater.cshtml" />
     <Content Include="Views\Film\ViewDetail.cshtml" />
     <Content Include="Views\Film\_subMenuPartial.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
+    <Content Include="Views\Home\Ticket.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Views\Shared\CError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
