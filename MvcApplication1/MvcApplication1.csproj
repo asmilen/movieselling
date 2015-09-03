@@ -264,14 +264,14 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Web.config" />
+    <None Include="Properties\PublishProfiles\tbsvn - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\tbsvn - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <None Include="Properties\PublishProfiles\TBSvn - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\TBSvn - Web Deploy.pubxml" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Scripts\ai.0.15.0-build41087.js" />

@@ -194,9 +194,9 @@ namespace MovieSelling.Controllers
             var index = 1;
             for (int i = 0; i < seatTotal; i++)
             {
-                string seatI = ListSeat.Substring(index, 3);
-                temp.Add(new Seat(Int32.Parse(seatI.Substring(0, 1)), Int32.Parse(seatI.Substring(2, 1)),DatabaseHelper.getPriceByScheID(ScheID)));
-                index += 3;
+                string seatI = ListSeat.Substring(index, 5);
+                temp.Add(new Seat(Int32.Parse(seatI.Substring(0, 2)), Int32.Parse(seatI.Substring(3, 2)),DatabaseHelper.getPriceByScheID(ScheID)));
+                index += 5;
             }
             return temp;
         }
