@@ -353,6 +353,7 @@
     <Content Include="Views\ManageFilm\ViewDetail.cshtml" />
     <Content Include="Views\Statistics\TicketSale.cshtml" />
     <Content Include="Views\ManageFilm\Edit.cshtml" />
+    <Content Include="Views\ManageFilm\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

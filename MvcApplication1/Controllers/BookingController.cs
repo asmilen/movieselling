@@ -203,10 +203,11 @@ namespace MovieSelling.Controllers
 
         private int InsertToOrder(Ticket model, int CustomerID)
         {
+            int modified = 0;
             using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
             {
                 conn.Open();
-                string sqlSelect = @"Insert into Orders output INSERTED.OrderID values (@CusID,@price,@numTicket,@ScheID,@code,@status)";
+                string sqlSelect = @"Insert into Orders values (@CusID,@price,@numTicket,@ScheID,@code,@status)";
                 using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                 {
                     cmd.Parameters.AddWithValue("@CusID", CustomerID);
@@ -216,12 +217,26 @@ namespace MovieSelling.Controllers
                     cmd.Parameters.AddWithValue("@code", model.code);
                     cmd.Parameters.AddWithValue("@status", DatabaseHelper.booked);
 
-                    int modified = (int)cmd.ExecuteScalar();
-                    conn.Close();
-                    conn.Dispose();
-                    return modified;
+                    cmd.ExecuteNonQuery();
+                    
                 }
             }
+            using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                conn.Open();
+                string sqlSelect = @"Select OrderID from Orders where CustomerId = @CusID";
+                using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
+                {
+                    cmd.Parameters.AddWithValue("@CusID", CustomerID);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        modified = (int)reader["OrderID"];
+                    }
+
+                }
+            }
+            return modified;
         }
 
         private int InsertCustomerToDB(Customer model,string ScheID)
@@ -280,7 +295,7 @@ namespace MovieSelling.Controllers
                             // Bien lay ra gio hien tai de lay ra lich chieu lon hon gio hien tai
                             var time = DateTime.UtcNow.AddHours(7).AddMinutes(60);
                             var timeNow = Int32.Parse(time.Hour + "" + time.Minute);
-
+                            if (time.Minute < 10) timeNow *= 10;
                             // Lay ra lich chieu lon hon gio hien tai
                             if (dateSelected != DateTime.UtcNow.AddHours(7).ToString(DatabaseHelper.DateFormat) || timeNow < Int32.Parse(startTime.Replace(":", "")))
                             {

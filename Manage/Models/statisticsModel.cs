@@ -16,6 +16,7 @@ namespace Manage.Models
 
         public string[] yValue2 { get; set; }
 
+        public int total { get; set; }
         public StatisticsDetail()
         {
 
@@ -56,6 +57,7 @@ namespace Manage.Models
 
             yearSelect = year;
             monthSelect = month;
+
         }
     }
 

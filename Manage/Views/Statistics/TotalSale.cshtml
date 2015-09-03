@@ -33,5 +33,6 @@
         <td>@Html.DropDownListFor(m => m.monthSelect, Model.listMonth, new { Name = "listMonth", Id = "listMonth" })</td>
     </tr>
 </table>
+<br />
 
 <img src="@Url.Action("Mychart", new { year = Model.yearSelect, month = Model.monthSelect  })" alt="Chart" />

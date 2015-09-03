@@ -71,12 +71,12 @@ namespace Manage.Controllers
             var bytes = new Chart(width: model.width, height: model.height, theme: themeChart);
             if (month != "0")
             {
-                bytes.AddTitle("Doanh số tháng " + month + "/" + year);
+                bytes.AddTitle("Doanh số tháng " + month + "/" + year + "     (Tổng doanh số: " + model.total + " đồng )");
                 bytes.SetXAxis(title: "ngày");
             }
             else
             {
-                bytes.AddTitle("Doanh số năm " + year);
+                bytes.AddTitle("Doanh số năm " + year + "     (Tổng doanh số: " + model.total + " đồng )");
                 bytes.SetXAxis(title: "Tháng");
             }
             bytes.AddSeries(chartType: model.chartType,
@@ -89,6 +89,7 @@ namespace Manage.Controllers
         private StatisticsDetail getStaticsticDetail(string year, string month)
         {
             var model = new StatisticsDetail();
+            model.total = 0;
             model.height = 600;
             model.width = 800;
             // Chọn tất cả
@@ -109,7 +110,7 @@ namespace Manage.Controllers
                         if (j < 10) dateSelect = "0" + dateSelect;
                         monthTotal += getTotalSaleByDate(dateSelect,0);
                     }
-
+                    model.total += monthTotal;
                     // gan vao bieu do
                     model.yValue[i - 1] = monthTotal.ToString();
                     model.xValue[i - 1] = i + "";
@@ -121,14 +122,16 @@ namespace Manage.Controllers
             {
                 model.xValue = new string[31];
                 model.yValue = new string[31];
-                model.chartType = "line";
+                model.chartType = "column";
 
                 // Lặp từng ngày trong tháng
                 for (int i = 1; i < 32; i++)
                 {
                     string dateSelect = i + "-" + month + "-" + year;
                     if (i < 10) dateSelect = "0" + dateSelect;
-                    model.yValue[i - 1] = getTotalSaleByDate(dateSelect,0).ToString();
+                    int SaleDate = getTotalSaleByDate(dateSelect, 0);
+                    model.total += SaleDate;
+                    model.yValue[i - 1] = SaleDate.ToString();
                     model.xValue[i - 1] = i + "";
                 }
             }
@@ -162,7 +165,7 @@ namespace Manage.Controllers
             var model = getStaticsticDetailByFilm(filmID, month, type);
             var year = DateTime.Now.Year;
             var bytes = new Chart(width: model.width, height: model.height, theme: themeChart);
-            bytes.AddTitle("Doanh số tháng " + month + "/" + year);
+            bytes.AddTitle("Doanh số tháng " + month + "/" + year + "     (Tổng doanh số: " + model.total + " đồng )");
             bytes.SetXAxis(title: "Ngày");
 
             bytes.AddSeries(chartType: model.chartType,
@@ -180,14 +183,16 @@ namespace Manage.Controllers
             // Chọn từng tháng
             model.xValue = new string[31];
             model.yValue = new string[31];
-            model.chartType = "line";
-
+            model.chartType = "column";
+            model.total = 0;
             // Lặp từng ngày trong tháng
             for (int i = 1; i < 32; i++)
             {
                 string dateSelect = i + "-" + month + "-" + DateTime.Now.Year;
                 if (i < 10) dateSelect = "0" + dateSelect;
-                    model.yValue[i - 1] = getTotalSaleByDate(dateSelect, Int32.Parse(filmID)).ToString();
+                int SaleDate = getTotalSaleByDate(dateSelect, Int32.Parse(filmID));
+                model.total += SaleDate;
+                model.yValue[i - 1] = SaleDate.ToString();
                 model.xValue[i - 1] = i + "";
             }
 
@@ -220,12 +225,13 @@ namespace Manage.Controllers
             var model = getStaticsticDetailByRoom(roomID, month);
             var year = DateTime.Now.Year;
             var bytes = new Chart(width: model.width, height: model.height, theme: themeChart);
-            bytes.AddTitle("Doanh số tháng " + month + "/" + year);
+
+            bytes.AddTitle("Tổng doanh số: " + model.total + " vé ");
             bytes.SetXAxis(title: "Ngày");
 
-            bytes.AddSeries(chartType: model.chartType,
+            bytes.AddSeries(chartType: "column",
                             xValue: model.xValue, yValues: model.yValue);
-            bytes.AddSeries(chartType: model.chartType, yValues: model.yValue2);
+            bytes.AddSeries(chartType: "line", yValues: model.yValue2);
             bytes.SetYAxis(title: "Số vé");
             bytes.Write("png");
             return null;
@@ -240,6 +246,7 @@ namespace Manage.Controllers
             model.xValue = new string[31];
             model.yValue = new string[31];
             model.yValue2 = new string[31];
+            model.total = 0;
             model.chartType = "line";
 
             // Lặp từng ngày trong tháng
@@ -247,7 +254,10 @@ namespace Manage.Controllers
             {
                 string dateSelect = i + "-" + month + "-" + DateTime.Now.Year;
                 if (i < 10) dateSelect = "0" + dateSelect;
-                model.yValue[i - 1] = getTotalTicketByDate(dateSelect, Int32.Parse(roomID)).ToString();
+
+                int Sale = getTotalTicketByDate(dateSelect, Int32.Parse(roomID));
+                model.total += Sale;
+                model.yValue[i - 1] = Sale.ToString();
                 model.yValue2[i - 1] = getTotalSeatByDate(dateSelect, Int32.Parse(roomID)).ToString();
                 model.xValue[i - 1] = i + "";
             }

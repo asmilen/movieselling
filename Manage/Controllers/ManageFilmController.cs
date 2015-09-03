@@ -448,6 +448,10 @@ namespace Manage.Controllers
 
         public ActionResult Delete(int FilmID)
         {
+            var model = getFilmByID(FilmID);
+            if (model.StartDate < DateTime.UtcNow.AddHours(7) && DateTime.UtcNow.AddHours(7) < model.EndDate.AddDays(1))
+                return View();
+            
             using (SqlConnection conn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
             {
                 conn.Open();

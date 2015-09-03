@@ -45,7 +45,7 @@
                             string listSeat = "";
                             foreach (var item in Model.seat)
                             {
-                                listSeat += char.ConvertFromUtf32(item.Row + 65) + "-" + item.Column + " ";
+                                listSeat += char.ConvertFromUtf32(item.Row + 65) + "-" + (item.Column + 1) + " ";
                             }
                         }
                         <tr>
@@ -56,7 +56,7 @@
                             int i = 0;
                             foreach (var item in Model.seat)
                             {
-                                string seat = char.ConvertFromUtf32(item.Row + 65) + "-" + item.Column + " ";
+                                string seat = char.ConvertFromUtf32(item.Row + 65) + "-" + (item.Column + 1) + " ";
                                 string gia = (i == 0) ? "Giá" : "";
                                 i++;
                                 <tr>

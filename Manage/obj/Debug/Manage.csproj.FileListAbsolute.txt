@@ -169,4 +169,3 @@ F:\B's Workshop\MovieSelling\Manage\bin\zh-Hans\System.Spatial.resources.dll
 F:\B's Workshop\MovieSelling\Manage\bin\zh-Hant\System.Spatial.resources.dll
 F:\B's Workshop\MovieSelling\Manage\obj\Debug\Manage.dll
 F:\B's Workshop\MovieSelling\Manage\obj\Debug\Manage.pdb
-F:\B's Workshop\MovieSelling\Manage\obj\Debug\Manage.csprojResolveAssemblyReference.cache

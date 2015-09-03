@@ -40,7 +40,10 @@
     <tr>
         <td> @Html.ActionLink(sche.startTime, "Index", "ManageOrder", new { ScheID=sche.ScheduleID }, new { }) </td>
         <td> @Manage.DatabaseHelper.getFilmNamebyID(sche.FilmID) </td>
-        <td> @Html.ActionLink("Delete", "Delete", new { ScheID = sche.ScheduleID  })</td>
+        @if (Model.DateSche > DateTime.UtcNow.AddHours(8))
+        {
+            <td> @Html.ActionLink("Delete", "Delete", new { ScheID = sche.ScheduleID })</td>
+        }
     </tr>
 }
         </table>

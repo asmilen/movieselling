@@ -43,7 +43,11 @@ namespace Manage
                 using (SqlCommand cmd = new SqlCommand(sqlSelect, conn))
                 {
                     cmd.Parameters.AddWithValue("@Date", currDateTime.ToString(DatabaseHelper.DateFormat));
-                    cmd.Parameters.AddWithValue("@time", currDateTime.Hour + ":" + currDateTime.Minute );
+                    string time = currDateTime.Hour.ToString();
+                    if (currDateTime.Hour < 10) time = "0" + time;
+                    if (currDateTime.Minute < 10) time = time + ":0" + currDateTime.Minute;
+                    else time = time + ":" + currDateTime.Minute;
+                    cmd.Parameters.AddWithValue("@time", time );
                     cmd.Parameters.AddWithValue("@status", DatabaseHelper.booked);
                     cmd.ExecuteNonQuery();
                 }
